@@ -88,7 +88,9 @@ export function Hero() {
           </a>
           
           <a
-            href="#"
+            href="/cv"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative px-8 py-4 bg-[#050B1F] overflow-hidden rounded-md border border-[#00D4FF] text-[#00D4FF] font-mono font-bold tracking-widest transition-all duration-300 hover:text-white hover:shadow-[0_0_20px_#00D4FF] flex items-center justify-center gap-2"
           >
             <div className="absolute inset-0 w-0 bg-[#00D4FF] transition-all duration-[250ms] ease-out group-hover:w-full -z-10" />
