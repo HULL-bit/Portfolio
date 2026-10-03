@@ -30,6 +30,7 @@ for (const [name, w, h, mobile] of [['desktop', 1440, 900, false], ['mobile', 39
     await page.goto(`http://localhost:${port}${p}`, { waitUntil: 'networkidle' });
     await page.waitForTimeout(400);
     const slug = p.replace(/\//g, '_').replace(/^_|_$/g, '') || 'root';
+    await page.screenshot({ path: `.screenshots/${slug}-${name}-fold.png` });
     await page.screenshot({ path: `.screenshots/${slug}-${name}.png`, fullPage: true });
   }
   await ctx.close();

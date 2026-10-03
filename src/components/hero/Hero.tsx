@@ -1,0 +1,43 @@
+import Link from 'next/link';
+import { withBase } from '@/lib/base';
+import { localePath } from '@/lib/site';
+import { pick, profile, t } from '@/lib/content';
+import type { Lang } from '@/lib/i18n';
+import { Picture } from '@/components/ui/Picture';
+
+export function Hero({ lang }: { lang: Lang }) {
+  const proofs = profile.keyFigures.filter((f) => f.hero);
+  const types = profile.availability.types.map((x) => pick(x, lang)).join(' · ');
+  return (
+    <section className="hero" aria-labelledby="hero-name">
+      <div className="wrap hero-grid">
+        <div>
+          <p className="badge"><span className="dot" aria-hidden="true" />{t(lang, 'hero.available')} — {types}</p>
+          <h1 id="hero-name" className="display hero-name">{profile.name}</h1>
+          <p className="hero-title">{pick(profile.title, lang)} <span>{profile.stackLine}</span></p>
+          <ul className="hero-roles">
+            {profile.roles.map((r) => <li key={r.fr}>{pick(r, lang)}</li>)}
+          </ul>
+          <p className="hero-tagline">{pick(profile.tagline, lang)}</p>
+          <p className="hero-cred">{t(lang, 'hero.credibility')}</p>
+          <dl className="proofs">
+            {proofs.map((f) => (
+              <div className="proof" key={f.id}>
+                <dt>{f.value}{f.suffix}</dt>
+                <dd>{t(lang, `proofs.${f.id}`)}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="cta">
+            <a className="btn btn-gold" href={withBase(profile.cv[lang])} download data-track="cv-download">{t(lang, 'hero.ctaCv')}</a>
+            <Link className="btn btn-line" href={`${localePath(lang)}#contact`}>{t(lang, 'hero.ctaContact')}</Link>
+            <Link className="link-arrow" href={`${localePath(lang)}#projects`}>{t(lang, 'hero.ctaProjects')} →</Link>
+          </div>
+        </div>
+        <figure className="duotone">
+          <Picture name="profil" alt={t(lang, 'a11y.portrait')} sizes="(min-width: 960px) 30rem, 90vw" width={800} height={1067} eager />
+        </figure>
+      </div>
+    </section>
+  );
+}
