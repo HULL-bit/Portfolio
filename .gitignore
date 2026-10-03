@@ -53,3 +53,7 @@ Thumbs.db
 out
 next-env.d.ts
 .screenshots
+
+# env
+.env
+.env.local

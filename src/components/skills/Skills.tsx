@@ -2,6 +2,8 @@ import { pick, skills, t } from '@/lib/content';
 import type { Lang } from '@/lib/i18n';
 import { SectionHead } from '@/components/ui/SectionHead';
 import { Leds } from './Leds';
+import { SkillsLoader } from './SkillsLoader';
+import type { RackDomain } from './skills-data';
 
 const SPAN: Record<string, string> = {
   systems: 'lg:col-span-6',
@@ -17,7 +19,11 @@ export function Skills({ lang }: { lang: Lang }) {
     <section id="skills" className="section" aria-labelledby="skills-title">
       <div className="wrap">
         <SectionHead id="skills-title" eyebrow={t(lang, 'sections.skills.eyebrow')} title={t(lang, 'sections.skills.title')} />
-        <div className="grid12" data-skills-fallback>
+        <SkillsLoader
+          domains={skills.domains.map((d): RackDomain => ({ id: d.id, name: pick(d.name, lang), blurb: pick(d.blurb, lang), primary: d.primary, items: d.items }))}
+          labels={{ primary: t(lang, 'skills.primary'), level: t(lang, 'skills.level'), hint: t(lang, 'skills.hint'), list: t(lang, 'skills.list') }}
+        />
+        <div className="grid12 skills-fallback">
           {skills.domains.map((d) => (
             <article key={d.id} className={`glass skill-card col-span-12 ${SPAN[d.id] ?? 'lg:col-span-6'}`}>
               <div className="flex items-center justify-between gap-4 mb-2">

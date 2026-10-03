@@ -151,10 +151,12 @@
   "skills": {
     "primary": "PRINCIPAL",
     "level": "Niveau",
-    "hint": "Survolez ou sélectionnez un serveur pour voir ses technologies."
+    "hint": "Survolez ou sélectionnez un serveur pour voir ses technologies.",
+    "list": "Domaines de compétences"
   },
   "journey": {
-    "now": "En cours"
+    "now": "En cours",
+    "map": "Schéma du trajet de Touba et Mbacké à Dakar"
   },
   "github": {
     "repos": "dépôts publics",
@@ -178,12 +180,17 @@
       "mailto": "Ouvrir mon client mail",
       "errName": "Indiquez votre nom.",
       "errEmail": "Adresse e-mail invalide.",
-      "errMessage": "Votre message est trop court (10 caractères minimum)."
+      "errMessage": "Votre message est trop court (10 caractères minimum).",
+      "fallback": "Votre client mail s'ouvre avec le message prérempli. Sinon :"
     },
     "copyEmail": "Copier l'e-mail",
     "copied": "E-mail copié",
     "cvFr": "CV (FR)",
-    "cvEn": "CV (EN)"
+    "cvEn": "CV (EN)",
+    "write": "Écrire",
+    "terminalTitle": "hire_me.sh",
+    "mailSubject": "Contact depuis le portfolio",
+    "formIntro": "Décrivez votre besoin : je réponds sous 24 h."
   },
   "footer": {
     "copyright": "© 2026 Souleymane DIAW — compilé statiquement, servi depuis Linux.",

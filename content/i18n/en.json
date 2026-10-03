@@ -151,10 +151,12 @@
   "skills": {
     "primary": "PRIMARY",
     "level": "Level",
-    "hint": "Hover or select a server to see its technologies."
+    "hint": "Hover or select a server to see its technologies.",
+    "list": "Skill domains"
   },
   "journey": {
-    "now": "In progress"
+    "now": "In progress",
+    "map": "Route diagram from Touba and Mbacké to Dakar"
   },
   "github": {
     "repos": "public repositories",
@@ -178,12 +180,17 @@
       "mailto": "Open my mail client",
       "errName": "Please enter your name.",
       "errEmail": "Invalid e-mail address.",
-      "errMessage": "Your message is too short (10 characters minimum)."
+      "errMessage": "Your message is too short (10 characters minimum).",
+      "fallback": "Your mail client is opening with the message pre-filled. Otherwise:"
     },
     "copyEmail": "Copy e-mail",
     "copied": "E-mail copied",
     "cvFr": "Résumé (FR)",
-    "cvEn": "Résumé (EN)"
+    "cvEn": "Résumé (EN)",
+    "write": "Write",
+    "terminalTitle": "hire_me.sh",
+    "mailSubject": "Contact from the portfolio",
+    "formIntro": "Tell me what you need: I reply within 24 h."
   },
   "footer": {
     "copyright": "© 2026 Souleymane DIAW — compiled statically, served from Linux.",
