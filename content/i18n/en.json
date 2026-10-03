@@ -214,5 +214,9 @@
     "view": "view",
     "open": "open",
     "drag": "drag"
+  },
+  "boot": {
+    "welcome": "Welcome",
+    "skip": "Skip"
   }
 }

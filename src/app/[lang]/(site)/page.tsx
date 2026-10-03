@@ -15,6 +15,7 @@ import { Github } from '@/components/github/Github';
 import { Testimonials, Certifications } from '@/components/contact/Optional';
 import { Contact } from '@/components/contact/Contact';
 import { Divider } from '@/components/ui/Divider';
+import { BootSequence } from '@/components/boot/BootSequence';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -45,6 +46,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <BootSequence labels={{ welcome: t(lang, 'boot.welcome'), skip: t(lang, 'boot.skip') }} />
       <Hero lang={lang} />
       <Trust lang={lang} />
       <Divider motif="feston" />
