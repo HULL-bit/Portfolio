@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { isLang } from '@/lib/i18n';
-import { education, experience, pick, profile, projects, skills, t, tList } from '@/lib/content';
+import { curriculum, education, experience, pick, profile, projects, skills, t, tList } from '@/lib/content';
 import { withBase } from '@/lib/base';
 import { localePath, pageMeta } from '@/lib/site';
 import { period } from '@/lib/format';
@@ -69,6 +69,7 @@ export default async function CvPage({ params }: { params: Promise<{ lang: strin
             {[...education].reverse().map((e) => (
               <p key={e.id} className="cv-edu"><strong>{pick(e.level, lang)}</strong> — {pick(e.school, lang)} <span>({period(e.start, e.end, t(lang, 'journey.now'))})</span></p>
             ))}
+            <p className="cv-edu"><strong>{L('curriculum')} :</strong> {pick(curriculum.cvLine, lang)}</p>
           </section>
           <section>
             <h2>{L('skills')}</h2>

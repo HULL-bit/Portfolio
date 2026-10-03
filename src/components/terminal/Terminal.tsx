@@ -12,6 +12,7 @@ export type TerminalData = {
   commands: { name: string; usage: string; description: string }[];
   projects: { slug: string; title: string; href: string }[];
   skills: { name: string; items: { name: string; level: number }[] }[];
+  curriculum: { name: string; items: string[] }[];
   whoami: string[];
   uname: string[];
   neofetchLogo: string[];
@@ -70,7 +71,11 @@ export function Terminal({ data, initialOpen = false }: { data: TerminalData; in
   }, [open, data.welcome]);
 
   useEffect(() => { out.current?.scrollTo({ top: out.current.scrollHeight }); }, [lines]);
-  useEffect(() => setOpen(false), [pathname]);
+  // ferme le terminal quand la page change (pas au premier rendu : il peut être monté déjà ouvert)
+  const lastPath = useRef(pathname);
+  useEffect(() => {
+    if (lastPath.current !== pathname) { lastPath.current = pathname; setOpen(false); }
+  }, [pathname]);
 
   const goContact = () => {
     setOpen(false);
@@ -90,6 +95,10 @@ export function Terminal({ data, initialOpen = false }: { data: TerminalData; in
       case 'help': print(data.commands.map((c) => ({ text: `${c.usage.padEnd(18)} ${c.description}` }))); break;
       case 'whoami': print(data.whoami.map((text) => ({ text }))); break;
       case 'ls':
+        if (arg === 'cursus' || arg === 'curriculum') {
+          print(data.curriculum.flatMap((d) => [{ text: `[${d.name}]`, kind: 'ok' as const }, { text: `  ${d.items.join(' · ')}` }]));
+          break;
+        }
         print(data.projects.map((p, i) => ({ text: `${String(i + 1).padStart(2, '0')}  ${p.slug.padEnd(20)} ${p.title}`, href: p.href })));
         break;
       case 'open': {
@@ -152,7 +161,7 @@ export function Terminal({ data, initialOpen = false }: { data: TerminalData; in
       const hit = data.projects.filter((p) => p.slug.startsWith(parts[1] ?? ''));
       if (hit.length === 1) setValue(`open ${hit[0]!.slug}`);
     } else if (parts[0] === 'lang') setValue(`lang ${'fr'.startsWith(parts[1] ?? '') ? 'fr' : 'en'}`);
-    else if (parts[0] === 'ls') setValue('ls projects');
+    else if (parts[0] === 'ls') setValue('cursus'.startsWith(parts[1] ?? '') && (parts[1] ?? '').length > 0 && !'projects'.startsWith(parts[1] ?? '') ? 'ls cursus' : 'ls projects');
     else if (parts[0] === 'cat') setValue('cat cv');
     else if (parts[0] === 'sudo') setValue('sudo hire-me');
   };

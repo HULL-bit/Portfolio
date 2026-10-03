@@ -8,11 +8,13 @@ import certificationsJson from '@content/certifications.json';
 import githubJson from '@content/github.json';
 import terminalJson from '@content/terminal.json';
 import imagesManifestJson from '@content/images-manifest.json';
+import curriculumJson from '@content/curriculum.json';
 import fr from '@content/i18n/fr.json';
 import en from '@content/i18n/en.json';
 import type { Lang } from './i18n';
 import {
   certificationsSchema,
+  curriculumSchema,
   educationSchema,
   experienceSchema,
   githubSchema,
@@ -38,6 +40,7 @@ export const certifications = certificationsSchema.parse(certificationsJson);
 export const github = githubSchema.parse(githubJson);
 export const terminal = terminalSchema.parse(terminalJson);
 export const imagesManifest = imagesManifestSchema.parse(imagesManifestJson);
+export const curriculum = curriculumSchema.parse(curriculumJson);
 
 /** Métadonnées d'une capture de projet (tailles générées), ou undefined si elle n'existe pas. */
 export const getShot = (slug: string, name: string) => imagesManifest[slug]?.[name];
@@ -87,6 +90,7 @@ export function collectTodos(): string[] {
   return [
     ...profile.todo.map((x) => `Profil : ${x}`),
     ...experience.flatMap((e) => e.todo.map((x) => `Expérience ${e.id} : ${x}`)),
+    ...curriculum.todo.map((x) => x),
     ...(skills.levelsTodo ? ['Compétences : niveaux (1-5) indicatifs à confirmer'] : []),
     ...projects.flatMap((p) => p.todo.map((x) => `Projet ${p.slug} : ${x}`)),
   ];

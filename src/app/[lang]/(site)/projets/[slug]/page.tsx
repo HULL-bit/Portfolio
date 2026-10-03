@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { LOCALES, isLang } from '@/lib/i18n';
 import { getProject, pick, profile, projects, t } from '@/lib/content';
 import { abs, localePath, pageMeta } from '@/lib/site';
+import { LiquidBehavior } from '@/components/projects/LiquidBehavior';
 import { ProjectMedia } from '@/components/projects/ProjectMedia';
 import { ProjectVisual } from '@/components/projects/ProjectVisual';
 import { ArchitectureDiagram } from '@/components/projects/ArchitectureDiagram';
@@ -70,6 +71,7 @@ export default async function ProjectPage({ params }: Params) {
           </div>
           {project.repo && project.repoLabel ? <p className="pj-note muted">{pick(project.repoLabel, lang)}</p> : null}
           <div className="project-visual mt-10"><ProjectMedia project={project} lang={lang} sizes="(min-width: 1100px) 1100px, 94vw" eager /></div>
+          <LiquidBehavior />
         </div>
       </header>
 

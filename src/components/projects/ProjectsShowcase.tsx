@@ -1,7 +1,8 @@
-'use client';
-import Link from 'next/link';
-import { useMemo, useState, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { withBase } from '@/lib/base';
 import { CATEGORIES, type Category, type Status } from '@/lib/schemas';
+import { LiquidBehavior } from './LiquidBehavior';
+import { ProjectsFilter } from './ProjectsFilter';
 import { StatusBadge } from './StatusBadge';
 
 export type ShowcaseItem = {
@@ -19,62 +20,66 @@ export type ShowcaseLabels = {
 const pad = (n: number) => String(n).padStart(2, '0');
 
 /**
- * Section Projets : lignes éditoriales pour les projets mis en avant (maquette du site, réalisation technique, liens),
- * cartes compactes pour les autres. Filtres par catégorie et par technologie (chips cliquables).
+ * Section Projets, rendue entièrement côté serveur : lignes éditoriales pour les projets mis en avant (maquette du site,
+ * réalisation technique, liens), cartes compactes pour les autres. Les filtres (catégorie, technologie) sont assurés par
+ * l'îlot <ProjectsFilter /> qui bascule l'attribut `hidden` — le gros arbre HTML n'est donc jamais hydraté.
  */
 export function ProjectsShowcase({ items, labels }: { items: ShowcaseItem[]; labels: ShowcaseLabels }) {
-  const [cat, setCat] = useState<'all' | Category>('all');
-  const [tech, setTech] = useState<string | null>(null);
-
-  const shown = useMemo(() => items.filter((i) => (cat === 'all' || i.categories.includes(cat)) && (!tech || i.stack.includes(tech))), [items, cat, tech]);
-  const available = useMemo(() => new Set(items.flatMap((i) => i.categories)), [items]);
-  const featured = shown.filter((i) => i.featured);
-  const others = shown.filter((i) => !i.featured);
-  const filterKey = `${cat}|${tech ?? ''}`;
+  const featured = items.filter((i) => i.featured);
+  const others = items.filter((i) => !i.featured);
+  const available = new Set(items.flatMap((i) => i.categories));
 
   const chips = (it: ShowcaseItem) => (
     <ul className="chips">
       {it.stack.map((s) => (
         <li key={s}>
-          <button type="button" className="chip chip-btn" aria-pressed={tech === s} aria-label={`${labels.techFilter} ${s}`} onClick={() => setTech((cur) => (cur === s ? null : s))}>{s}</button>
+          <button type="button" className="chip chip-btn" data-tech={s} aria-pressed="false" aria-label={`${labels.techFilter} ${s}`}>{s}</button>
         </li>
       ))}
     </ul>
   );
+  const actions = (it: ShowcaseItem) => (
+    <div className="pj-actions">
+      {it.demo ? <a className="btn btn-gold btn-sm" href={it.demo} target="_blank" rel="noopener" data-track="demo-click">{labels.visit} ↗</a> : null}
+      {it.repo ? <a className="btn btn-line btn-sm" href={it.repo} target="_blank" rel="noopener" data-track="github-click">{labels.code} ↗</a> : null}
+      <a className="link-arrow" href={withBase(it.href)}>{labels.open} →</a>
+    </div>
+  );
+  const meta = (it: ShowcaseItem) => (
+    <p className="meta">
+      {it.client ? <span>{it.client}</span> : null}
+      {it.location ? <span>{it.location}</span> : null}
+      {it.year ? <span>{it.year}</span> : null}
+    </p>
+  );
 
   return (
-    <div className="showcase">
+    <div className="showcase" data-showcase>
       <div className="wrap">
         <div className="filters-bar">
           <div className="filters" role="group" aria-label={labels.filterLabel}>
             {(['all', ...CATEGORIES] as const).filter((c) => c === 'all' || available.has(c)).map((c) => (
-              <button key={c} type="button" className="chip chip-btn" aria-pressed={cat === c} onClick={() => setCat(c)}>{labels.filters[c]}</button>
+              <button key={c} type="button" className="chip chip-btn" data-cat={c} aria-pressed={c === 'all'}>{labels.filters[c]}</button>
             ))}
-            {tech ? <button type="button" className="chip chip-btn chip-active" onClick={() => setTech(null)} aria-label={`${labels.clearTech} : ${tech}`}>{tech} ×</button> : null}
+            <button type="button" className="chip chip-btn chip-active" data-clear data-label={labels.clearTech} hidden />
           </div>
-          <p className="muted mono" style={{ fontSize: '0.8rem' }} aria-live="polite">{pad(shown.length)} / {pad(items.length)}<span className="sr-only"> {labels.shown}</span></p>
+          <p className="muted mono" style={{ fontSize: '0.8rem' }} aria-live="polite"><span data-count>{pad(items.length)}</span> / {pad(items.length)}<span className="sr-only"> {labels.shown}</span></p>
         </div>
 
-        {shown.length === 0 ? (
-          <p className="glass prose">{labels.none} <button type="button" className="link-arrow" style={{ background: 'none', border: 0, cursor: 'pointer', font: 'inherit' }} onClick={() => { setCat('all'); setTech(null); }}>{labels.reset}</button></p>
-        ) : null}
+        <p className="glass prose" data-empty hidden>{labels.none} <button type="button" className="link-arrow" data-reset style={{ background: 'none', border: 0, cursor: 'pointer', font: 'inherit' }}>{labels.reset}</button></p>
 
         {featured.map((it, i) => (
-          <article key={`${it.slug}-${filterKey}`} className={`pj${i % 2 ? ' is-flip' : ''}`} style={{ ['--accent' as string]: it.accent }}>
+          <article key={it.slug} className={`pj${i % 2 ? ' is-flip' : ''}`} data-pj data-cats={it.categories.join(' ')} data-stack={it.stack.join('|')} style={{ ['--accent' as string]: it.accent }}>
             <div className="pj-media">
-              <Link href={it.href} tabIndex={-1} aria-hidden="true" className="pj-media-link" data-cursor="open">{it.media}</Link>
+              <a href={withBase(it.href)} tabIndex={-1} aria-hidden="true" className="pj-media-link" data-cursor="open">{it.media}</a>
             </div>
             <div className="pj-body">
               <div className="pj-top">
                 <span className="pj-num" aria-hidden="true">{pad(it.index + 1)}</span>
                 <StatusBadge status={it.status} label={it.statusLabel} note={it.statusNote} />
               </div>
-              <h3 className="pj-title"><Link href={it.href}>{it.title}</Link></h3>
-              <p className="meta">
-                {it.client ? <span>{it.client}</span> : null}
-                {it.location ? <span>{it.location}</span> : null}
-                {it.year ? <span>{it.year}</span> : null}
-              </p>
+              <h3 className="pj-title"><a href={withBase(it.href)}>{it.title}</a></h3>
+              {meta(it)}
               <p className="pj-summary">{it.summary}</p>
               {it.technical.length ? (
                 <div className="pj-tech">
@@ -86,40 +91,28 @@ export function ProjectsShowcase({ items, labels }: { items: ShowcaseItem[]; lab
                 <ul className="results">{it.results.map((r) => <li className="result" key={r.value + r.label}><strong>{r.value}</strong><span>{r.label}</span></li>)}</ul>
               ) : null}
               {chips(it)}
-              <div className="pj-actions">
-                {it.demo ? <a className="btn btn-gold btn-sm" href={it.demo} target="_blank" rel="noopener" data-track="demo-click">{labels.visit} ↗</a> : null}
-                {it.repo ? <a className="btn btn-line btn-sm" href={it.repo} target="_blank" rel="noopener" data-track="github-click">{labels.code} ↗</a> : null}
-                <Link className="link-arrow" href={it.href}>{labels.open} →</Link>
-              </div>
+              {actions(it)}
               {it.repo && it.repoLabel ? <p className="pj-note muted">{it.repoLabel}</p> : null}
             </div>
           </article>
         ))}
 
         {others.length ? (
-          <section className="pj-others" aria-labelledby="pj-others-title">
+          <section className="pj-others" data-others aria-labelledby="pj-others-title">
             <h3 id="pj-others-title" className="pj-others-title">{labels.others}</h3>
             <ul className="pj-grid">
               {others.map((it) => (
-                <li key={`${it.slug}-${filterKey}`}>
+                <li key={it.slug} data-pj data-card data-cats={it.categories.join(' ')} data-stack={it.stack.join('|')}>
                   <article className="panel pj-card" style={{ ['--accent' as string]: it.accent }}>
                     <div className="pj-top">
                       <span className="pj-num pj-num-sm" aria-hidden="true">{pad(it.index + 1)}</span>
                       <StatusBadge status={it.status} label={it.statusLabel} note={it.statusNote} />
                     </div>
-                    <h4 className="pj-card-title"><Link href={it.href}>{it.title}</Link></h4>
-                    <p className="meta">
-                      {it.client ? <span>{it.client}</span> : null}
-                      {it.location ? <span>{it.location}</span> : null}
-                      {it.year ? <span>{it.year}</span> : null}
-                    </p>
+                    <h4 className="pj-card-title"><a href={withBase(it.href)}>{it.title}</a></h4>
+                    {meta(it)}
                     <p className="pj-card-summary">{it.summary}</p>
                     {chips(it)}
-                    <div className="pj-actions">
-                      {it.demo ? <a className="btn btn-gold btn-sm" href={it.demo} target="_blank" rel="noopener" data-track="demo-click">{labels.visit} ↗</a> : null}
-                      {it.repo ? <a className="btn btn-line btn-sm" href={it.repo} target="_blank" rel="noopener" data-track="github-click">{labels.code} ↗</a> : null}
-                      <Link className="link-arrow" href={it.href}>{labels.open} →</Link>
-                    </div>
+                    {actions(it)}
                   </article>
                 </li>
               ))}
@@ -128,6 +121,8 @@ export function ProjectsShowcase({ items, labels }: { items: ShowcaseItem[]; lab
           </section>
         ) : null}
       </div>
+      <ProjectsFilter />
+      <LiquidBehavior />
     </div>
   );
 }

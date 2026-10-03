@@ -5,6 +5,8 @@
  */
 export type MotifName = 'rosace' | 'feston' | 'anneaux' | 'chainette' | 'treillis' | 'quatrefeuille';
 export type Geometry = { w: number; h: number; paths: string[]; pads: [number, number][] };
+/** Un seul motif répétable (pour <pattern>) : `unit` = largeur d'une répétition. */
+export type Tile = Geometry & { unit: number };
 
 const f = (n: number) => Math.round(n * 100) / 100;
 const pt = (cx: number, cy: number, r: number, a: number): [number, number] => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
@@ -23,6 +25,21 @@ function rosace(): Geometry {
     const [ox, oy] = pt(c, c, 92, a + half);
     paths.push(`M ${f(x2)} ${f(y2)} L ${f(ox)} ${f(oy)}`);
     pads.push([f(ox), f(oy)]);
+  }
+  return { w: 200, h: 200, paths, pads };
+}
+
+/** Rosace allégée pour les petites tailles (icônes de 44 px) : 8 pétales, sans connecteurs ni anneau extérieur détaillé. */
+export function rosaceSimple(): Geometry {
+  const c = 100, N = 8, paths: string[] = [], pads: [number, number][] = [];
+  paths.push(`M ${c + 92} ${c} A 92 92 0 1 0 ${c - 92} ${c} A 92 92 0 1 0 ${c + 92} ${c}`);
+  paths.push(`M ${c + 14} ${c} A 14 14 0 1 0 ${c - 14} ${c} A 14 14 0 1 0 ${c + 14} ${c}`);
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2, half = Math.PI / N;
+    const [x1, y1] = pt(c, c, 14, a), [x2, y2] = pt(c, c, 84, a);
+    const [cx1, cy1] = pt(c, c, 70, a - half * 1.3), [cx2, cy2] = pt(c, c, 70, a + half * 1.3);
+    paths.push(`M ${f(x1)} ${f(y1)} Q ${f(cx1)} ${f(cy1)} ${f(x2)} ${f(y2)} Q ${f(cx2)} ${f(cy2)} ${f(x1)} ${f(y1)}`);
+    pads.push([f(x2), f(y2)]);
   }
   return { w: 200, h: 200, paths, pads };
 }
@@ -88,5 +105,35 @@ function quatrefeuille(): Geometry {
   pads.push([c, c]);
   return { w: 100, h: 100, paths, pads };
 }
+
+/**
+ * Versions « carreau » des bandes : une seule répétition, rendue via <pattern> SVG (≈ 6 nœuds au lieu de centaines).
+ * Les parties qui débordent d'un carreau sont redessinées de l'autre côté pour que la jonction soit continue.
+ */
+function festonTile(): Tile {
+  const u = 36, cy = 6 + u / 2;
+  return {
+    unit: u, w: u, h: 6 + u / 2 + 18,
+    paths: [`M 0 6 L ${u} 6`, `M 0 6 A ${u / 2} ${u / 2} 0 0 0 ${u} 6`, `M ${u / 2 + 5} ${cy + 9} a 5 5 0 1 0 -10 0 a 5 5 0 1 0 10 0`, `M ${u / 2} ${cy} L ${u / 2} ${cy + 4}`],
+    pads: [[0, 6], [u, 6], [u / 2, cy]],
+  };
+}
+function anneauxTile(): Tile {
+  const u = 60;
+  return {
+    unit: u, w: u, h: 4 + 22 + 18 + 2,
+    paths: [`M 0 4 L ${u} 4`, 'M 15 4 L 15 26', 'M 24 35 a 9 9 0 1 0 -18 0 a 9 9 0 1 0 18 0', 'M 45 4 L 45 16', 'M 51 22 a 6 6 0 1 0 -12 0 a 6 6 0 1 0 12 0'],
+    pads: [[15, 4], [45, 4]],
+  };
+}
+function chainetteTile(): Tile {
+  const u = 26;
+  return {
+    unit: u, w: u, h: 28,
+    paths: ['M 0 14 a 17 8 0 1 0 34 0 a 17 8 0 1 0 -34 0', 'M -26 14 a 17 8 0 1 0 34 0 a 17 8 0 1 0 -34 0'],
+    pads: [[4, 8.85], [4, 19.15]],
+  };
+}
+export const BAND_TILES: Partial<Record<MotifName, () => Tile>> = { feston: festonTile, anneaux: anneauxTile, chainette: chainetteTile };
 
 export const MOTIFS: Record<MotifName, (count?: number) => Geometry> = { rosace, feston, anneaux, chainette, treillis, quatrefeuille };

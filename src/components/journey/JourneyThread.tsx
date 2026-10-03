@@ -72,7 +72,7 @@ export function JourneyThread() {
           </svg>
           {geo.pts.map((p, i) => (
             <span key={i} className="thread-rose" style={{ left: p.x - 22, top: p.y - 22 }}>
-              <Motif name="rosace" variant="circuit" />
+              <Motif name="rosace" variant="circuit" simple />
             </span>
           ))}
         </>

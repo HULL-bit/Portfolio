@@ -177,7 +177,11 @@
   },
   "journey": {
     "now": "In progress",
-    "map": "Route diagram from Touba and Mbacké to Dakar"
+    "map": "Route diagram from Touba and Mbacké to Dakar",
+    "curriculumEyebrow": "// curriculum — subjects covered",
+    "curriculum": "Curriculum",
+    "curriculumIntro": "What I studied during my training at UCAD (BSc Computer Science, MSc SIR): from the foundations of computer science to networks, databases and security.",
+    "andMore": "and more…"
   },
   "github": {
     "repos": "public repositories",
@@ -227,7 +231,8 @@
     "skills": "Skills",
     "projects": "Projects",
     "languages": "Languages",
-    "contact": "Contact"
+    "contact": "Contact",
+    "curriculum": "Coursework"
   },
   "notFound": {
     "eyebrow": "kernel panic — 404",

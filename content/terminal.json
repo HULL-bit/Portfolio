@@ -29,10 +29,10 @@
     },
     {
       "name": "ls",
-      "usage": "ls projects",
+      "usage": "ls projects | cursus",
       "description": {
-        "fr": "Lister les projets",
-        "en": "List projects"
+        "fr": "Lister les projets ou le cursus",
+        "en": "List projects or curriculum"
       }
     },
     {

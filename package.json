@@ -11,7 +11,8 @@
     "preview": "npx serve out",
     "lint": "eslint src",
     "shots": "node scripts/shots.mjs",
-    "a11y": "node scripts/audit-a11y.mjs"
+    "a11y": "node scripts/audit-a11y.mjs",
+    "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

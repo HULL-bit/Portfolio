@@ -1,5 +1,5 @@
 import {
-  siDart, siDebian, siDjango, siDocker, siFlutter, siGit, siLinux, siMysql, siNextdotjs, siNginx, siOpenjdk,
+  siDart, siDebian, siDjango, siDotnet, siDocker, siFlutter, siGit, siLinux, siMysql, siNextdotjs, siNginx, siOpenjdk,
   siPostgresql, siPython, siReact, siSpring, siTypescript, siUbuntu, type SimpleIcon,
 } from 'simple-icons';
 import { skills, t } from '@/lib/content';
@@ -11,7 +11,7 @@ import { Marquee } from '@/components/motion/Marquee';
 const ICONS: Record<string, SimpleIcon> = {
   Linux: siLinux, Debian: siDebian, Ubuntu: siUbuntu, PostgreSQL: siPostgresql, MySQL: siMysql, Django: siDjango, React: siReact,
   Spring: siSpring, 'Next.js': siNextdotjs, Flutter: siFlutter, Docker: siDocker, Nginx: siNginx, Git: siGit, Python: siPython,
-  Java: siOpenjdk, TypeScript: siTypescript, Dart: siDart,
+  Java: siOpenjdk, TypeScript: siTypescript, Dart: siDart, '.NET': siDotnet,
 };
 
 function Item({ name }: { name: string }) {

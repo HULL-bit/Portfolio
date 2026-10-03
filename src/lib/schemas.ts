@@ -80,6 +80,26 @@ export const skillsSchema = z.object({
   marquee: z.array(z.string()).min(1),
 });
 
+export const curriculumSchema = z.object({
+  todo: z.array(z.string()).default([]),
+  /** Phrase courte pour la vue express (CV). */
+  cvLine: L,
+  domains: z
+    .array(
+      z.object({
+        id: z.string(),
+        /** Largeur de la carte sur la grille de 12 colonnes (écrans larges). */
+        span: z.number().int().min(3).max(12).default(4),
+        name: L,
+        blurb: L,
+        groups: z
+          .array(z.object({ label: L.nullable().default(null), items: z.array(L).min(1), /** Ajoute la pastille « et d'autres… » en fin de groupe. */ more: z.boolean().default(false) }))
+          .min(1),
+      }),
+    )
+    .min(1),
+});
+
 export const CATEGORIES = ['web', 'mobile', 'systeme', 'bdd', 'ia'] as const;
 export type Category = (typeof CATEGORIES)[number];
 

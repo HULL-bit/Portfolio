@@ -5,6 +5,7 @@ import { period } from '@/lib/format';
 import { JourneyThread } from './JourneyThread';
 import { JourneyMap } from './JourneyMap';
 import { InView } from '@/components/ui/InView';
+import { Curriculum } from './Curriculum';
 
 export function Journey({ lang }: { lang: Lang }) {
   return (
@@ -32,6 +33,7 @@ export function Journey({ lang }: { lang: Lang }) {
             <p className="muted mono" style={{ fontSize: '0.8rem' }}>2022 → 2026</p>
           </aside>
         </div>
+        <Curriculum lang={lang} />
       </div>
     </section>
   );

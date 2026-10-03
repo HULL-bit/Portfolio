@@ -1,4 +1,4 @@
-import { pick, profile, projects, skills, t, terminal } from '@/lib/content';
+import { curriculum, pick, profile, projects, skills, t, terminal } from '@/lib/content';
 import { withBase } from '@/lib/base';
 import { localePath } from '@/lib/site';
 import type { Lang } from '@/lib/i18n';
@@ -18,6 +18,7 @@ export function TerminalHost({ lang }: { lang: Lang }) {
     commands: terminal.commands.map((x) => ({ name: x.name, usage: x.usage, description: pick(x.description, lang) })),
     projects: projects.map((p) => ({ slug: p.slug, title: pick(p.title, lang), href: localePath(lang, `projets/${p.slug}/`) })),
     skills: skills.domains.filter((d) => d.primary).map((d) => ({ name: pick(d.name, lang), items: d.items })),
+    curriculum: curriculum.domains.map((d) => ({ name: pick(d.name, lang), items: d.groups.flatMap((g) => g.items.map((i) => pick(i, lang))) })),
     whoami: r('whoami', lang) as string[],
     uname: r('uname', lang) as string[],
     neofetchLogo: (terminal.responses.neofetchLogo as string[]),

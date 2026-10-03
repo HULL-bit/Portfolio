@@ -17,14 +17,9 @@ export function MotionProvider() {
     let teardown: (() => void) | null = null;
 
     const start = async () => {
-      const [{ gsap }, { ScrollTrigger }, { SplitText }, { default: Lenis }] = await Promise.all([
-        import('gsap'),
-        import('gsap/ScrollTrigger'),
-        import('gsap/SplitText'),
-        import('lenis'),
-      ]);
+      const [{ gsap }, { ScrollTrigger }, { default: Lenis }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger'), import('lenis')]);
       if (disposed) return;
-      gsap.registerPlugin(ScrollTrigger, SplitText);
+      gsap.registerPlugin(ScrollTrigger);
 
       // ── Défilement fluide, synchronisé avec ScrollTrigger ──
       const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
@@ -58,83 +53,73 @@ export function MotionProvider() {
       };
       document.addEventListener('click', onClick);
 
-      const ctxCleanups: (() => void)[] = [];
+      const cleanups: (() => void)[] = [];
+
+      // ── Révélations de blocs, d'étiquettes et de compteurs : CSS + IntersectionObserver ──
+      // (des centaines de tweens GSAP coûtaient ~300 ms de thread principal sur mobile ; ici, une classe suffit)
+      const reveal = new IntersectionObserver(
+        (entries) => {
+          let n = 0;
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            const el = e.target as HTMLElement;
+            el.style.setProperty('--rv-delay', `${(n++ * STAGGER.cards).toFixed(2)}s`);
+            el.classList.add('in');
+            reveal.unobserve(el);
+          }
+        },
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.01 },
+      );
+      document.querySelectorAll('main .glass, main .photo-wrap, [data-eyebrow], [data-roll]').forEach((el) => reveal.observe(el));
+      cleanups.push(() => reveal.disconnect());
+
+      // ── Titres (lettres en cascade) et textes (lignes masquées) : découpés seulement à l'approche de l'écran ──
+      let splitText: typeof import('gsap/SplitText').SplitText | null = null;
+      const loadSplit = async () => {
+        if (splitText) return splitText;
+        const mod = await import('gsap/SplitText');
+        gsap.registerPlugin(mod.SplitText);
+        splitText = mod.SplitText;
+        return splitText;
+      };
+      const show = (el: HTMLElement) => { el.style.visibility = 'visible'; };
+      const splitIo = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            const el = e.target as HTMLElement;
+            splitIo.unobserve(el);
+            Promise.all([loadSplit(), document.fonts.ready])
+              .then(([ST]) => {
+                if (disposed || !ST) return show(el);
+                if (el.hasAttribute('data-title')) {
+                  ST.create(el, {
+                    type: 'chars,words', mask: 'chars', maskClass: 'split-mask', autoSplit: true,
+                    onSplit: (self) => {
+                      show(el);
+                      return gsap.from(self.chars, { yPercent: 115, duration: DUR.reveal * 1.15, ease: EASE.out, stagger: STAGGER.chars });
+                    },
+                  });
+                } else {
+                  const targets = el.querySelectorAll('p, li').length ? el.querySelectorAll('p, li') : el;
+                  ST.create(targets, {
+                    type: 'lines', mask: 'lines', maskClass: 'split-mask', autoSplit: true,
+                    onSplit: (self) =>
+                      gsap.from(self.lines, {
+                        yPercent: 108, duration: DUR.reveal, ease: EASE.out, stagger: STAGGER.lines,
+                        onComplete: () => el.querySelectorAll<HTMLElement>('.kw').forEach((k, i) => setTimeout(() => k.classList.add('lit'), i * 140)),
+                      }),
+                  });
+                }
+              })
+              .catch(() => show(el)); // si SplitText ne se charge pas, le texte reste visible tel quel
+          }
+        },
+        { rootMargin: '0px 0px 20% 0px' },
+      );
+      document.querySelectorAll<HTMLElement>('[data-title], [data-lines]').forEach((el) => splitIo.observe(el));
+      cleanups.push(() => splitIo.disconnect());
       const ctx = gsap.context(() => {
-        // ── Titres : lettres en cascade ──
-        const titles = gsap.utils.toArray<HTMLElement>('[data-title]');
-        const eyebrows = gsap.utils.toArray<HTMLElement>('[data-eyebrow]');
-        document.fonts.ready.then(() => {
-          if (disposed) return;
-          titles.forEach((el) => {
-            SplitText.create(el, {
-              type: 'chars,words',
-              mask: 'chars',
-              maskClass: 'split-mask',
-              autoSplit: true,
-              onSplit: (self) => {
-                el.style.visibility = 'visible';
-                return gsap.from(self.chars, {
-                  yPercent: 115,
-                  duration: DUR.reveal * 1.15,
-                  ease: EASE.out,
-                  stagger: STAGGER.chars,
-                  scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-                });
-              },
-            });
-          });
-          // ── Texte : lignes masquées qui montent ──
-          gsap.utils.toArray<HTMLElement>('[data-lines]').forEach((el) => {
-            SplitText.create(el.querySelectorAll('p, li').length ? el.querySelectorAll('p, li') : el, {
-              type: 'lines',
-              mask: 'lines',
-              maskClass: 'split-mask',
-              autoSplit: true,
-              onSplit: (self) =>
-                gsap.from(self.lines, {
-                  yPercent: 108,
-                  duration: DUR.reveal,
-                  ease: EASE.out,
-                  stagger: STAGGER.lines,
-                  scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-                  onComplete: () => {
-                    // les mots-clés s'allument en cyan après la révélation
-                    el.querySelectorAll<HTMLElement>('.kw').forEach((k, i) => gsap.delayedCall(i * 0.14, () => k.classList.add('lit')));
-                  },
-                }),
-            });
-          });
-          ScrollTrigger.refresh();
-        });
-
-        eyebrows.forEach((el) =>
-          gsap.from(el, { autoAlpha: 0, x: -24, duration: DUR.reveal * 0.8, ease: EASE.out, scrollTrigger: { trigger: el, start: 'top 90%', once: true } }),
-        );
-
-        // ── Cartes et blocs : fondu + montée, en cascade par rangée ──
-        gsap.set('main .glass, main .photo-wrap', { autoAlpha: 0, y: 48 });
-        ScrollTrigger.batch('main .glass, main .photo-wrap', {
-          start: 'top 90%',
-          once: true,
-          onEnter: (els) => gsap.to(els, { autoAlpha: 1, y: 0, duration: DUR.reveal, ease: EASE.out, stagger: STAGGER.cards, overwrite: true }),
-        });
-
-        // ── Compteurs mécaniques : colonnes 0–9 qui défilent ──
-        gsap.utils.toArray<HTMLElement>('[data-roll]').forEach((root) => {
-          const cols = root.querySelectorAll<HTMLElement>('.roll-col');
-          gsap.fromTo(
-            cols,
-            { yPercent: 0 },
-            {
-              yPercent: (_i, el: HTMLElement) => -(Number(el.dataset.d) + 10) * 5,
-              duration: DUR.count,
-              ease: EASE.out,
-              stagger: STAGGER.digits,
-              scrollTrigger: { trigger: root, start: 'top 90%', once: true },
-            },
-          );
-        });
-
         // ── Boutons magnétiques ──
         if (finePointer()) {
           const items = gsap.utils.toArray<HTMLElement>('[data-magnetic]').map((el) => ({
@@ -154,7 +139,7 @@ export function MotionProvider() {
             }
           };
           window.addEventListener('pointermove', onMove, { passive: true });
-          ctxCleanups.push(() => window.removeEventListener('pointermove', onMove));
+          cleanups.push(() => window.removeEventListener('pointermove', onMove));
         }
       });
 
@@ -163,7 +148,7 @@ export function MotionProvider() {
       requestAnimationFrame(() => ScrollTrigger.refresh());
 
       teardown = () => {
-        ctxCleanups.forEach((f) => f());
+        cleanups.forEach((f) => f());
         ctx.revert();
         document.removeEventListener('click', onClick);
         gsap.ticker.remove(tick);

@@ -1,0 +1,248 @@
+{
+  "todo": [
+    "Cursus : intitulés exacts des unités d'enseignement et répartition par année (Licence, Master 1, Master 2) à confirmer",
+    "Cursus : la mention « et d'autres » (langages, frameworks) attend la liste complète"
+  ],
+  "cvLine": {
+    "fr": "algorithmique, architecture des ordinateurs, mathématiques et algèbre, optique, réseaux et services IP, Oracle 19c, SQL Server, C# et .NET, sécurité et protocoles.",
+    "en": "algorithms, computer architecture, mathematics and algebra, optics, networks and IP services, Oracle 19c, SQL Server, C# and .NET, security and protocols."
+  },
+  "domains": [
+    {
+      "id": "foundations",
+      "span": 5,
+      "name": {
+        "fr": "Fondamentaux",
+        "en": "Foundations"
+      },
+      "blurb": {
+        "fr": "Les bases scientifiques de l'informatique.",
+        "en": "The scientific foundations of computing."
+      },
+      "groups": [
+        {
+          "label": null,
+          "items": [
+            {
+              "fr": "Algorithmique : les bases",
+              "en": "Algorithms: the fundamentals"
+            },
+            {
+              "fr": "Architecture des ordinateurs",
+              "en": "Computer architecture"
+            },
+            {
+              "fr": "Optique",
+              "en": "Optics"
+            },
+            {
+              "fr": "Mathématiques",
+              "en": "Mathematics"
+            },
+            {
+              "fr": "Algèbre",
+              "en": "Algebra"
+            }
+          ],
+          "more": false
+        }
+      ]
+    },
+    {
+      "id": "programming",
+      "span": 7,
+      "name": {
+        "fr": "Programmation",
+        "en": "Programming"
+      },
+      "blurb": {
+        "fr": "Des langages aux frameworks, du poste de travail au serveur.",
+        "en": "From languages to frameworks, from the desktop to the server."
+      },
+      "groups": [
+        {
+          "label": {
+            "fr": "Langages",
+            "en": "Languages"
+          },
+          "items": [
+            {
+              "fr": "Python",
+              "en": "Python"
+            },
+            {
+              "fr": "Java",
+              "en": "Java"
+            },
+            {
+              "fr": "JavaScript",
+              "en": "JavaScript"
+            },
+            {
+              "fr": "TypeScript",
+              "en": "TypeScript"
+            },
+            {
+              "fr": "Dart",
+              "en": "Dart"
+            },
+            {
+              "fr": "PHP",
+              "en": "PHP"
+            },
+            {
+              "fr": "C / C++",
+              "en": "C / C++"
+            },
+            {
+              "fr": "C#",
+              "en": "C#"
+            },
+            {
+              "fr": "SQL",
+              "en": "SQL"
+            },
+            {
+              "fr": "XML",
+              "en": "XML"
+            }
+          ],
+          "more": true
+        },
+        {
+          "label": {
+            "fr": "Frameworks",
+            "en": "Frameworks"
+          },
+          "items": [
+            {
+              "fr": "Django",
+              "en": "Django"
+            },
+            {
+              "fr": "React",
+              "en": "React"
+            },
+            {
+              "fr": "Spring",
+              "en": "Spring"
+            },
+            {
+              "fr": "Next.js",
+              "en": "Next.js"
+            },
+            {
+              "fr": "Flutter",
+              "en": "Flutter"
+            },
+            {
+              "fr": "JEE",
+              "en": "JEE"
+            },
+            {
+              "fr": "Hibernate",
+              "en": "Hibernate"
+            },
+            {
+              "fr": ".NET",
+              "en": ".NET"
+            }
+          ],
+          "more": true
+        }
+      ]
+    },
+    {
+      "id": "networks",
+      "span": 4,
+      "name": {
+        "fr": "Réseaux",
+        "en": "Networks"
+      },
+      "blurb": {
+        "fr": "Des fondamentaux aux services IP et aux réseaux avancés.",
+        "en": "From the fundamentals to IP services and advanced networking."
+      },
+      "groups": [
+        {
+          "label": null,
+          "items": [
+            {
+              "fr": "Réseaux",
+              "en": "Networking"
+            },
+            {
+              "fr": "Services IP",
+              "en": "IP services"
+            },
+            {
+              "fr": "Réseaux avancés",
+              "en": "Advanced networking"
+            }
+          ],
+          "more": false
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "span": 4,
+      "name": {
+        "fr": "Bases de données",
+        "en": "Databases"
+      },
+      "blurb": {
+        "fr": "Administration et programmation des bases relationnelles.",
+        "en": "Administration and programming of relational databases."
+      },
+      "groups": [
+        {
+          "label": null,
+          "items": [
+            {
+              "fr": "Oracle 19c",
+              "en": "Oracle 19c"
+            },
+            {
+              "fr": "SQL Server",
+              "en": "SQL Server"
+            },
+            {
+              "fr": "SQL avancé et PL/SQL",
+              "en": "Advanced SQL and PL/SQL"
+            }
+          ],
+          "more": true
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "span": 4,
+      "name": {
+        "fr": "Sécurité",
+        "en": "Security"
+      },
+      "blurb": {
+        "fr": "Les fondamentaux et les protocoles.",
+        "en": "The fundamentals and the protocols."
+      },
+      "groups": [
+        {
+          "label": null,
+          "items": [
+            {
+              "fr": "Bases de la sécurité",
+              "en": "Security fundamentals"
+            },
+            {
+              "fr": "Protocoles",
+              "en": "Protocols"
+            }
+          ],
+          "more": false
+        }
+      ]
+    }
+  ]
+}

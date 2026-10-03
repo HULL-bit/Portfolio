@@ -341,7 +341,11 @@ details.menu > summary::-webkit-details-marker { display: none; }
 
 /* ───────── Motion : états initiaux (la classe .motion est posée avant le premier rendu) ───────── */
 .motion [data-title] { visibility: hidden; }
-.motion [data-eyebrow], .motion main .glass, .motion main .photo-wrap { opacity: 0; }
+/* Révélations pilotées par IntersectionObserver (classe .in) : fondu + montée en cascade (--rv-delay) */
+.motion [data-eyebrow]:not(.in) { opacity: 0; transform: translateX(-24px); }
+.motion [data-eyebrow].in { transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+.motion main .glass:not(.in), .motion main .photo-wrap:not(.in) { opacity: 0; transform: translateY(48px); }
+.motion main .glass.in, .motion main .photo-wrap.in { transition: opacity 0.95s var(--ease-out-expo) var(--rv-delay, 0s), transform 0.95s var(--ease-out-expo) var(--rv-delay, 0s); }
 .split-mask { padding-block: 0.32em 0.34em; margin-block: -0.32em -0.34em; }
 .kw { transition: color 0.7s var(--ease-out-expo); color: var(--cyan); }
 .motion .kw:not(.lit) { color: inherit; }
@@ -364,6 +368,7 @@ html.menu-open { overflow: hidden; }
 .roll-col { display: flex; flex-direction: column; transform: translateY(calc((var(--d) + 10) * -5%)); will-change: transform; }
 .roll-col > span { display: block; height: 1em; line-height: 1; }
 .motion .roll-col { transform: none; }
+.motion .roll.in .roll-col { transform: translateY(calc((var(--d) + 10) * -5%)); transition: transform 1.9s var(--ease-out-expo) calc(var(--i, 0) * 0.12s); }
 .roll-suffix { display: block; height: 1em; }
 
 /* Bandeaux de technologies */
@@ -765,3 +770,18 @@ html.menu-open .mobile-bar, html.terminal-open .mobile-bar { display: none; }
 :root[data-theme='light'] .chip-btn[aria-pressed='true'] { background: var(--indigo); border-color: var(--indigo); color: #fff; }
 :root[data-theme='light'] .chip-active { background: rgba(143, 97, 0, 0.14) !important; }
 :root[data-theme='light'] .rack-tabs .chip-btn[aria-pressed='true'] { background: var(--indigo); color: #fff; }
+
+.pj[hidden], .pj-others[hidden], [data-empty][hidden], [data-clear][hidden] { display: none; }
+
+/* ───────── Cursus : enseignements suivis ───────── */
+.curriculum { margin-top: clamp(3.5rem, 8vw, 7rem); padding-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line); scroll-margin-top: 5rem; }
+.curriculum-head { margin-bottom: clamp(1.5rem, 3vw, 2.5rem); max-width: 62rem; }
+.curriculum-title { font-family: var(--font-display); font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; font-size: clamp(3rem, 8.5vw, 8rem); margin: 0.8rem 0 1.2rem; word-spacing: 0.1em; }
+.cur-card { display: flex; flex-direction: column; gap: 0.7rem; }
+.cur-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1.02; letter-spacing: -0.03em; }
+.cur-blurb { font-size: 0.95rem; max-width: 46ch; }
+.cur-group { margin-top: 0.5rem; }
+.cur-group + .cur-group { margin-top: 1.1rem; }
+.cur-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.5rem; }
+.cur-card .chip { font-size: 0.82rem; padding: 0.35rem 0.8rem; }
+.chip-more { border-style: dashed; color: var(--muted); background: transparent; }

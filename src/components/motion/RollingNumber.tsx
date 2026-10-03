@@ -8,7 +8,7 @@ export function RollingNumber({ value, suffix = '' }: { value: number; suffix?: 
     <span className="roll" data-roll role="img" aria-label={`${value}${suffix}`}>
       {digits.map((d, i) => (
         <span className="roll-digit" key={i} aria-hidden="true">
-          <span className="roll-col" data-d={d} style={{ ['--d' as string]: d }}>
+          <span className="roll-col" data-d={d} style={{ ['--d' as string]: d, ['--i' as string]: i }}>
             {[...Array(20)].map((_, n) => <span key={n}>{n % 10}</span>)}
           </span>
         </span>
