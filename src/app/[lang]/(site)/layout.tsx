@@ -9,7 +9,9 @@ import { MotionProvider } from '@/components/motion/MotionProvider';
 import { ReadingProgress } from '@/components/motion/ReadingProgress';
 import { Cursor } from '@/components/motion/Cursor';
 import { CircuitRail } from '@/components/motion/CircuitRail';
-import { t } from '@/lib/content';
+import { profile, t } from '@/lib/content';
+import { withBase } from '@/lib/base';
+import { MobileBar } from '@/components/ui/MobileBar';
 import { BackgroundLoader } from '@/components/three/BackgroundLoader';
 
 export default async function SiteLayout({ children, params }: { children: ReactNode; params: Promise<{ lang: string }> }) {
@@ -29,6 +31,15 @@ export default async function SiteLayout({ children, params }: { children: React
         {children}
       </main>
       <Footer lang={lang} />
+      <MobileBar
+        label={t(lang, 'a11y.mobileBar')}
+        items={[
+          { id: 'cv', label: t(lang, 'mobileBar.cv'), href: withBase(profile.cv[lang]), download: true, track: 'cv-download' },
+          { id: 'email', label: t(lang, 'mobileBar.email'), href: `mailto:${profile.contact.email}`, track: 'email-click' },
+          { id: 'whatsapp', label: t(lang, 'mobileBar.whatsapp'), href: profile.contact.whatsapp, track: 'whatsapp-click', external: true },
+          { id: 'linkedin', label: t(lang, 'mobileBar.linkedin'), href: profile.contact.linkedin, track: 'linkedin-click', external: true },
+        ]}
+      />
     </div>
   );
 }

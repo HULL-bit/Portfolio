@@ -6,6 +6,7 @@ import { education, experience, pick, profile, projects, skills, t, tList } from
 import { withBase } from '@/lib/base';
 import { localePath, pageMeta } from '@/lib/site';
 import { period } from '@/lib/format';
+import { TrackView } from '@/components/ui/Analytics';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -22,6 +23,7 @@ export default async function CvPage({ params }: { params: Promise<{ lang: strin
   const shown = projects.filter((p) => !p.draft);
   return (
     <div className="cv-page">
+      <TrackView event="express-open" />
       <main id="main" className="cv">
         <div className="cv-actions no-print">
           <Link href={localePath(lang)}>← {L('back')}</Link>

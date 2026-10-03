@@ -11,10 +11,11 @@ type Props = {
   items: Item[];
   labels: { menu: string; open: string; close: string };
   cv: { href: string; label: string };
+  tools?: React.ReactNode;
 };
 
 /** Menu plein écran : liens géants sur fond de motif brodé animé. Échap pour fermer, focus géré. */
-export function Menu({ items, labels, cv }: Props) {
+export function Menu({ items, labels, cv, tools }: Props) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -52,7 +53,10 @@ export function Menu({ items, labels, cv }: Props) {
               </li>
             ))}
           </ul>
-          <a className="btn btn-gold" href={cv.href} download data-track="cv-download">{cv.label}</a>
+          <div className="menu-foot">
+            <a className="btn btn-gold" href={cv.href} download data-track="cv-download">{cv.label}</a>
+            <div className="nav-tools-inline">{tools}</div>
+          </div>
         </div>
       </div>,
         document.body,
