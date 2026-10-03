@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-github.mjs && node scripts/optimize-images.mjs && node scripts/sample-portrait.mjs && node scripts/generate-og.mjs",
     "build": "next build",
     "postbuild": "node scripts/check-static.mjs",
     "preview": "npx serve out",

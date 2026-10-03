@@ -1,0 +1,75 @@
+{
+  "levelsTodo": true,
+  "domains": [
+    {
+      "id": "systems", "primary": true,
+      "name": { "fr": "Systèmes & Linux", "en": "Systems & Linux" },
+      "blurb": { "fr": "Debian/Ubuntu, configuration serveur, déploiement, sécurisation.", "en": "Debian/Ubuntu, server configuration, deployment, hardening." },
+      "items": [
+        { "name": "Linux (Debian / Ubuntu)", "level": 5 },
+        { "name": "Configuration serveur", "level": 5 },
+        { "name": "Sécurisation", "level": 4 },
+        { "name": "Nginx", "level": 4 },
+        { "name": "Docker", "level": 4 },
+        { "name": "Git", "level": 4 }
+      ]
+    },
+    {
+      "id": "databases", "primary": true,
+      "name": { "fr": "Bases de données", "en": "Databases" },
+      "blurb": { "fr": "Oracle Database, SQL avancé, PL/SQL.", "en": "Oracle Database, advanced SQL, PL/SQL." },
+      "items": [
+        { "name": "Oracle Database", "level": 5 },
+        { "name": "SQL avancé", "level": 5 },
+        { "name": "PL/SQL", "level": 4 },
+        { "name": "PostgreSQL", "level": 4 },
+        { "name": "MySQL", "level": 4 },
+        { "name": "SQL Server", "level": 3 }
+      ]
+    },
+    {
+      "id": "fullstack", "primary": false,
+      "name": { "fr": "Full-Stack", "en": "Full-Stack" },
+      "blurb": { "fr": "Django, React et Spring en frameworks de prédilection.", "en": "Django, React and Spring as go-to frameworks." },
+      "items": [
+        { "name": "Django", "level": 5 },
+        { "name": "React", "level": 5 },
+        { "name": "Spring", "level": 4 },
+        { "name": "Next.js", "level": 4 },
+        { "name": "JEE / Hibernate", "level": 4 },
+        { "name": "REST / JWT", "level": 4 },
+        { "name": "Python", "level": 5 },
+        { "name": "Java", "level": 4 },
+        { "name": "JavaScript / TypeScript", "level": 4 },
+        { "name": "PHP", "level": 3 },
+        { "name": "C / C++ / C#", "level": 3 }
+      ]
+    },
+    {
+      "id": "mobile", "primary": false,
+      "name": { "fr": "Mobile", "en": "Mobile" },
+      "blurb": { "fr": "Applications Flutter connectées à des API REST sécurisées.", "en": "Flutter apps connected to secured REST APIs." },
+      "items": [
+        { "name": "Flutter", "level": 4 },
+        { "name": "Dart", "level": 4 },
+        { "name": "API REST / JWT", "level": 4 }
+      ]
+    },
+    {
+      "id": "modeling", "primary": false,
+      "name": { "fr": "Modélisation", "en": "Modeling" },
+      "blurb": { "fr": "Conception de systèmes d'information : UML, BPMN, Merise.", "en": "Information-system design: UML, BPMN, Merise." },
+      "items": [
+        { "name": "UML", "level": 4 },
+        { "name": "BPMN", "level": 4 },
+        { "name": "Merise (MCD / MLD)", "level": 4 },
+        { "name": "XML", "level": 3 }
+      ]
+    }
+  ],
+  "marquee": [
+    "Linux", "Debian", "Ubuntu", "Oracle", "PL/SQL", "PostgreSQL", "MySQL", "SQL Server",
+    "Django", "React", "Spring", "Next.js", "Flutter", "Docker", "Nginx", "Git",
+    "Python", "Java", "TypeScript", "Dart", "UML", "BPMN"
+  ]
+}

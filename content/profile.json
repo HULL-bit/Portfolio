@@ -1,0 +1,68 @@
+{
+  "name": "Souleymane DIAW",
+  "title": {
+    "fr": "Ingénieur Systèmes d'Information Répartis",
+    "en": "Distributed Information Systems Engineer"
+  },
+  "stackLine": "Linux · Oracle · Full-Stack",
+  "location": { "city": "Dakar", "country": "Sénégal", "timezone": "Africa/Dakar", "mobility": true },
+  "roles": [
+    { "fr": "Administrateur Linux", "en": "Linux Administrator" },
+    { "fr": "DBA Oracle", "en": "Oracle DBA" },
+    { "fr": "Ingénieur Full-Stack", "en": "Full-Stack Engineer" },
+    { "fr": "Architecte de systèmes répartis", "en": "Distributed Systems Architect" }
+  ],
+  "tagline": {
+    "fr": "Je conçois, sécurise et déploie des systèmes qui tournent en production, du serveur Linux à l'application mobile.",
+    "en": "I design, secure and ship systems that run in production — from the Linux server to the mobile app."
+  },
+  "availability": {
+    "open": true,
+    "types": [
+      { "fr": "Stage de fin d'études", "en": "End-of-studies internship" },
+      { "fr": "Alternance", "en": "Work-study" },
+      { "fr": "CDI", "en": "Permanent role" }
+    ],
+    "responseTime": { "fr": "Réponse sous 24 h", "en": "Reply within 24 h" }
+  },
+  "current": {
+    "role": { "fr": "Responsable informatique", "en": "IT Manager" },
+    "org": "ONG Wagadu Africa",
+    "url": "https://wagadu-africa.org/",
+    "since": 2024,
+    "study": { "fr": "Master 2 Ingénierie SIR — UCAD", "en": "Master 2 SIR Engineering — UCAD" }
+  },
+  "keyFigures": [
+    { "id": "projects", "value": 4, "suffix": "+", "hero": true, "todo": true },
+    { "id": "users", "value": 600, "suffix": "+", "hero": true, "todo": true },
+    { "id": "years", "value": 3, "suffix": "", "hero": true, "todo": true },
+    { "id": "tech", "value": 25, "suffix": "+", "hero": false, "todo": true }
+  ],
+  "trustedBy": [
+    { "name": "ONG Wagadu Africa", "url": "https://wagadu-africa.org/" },
+    { "name": "DGAP Sénégal" },
+    { "name": "UCAD" },
+    { "name": "Daara Barakatoul Mahaahidi" }
+  ],
+  "languages": [
+    { "name": { "fr": "Wolof", "en": "Wolof" }, "level": { "fr": "Langue maternelle", "en": "Native" }, "value": 1 },
+    { "name": { "fr": "Français", "en": "French" }, "level": { "fr": "C1 / C2", "en": "C1 / C2" }, "value": 0.95 },
+    { "name": { "fr": "Anglais", "en": "English" }, "level": { "fr": "B1 / B2 technique", "en": "B1 / B2 technical" }, "value": 0.65 },
+    { "name": { "fr": "Arabe", "en": "Arabic" }, "level": { "fr": "Notions", "en": "Basics" }, "value": 0.25 }
+  ],
+  "contact": {
+    "email": "souleymane9.diaw@ucad.edu.sn",
+    "phone": "+221 77 842 73 60",
+    "whatsapp": "https://wa.me/221778427360",
+    "github": "https://github.com/HULL-bit",
+    "linkedin": "https://www.linkedin.com/in/souleymane-diaw-824a8029b/"
+  },
+  "cv": { "fr": "/cv/CV-Souleymane-DIAW-FR.pdf", "en": "/cv/CV-Souleymane-DIAW-EN.pdf" },
+  "photo": { "src": "profil/profil.jpeg", "cutout": "profil/profil-detoure.png" },
+  "todo": [
+    "Chiffres clés (4+ projets, 600+ utilisateurs, 3 ans, 25+ technologies) à confirmer",
+    "CV EN : copie du CV FR en attendant une version anglaise",
+    "Adresse publique du site (NEXT_PUBLIC_SITE_URL) pour canonical, sitemap et Open Graph",
+    "Autorisation d'utiliser les noms/logos des organisations du bandeau « Ils m'ont fait confiance »"
+  ]
+}

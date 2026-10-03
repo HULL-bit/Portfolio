@@ -1,0 +1,34 @@
+[
+  {
+    "id": "bac-s2",
+    "start": 2022, "end": 2022,
+    "level": { "fr": "Baccalauréat série S2", "en": "Baccalaureate, S2 (sciences)" },
+    "school": { "fr": "Lycée de Mbacké", "en": "Lycée de Mbacké" },
+    "place": "Touba / Mbacké",
+    "note": { "fr": "Mention Assez Bien", "en": "Honours (Assez Bien)" }
+  },
+  {
+    "id": "licence",
+    "start": 2022, "end": 2025,
+    "level": { "fr": "Licence Informatique", "en": "Bachelor's degree in Computer Science" },
+    "school": { "fr": "UCAD — Département Mathématiques-Informatique", "en": "UCAD — Mathematics & Computer Science Dept." },
+    "place": "Dakar",
+    "note": { "fr": "Mémoire soutenu : système multi-magasins avec IA", "en": "Thesis defended: multi-store system with AI" }
+  },
+  {
+    "id": "master1",
+    "start": 2025, "end": 2026,
+    "level": { "fr": "Master 1 Systèmes d'Information Répartis", "en": "Master 1 Distributed Information Systems" },
+    "school": { "fr": "UCAD", "en": "UCAD" },
+    "place": "Dakar",
+    "note": null
+  },
+  {
+    "id": "master2",
+    "start": 2026, "end": null,
+    "level": { "fr": "Master 2 Ingénierie des Systèmes d'Information Répartis", "en": "Master 2 Distributed Information Systems Engineering" },
+    "school": { "fr": "UCAD", "en": "UCAD" },
+    "place": "Dakar",
+    "note": { "fr": "En cours", "en": "In progress" }
+  }
+]

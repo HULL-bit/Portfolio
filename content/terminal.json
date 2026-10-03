@@ -1,0 +1,47 @@
+{
+  "prompt": "visiteur@system-diaw:~$",
+  "welcome": {
+    "fr": ["SYSTEM//DIAW — terminal v1.0", "Tapez « help » pour la liste des commandes."],
+    "en": ["SYSTEM//DIAW — terminal v1.0", "Type \"help\" for the list of commands."]
+  },
+  "commands": [
+    { "name": "help", "usage": "help", "description": { "fr": "Liste des commandes", "en": "List commands" } },
+    { "name": "whoami", "usage": "whoami", "description": { "fr": "Qui est Souleymane", "en": "Who is Souleymane" } },
+    { "name": "ls", "usage": "ls projects", "description": { "fr": "Lister les projets", "en": "List projects" } },
+    { "name": "open", "usage": "open <slug>", "description": { "fr": "Ouvrir un projet", "en": "Open a project" } },
+    { "name": "cat", "usage": "cat cv", "description": { "fr": "Afficher le CV (et le télécharger)", "en": "Show the CV (and download it)" } },
+    { "name": "skills", "usage": "skills --primary", "description": { "fr": "Compétences principales", "en": "Primary skills" } },
+    { "name": "uname", "usage": "uname -a", "description": { "fr": "Informations système", "en": "System info" } },
+    { "name": "neofetch", "usage": "neofetch", "description": { "fr": "Résumé du système", "en": "System summary" } },
+    { "name": "contact", "usage": "contact", "description": { "fr": "Moyens de contact", "en": "Contact details" } },
+    { "name": "lang", "usage": "lang fr|en", "description": { "fr": "Changer de langue", "en": "Switch language" } },
+    { "name": "theme", "usage": "theme", "description": { "fr": "Basculer clair / sombre", "en": "Toggle light / dark" } },
+    { "name": "sudo", "usage": "sudo hire-me", "description": { "fr": "Recruter Souleymane", "en": "Hire Souleymane" } },
+    { "name": "clear", "usage": "clear", "description": { "fr": "Effacer l'écran", "en": "Clear the screen" } },
+    { "name": "exit", "usage": "exit", "description": { "fr": "Fermer le terminal", "en": "Close the terminal" } }
+  ],
+  "responses": {
+    "whoami": {
+      "fr": ["Souleymane DIAW — Ingénieur Systèmes d'Information Répartis.", "Linux · Oracle · Django · React · Spring.", "Responsable informatique @ Wagadu Africa — Master 2 SIR, UCAD, Dakar."],
+      "en": ["Souleymane DIAW — Distributed Information Systems Engineer.", "Linux · Oracle · Django · React · Spring.", "IT Manager @ Wagadu Africa — Master 2 SIR, UCAD, Dakar."]
+    },
+    "uname": { "fr": ["SYSTEM//DIAW 6.9-sir x86_64 GNU/Linux — compilé statiquement"], "en": ["SYSTEM//DIAW 6.9-sir x86_64 GNU/Linux — statically compiled"] },
+    "neofetchLogo": [
+      "  ____  ____  ",
+      " / ___||  _ \\ ",
+      " \\___ \\| | | |",
+      "  ___) | |_| |",
+      " |____/|____/ "
+    ],
+    "neofetchInfo": {
+      "fr": ["OS: SYSTEM//DIAW", "Hôte: Dakar, Sénégal", "Rôle: Responsable informatique", "Shell: zsh (Linux, Oracle, Django, React, Spring)", "Statut: ● disponible"],
+      "en": ["OS: SYSTEM//DIAW", "Host: Dakar, Senegal", "Role: IT Manager", "Shell: zsh (Linux, Oracle, Django, React, Spring)", "Status: ● available"]
+    },
+    "sudoPassword": { "fr": "[sudo] mot de passe pour visiteur :", "en": "[sudo] password for visitor:" },
+    "sudoGranted": { "fr": "Permission accordée. Redirection vers le contact…", "en": "Permission granted. Redirecting to contact…" },
+    "notFound": { "fr": "commande introuvable : {cmd}. Tapez « help ».", "en": "command not found: {cmd}. Type \"help\"." },
+    "unknownProject": { "fr": "projet introuvable : {slug}. Essayez « ls projects ».", "en": "project not found: {slug}. Try \"ls projects\"." },
+    "usageLang": { "fr": "usage : lang fr|en", "en": "usage: lang fr|en" },
+    "rootOn": { "fr": "Mode root activé.", "en": "Root mode enabled." }
+  }
+}

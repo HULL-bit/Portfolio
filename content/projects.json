@@ -1,0 +1,226 @@
+[
+  {
+    "slug": "dgap-senegal", "order": 1,
+    "title": { "fr": "Système DGAP Sénégal", "en": "DGAP Senegal system" },
+    "client": "DGAP Sénégal", "location": "Sénégal", "year": null,
+    "categories": ["web", "systeme", "bdd"],
+    "role": { "fr": "Conception et développement full-stack", "en": "Full-stack design and development" },
+    "summary": {
+      "fr": "Quatre modules intégrés : site vitrine, intranet, portail d'administration et plateforme d'admission.",
+      "en": "Four integrated modules: public website, intranet, administration portal and admission platform."
+    },
+    "context": {
+      "fr": "Une institution qui gère concours et inscriptions à fort volume, avec des normes de sécurité et de qualité élevées.",
+      "en": "An institution handling high-volume competitive exams and registrations under strict security and quality standards."
+    },
+    "mission": {
+      "fr": "Livrer un système d'information unique couvrant la communication, le travail interne, l'administration et les admissions.",
+      "en": "Deliver a single information system covering communication, internal work, administration and admissions."
+    },
+    "actions": [
+      { "fr": "J'ai conçu l'architecture des quatre modules autour d'un socle de données commun.", "en": "I designed the four modules around a shared data foundation." },
+      { "fr": "J'ai développé les interfaces et les API (Django, React, Spring).", "en": "I built the interfaces and APIs (Django, React, Spring)." },
+      { "fr": "J'ai déployé l'ensemble sur serveur Linux.", "en": "I deployed everything on a Linux server." }
+    ],
+    "features": [
+      { "fr": "Site vitrine", "en": "Public website" },
+      { "fr": "Intranet", "en": "Intranet" },
+      { "fr": "Portail d'administration", "en": "Administration portal" },
+      { "fr": "Plateforme d'admission : concours et inscriptions", "en": "Admission platform: exams and registrations" }
+    ],
+    "architecture": {
+      "nodes": [
+        { "id": "nginx", "label": "Nginx", "kind": "proxy" },
+        { "id": "react", "label": "React", "kind": "front" },
+        { "id": "django", "label": "Django API", "kind": "api" },
+        { "id": "spring", "label": "Spring", "kind": "api" },
+        { "id": "db", "label": "Oracle / PostgreSQL", "kind": "db" },
+        { "id": "linux", "label": "Linux", "kind": "host" }
+      ],
+      "links": [
+        { "from": "react", "to": "nginx" }, { "from": "nginx", "to": "django" }, { "from": "nginx", "to": "spring" },
+        { "from": "django", "to": "db" }, { "from": "spring", "to": "db" }, { "from": "linux", "to": "nginx" }
+      ]
+    },
+    "stack": ["Django", "React", "Spring", "Oracle", "PostgreSQL", "Linux"],
+    "results": [{ "value": "4", "label": { "fr": "modules livrés", "en": "modules delivered" } }],
+    "images": [], "repo": null, "demo": null, "private": true, "accent": "#3D5AFE",
+    "todo": ["Année, périmètre exact du rôle, volumes (candidats, inscriptions) et répartition Oracle/PostgreSQL", "Architecture à valider"]
+  },
+  {
+    "slug": "wagadu-pirogues", "order": 2,
+    "title": { "fr": "Suivi de pirogues — Wagadu Africa", "en": "Pirogue tracking — Wagadu Africa" },
+    "client": "ONG Wagadu Africa", "location": "Kayar", "year": null,
+    "categories": ["web", "mobile", "systeme"],
+    "role": { "fr": "Conception, développement et administration du serveur", "en": "Design, development and server administration" },
+    "summary": {
+      "fr": "Géolocalisation des pirogues en temps réel, alertes météo et tableaux de bord pour les coordinateurs.",
+      "en": "Real-time pirogue geolocation, weather alerts and dashboards for coordinators."
+    },
+    "context": {
+      "fr": "Des pirogues de pêche opèrent au large de Kayar, avec peu de visibilité sur leur position et les risques météo.",
+      "en": "Fishing pirogues operate off the coast of Kayar with little visibility on their position and weather risks."
+    },
+    "mission": {
+      "fr": "Suivre les pirogues en temps réel et alerter les coordinateurs, avec un service disponible en permanence.",
+      "en": "Track pirogues in real time and alert coordinators, on a service that stays available."
+    },
+    "actions": [
+      { "fr": "J'ai conçu et développé l'API Django, l'application web React et l'application mobile Flutter.", "en": "I built the Django API, the React web app and the Flutter mobile app." },
+      { "fr": "J'ai mis en place la géolocalisation en temps réel et les alertes météo.", "en": "I implemented real-time geolocation and weather alerts." },
+      { "fr": "J'ai administré le serveur Linux dédié pour la haute disponibilité.", "en": "I administered the dedicated Linux server for high availability." }
+    ],
+    "features": [
+      { "fr": "Géolocalisation en temps réel", "en": "Real-time geolocation" },
+      { "fr": "Alertes météo", "en": "Weather alerts" },
+      { "fr": "Tableaux de bord pour 3 coordinateurs", "en": "Dashboards for 3 coordinators" }
+    ],
+    "architecture": {
+      "nodes": [
+        { "id": "flutter", "label": "Flutter", "kind": "front" },
+        { "id": "react", "label": "React", "kind": "front" },
+        { "id": "nginx", "label": "Nginx", "kind": "proxy" },
+        { "id": "django", "label": "Django API", "kind": "api" },
+        { "id": "db", "label": "PostgreSQL", "kind": "db" },
+        { "id": "linux", "label": "Linux", "kind": "host" }
+      ],
+      "links": [
+        { "from": "flutter", "to": "nginx" }, { "from": "react", "to": "nginx" }, { "from": "nginx", "to": "django" },
+        { "from": "django", "to": "db" }, { "from": "linux", "to": "nginx" }
+      ]
+    },
+    "stack": ["Django", "React", "Flutter", "PostgreSQL", "REST/JWT", "Linux"],
+    "results": [
+      { "value": "−40 %", "label": { "fr": "grâce aux alertes météo", "en": "thanks to weather alerts" } },
+      { "value": "3", "label": { "fr": "coordinateurs équipés de tableaux de bord", "en": "coordinators equipped with dashboards" } }
+    ],
+    "images": [], "repo": "https://github.com/HULL-bit/ProjetOuagadou", "demo": null, "private": false, "accent": "#00E5FF",
+    "todo": ["Préciser ce que mesure −40 % (incidents ? risques ?)", "Nombre de pirogues suivies (50+ ou 200+)", "Année de mise en production", "Architecture à valider"]
+  },
+  {
+    "slug": "multi-market", "order": 3,
+    "title": { "fr": "Multi-Market — mémoire de Licence", "en": "Multi-Market — Bachelor's thesis" },
+    "client": "UCAD", "location": "Dakar", "year": 2025,
+    "categories": ["web", "mobile", "ia"],
+    "role": { "fr": "Conception et développement complets (mémoire)", "en": "End-to-end design and development (thesis)" },
+    "summary": {
+      "fr": "Gestion des ventes de plusieurs boutiques, automatisation, tickets et IA de calcul des bénéfices.",
+      "en": "Multi-shop sales management with automation, receipts and AI-based profit calculation."
+    },
+    "context": {
+      "fr": "Des commerçants gèrent plusieurs points de vente sans outil commun pour les ventes, les revenus et les stocks.",
+      "en": "Merchants run several points of sale without a common tool for sales, revenue and stock."
+    },
+    "mission": {
+      "fr": "Centraliser la gestion multi-boutiques et aider à décider grâce à l'automatisation et à l'IA.",
+      "en": "Centralize multi-shop management and support decisions through automation and AI."
+    },
+    "actions": [
+      { "fr": "J'ai conçu le système et ses modules : ventes, revenus, tickets.", "en": "I designed the system and its modules: sales, revenue, receipts." },
+      { "fr": "J'ai intégré une IA de calcul des bénéfices.", "en": "I integrated an AI profit-calculation feature." },
+      { "fr": "J'ai développé les applications web et mobile (Django, React, Flutter, Spring).", "en": "I built the web and mobile apps (Django, React, Flutter, Spring)." }
+    ],
+    "features": [
+      { "fr": "Ventes multi-boutiques", "en": "Multi-shop sales" },
+      { "fr": "Gestion des revenus et tickets", "en": "Revenue and receipts" },
+      { "fr": "IA de calcul des bénéfices", "en": "AI profit calculation" }
+    ],
+    "architecture": {
+      "nodes": [
+        { "id": "flutter", "label": "Flutter", "kind": "front" },
+        { "id": "react", "label": "React", "kind": "front" },
+        { "id": "django", "label": "Django API", "kind": "api" },
+        { "id": "spring", "label": "Spring", "kind": "api" },
+        { "id": "db", "label": "MySQL", "kind": "db" }
+      ],
+      "links": [
+        { "from": "flutter", "to": "django" }, { "from": "react", "to": "django" },
+        { "from": "django", "to": "db" }, { "from": "spring", "to": "db" }
+      ]
+    },
+    "stack": ["Django", "React", "Flutter", "Spring", "MySQL"],
+    "results": [
+      { "value": "5", "label": { "fr": "points de vente gérés", "en": "points of sale managed" } },
+      { "value": "−60 %", "label": { "fr": "de ruptures de stock", "en": "stock-outs" } }
+    ],
+    "images": [], "repo": "https://github.com/HULL-bit/Ocass-Digital", "demo": null, "private": false, "accent": "#FFB800",
+    "todo": ["Confirmer que le dépôt Ocass-Digital correspond bien à ce projet", "Architecture à valider"]
+  },
+  {
+    "slug": "daara-dbm", "order": 4,
+    "title": { "fr": "Gestion de Daara — Barakatoul Mahaahidi", "en": "Daara management — Barakatoul Mahaahidi" },
+    "client": "Daara Barakatoul Mahaahidi", "location": "Touba", "year": null,
+    "categories": ["web", "mobile"],
+    "role": { "fr": "Conception et développement web et mobile", "en": "Web and mobile design and development" },
+    "summary": {
+      "fr": "Membres, finances, ressources humaines, conservatoire et calendrier, en web et en mobile.",
+      "en": "Members, finances, HR, conservatory and calendar, on web and mobile."
+    },
+    "context": {
+      "fr": "Un daara de Touba qui administre ses membres, ses finances et ses activités sans outil numérique unifié.",
+      "en": "A daara in Touba managing its members, finances and activities without a unified digital tool."
+    },
+    "mission": {
+      "fr": "Fournir une plateforme unique de gestion, accessible depuis le web et le mobile.",
+      "en": "Provide a single management platform available on web and mobile."
+    },
+    "actions": [
+      { "fr": "J'ai conçu les modules : membres, finances, RH, conservatoire, calendrier.", "en": "I designed the modules: members, finances, HR, conservatory, calendar." },
+      { "fr": "J'ai développé l'API Django, les interfaces React / Next.js et l'application Flutter.", "en": "I built the Django API, the React / Next.js interfaces and the Flutter app." }
+    ],
+    "features": [
+      { "fr": "Membres", "en": "Members" }, { "fr": "Finances", "en": "Finances" },
+      { "fr": "Ressources humaines", "en": "Human resources" }, { "fr": "Conservatoire", "en": "Conservatory" },
+      { "fr": "Calendrier", "en": "Calendar" }
+    ],
+    "architecture": {
+      "nodes": [
+        { "id": "flutter", "label": "Flutter", "kind": "front" },
+        { "id": "next", "label": "Next.js / React", "kind": "front" },
+        { "id": "django", "label": "Django API", "kind": "api" },
+        { "id": "db", "label": "PostgreSQL", "kind": "db" }
+      ],
+      "links": [{ "from": "flutter", "to": "django" }, { "from": "next", "to": "django" }, { "from": "django", "to": "db" }]
+    },
+    "stack": ["Django", "React", "Next.js", "Flutter", "PostgreSQL"],
+    "results": [],
+    "images": [], "repo": "https://github.com/HULL-bit/DBM", "demo": null, "private": false, "accent": "#7C3AED",
+    "todo": ["Nombre d'utilisateurs (100+ ou 500+)", "Année", "Architecture à valider"]
+  },
+  {
+    "slug": "baaxil-xadiim", "order": 5,
+    "title": { "fr": "BAAXIL-XADIIM", "en": "BAAXIL-XADIIM" },
+    "client": "TODO", "location": "Sénégal", "year": null,
+    "categories": ["web"],
+    "role": { "fr": "Développement", "en": "Development" },
+    "summary": { "fr": "Description à venir.", "en": "Description coming soon." },
+    "context": { "fr": "Description à venir.", "en": "Description coming soon." },
+    "mission": { "fr": "Description à venir.", "en": "Description coming soon." },
+    "actions": [],
+    "features": [],
+    "architecture": { "nodes": [], "links": [] },
+    "stack": ["JavaScript"],
+    "results": [],
+    "images": [], "repo": "https://github.com/HULL-bit/BAAXIL-XADIIM", "demo": null, "private": false, "accent": "#FF2E88",
+    "todo": ["Description complète, client, année, rôle, résultats"],
+    "draft": true
+  },
+  {
+    "slug": "marketplace-pieces", "order": 6,
+    "title": { "fr": "Marketplace de pièces détachées", "en": "Spare-parts marketplace" },
+    "client": "TODO", "location": "Sénégal", "year": null,
+    "categories": ["web"],
+    "role": { "fr": "Développement", "en": "Development" },
+    "summary": { "fr": "Description à venir.", "en": "Description coming soon." },
+    "context": { "fr": "Description à venir.", "en": "Description coming soon." },
+    "mission": { "fr": "Description à venir.", "en": "Description coming soon." },
+    "actions": [],
+    "features": [],
+    "architecture": { "nodes": [], "links": [] },
+    "stack": [],
+    "results": [],
+    "images": [], "repo": "https://github.com/HULL-bit/MarketPlace-PiecesDetaches", "demo": null, "private": false, "accent": "#3D5AFE",
+    "todo": ["Description complète, stack, client, année, rôle, résultats"],
+    "draft": true
+  }
+]

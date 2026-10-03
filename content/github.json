@@ -1,0 +1,132 @@
+{
+  "fetchedAt": "2026-10-03T11:05:20.750Z",
+  "user": "HULL-bit",
+  "publicRepos": 14,
+  "stars": 0,
+  "languages": [
+    {
+      "name": "Python",
+      "bytes": 120470210,
+      "percent": 90.5
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 5040730,
+      "percent": 3.8
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 2050798,
+      "percent": 1.5
+    },
+    {
+      "name": "Cython",
+      "bytes": 1769208,
+      "percent": 1.3
+    },
+    {
+      "name": "Dart",
+      "bytes": 1036772,
+      "percent": 0.8
+    },
+    {
+      "name": "C",
+      "bytes": 713009,
+      "percent": 0.5
+    },
+    {
+      "name": "HTML",
+      "bytes": 614914,
+      "percent": 0.5
+    },
+    {
+      "name": "Java",
+      "bytes": 586845,
+      "percent": 0.4
+    }
+  ],
+  "repos": [
+    {
+      "name": "DBM",
+      "url": "https://github.com/HULL-bit/DBM",
+      "description": "Daara Barakatoul Mahaahidi",
+      "language": "JavaScript",
+      "stars": 0,
+      "pushedAt": "2026-10-02T13:01:19Z"
+    },
+    {
+      "name": "G-Services",
+      "url": "https://github.com/HULL-bit/G-Services",
+      "description": null,
+      "language": "Java",
+      "stars": 0,
+      "pushedAt": "2026-09-30T11:58:36Z"
+    },
+    {
+      "name": "O-Crystal",
+      "url": "https://github.com/HULL-bit/O-Crystal",
+      "description": null,
+      "language": "TypeScript",
+      "stars": 0,
+      "pushedAt": "2026-09-09T10:59:35Z"
+    },
+    {
+      "name": "DeliverEat",
+      "url": "https://github.com/HULL-bit/DeliverEat",
+      "description": null,
+      "language": "Dart",
+      "stars": 0,
+      "pushedAt": "2026-09-07T12:18:04Z"
+    },
+    {
+      "name": "W-HUB",
+      "url": "https://github.com/HULL-bit/W-HUB",
+      "description": null,
+      "language": "Python",
+      "stars": 0,
+      "pushedAt": "2026-09-03T11:27:33Z"
+    },
+    {
+      "name": "BAAXIL-XADIIM",
+      "url": "https://github.com/HULL-bit/BAAXIL-XADIIM",
+      "description": null,
+      "language": "JavaScript",
+      "stars": 0,
+      "pushedAt": "2026-08-26T19:33:04Z"
+    },
+    {
+      "name": "DGAP",
+      "url": "https://github.com/HULL-bit/DGAP",
+      "description": null,
+      "language": "Python",
+      "stars": 0,
+      "pushedAt": "2026-08-20T16:23:16Z"
+    },
+    {
+      "name": "SenExpertFormation",
+      "url": "https://github.com/HULL-bit/SenExpertFormation",
+      "description": null,
+      "language": null,
+      "stars": 0,
+      "pushedAt": "2026-08-14T12:27:45Z"
+    }
+  ],
+  "activity": {
+    "2026-10-01": 9,
+    "2026-10-02": 1,
+    "2026-09-29": 1,
+    "2026-09-30": 1,
+    "2026-09-21": 2,
+    "2026-09-17": 6,
+    "2026-09-18": 1,
+    "2026-09-15": 7,
+    "2026-09-16": 4,
+    "2026-09-14": 1,
+    "2026-09-09": 1,
+    "2026-09-08": 5,
+    "2026-09-07": 1,
+    "2026-09-04": 4,
+    "2026-09-03": 7,
+    "2026-09-05": 1
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "wagadu-africa",
+    "service": "wagadu-africa",
+    "role": { "fr": "Responsable informatique", "en": "IT Manager" },
+    "org": "ONG Wagadu Africa",
+    "url": "https://wagadu-africa.org/",
+    "place": "Kayar / Dakar",
+    "start": 2024, "end": null,
+    "missions": [
+      { "fr": "Administrer le serveur Linux dédié et garantir la disponibilité des services.", "en": "Administer the dedicated Linux server and keep services available." },
+      { "fr": "Concevoir et déployer l'application de suivi des pirogues (web et mobile).", "en": "Design and deploy the pirogue tracking application (web and mobile)." },
+      { "fr": "Fournir aux coordinateurs des tableaux de bord et des alertes météo.", "en": "Give coordinators dashboards and weather alerts." }
+    ],
+    "stack": ["Linux", "Django", "React", "Flutter", "PostgreSQL", "REST/JWT"],
+    "todo": ["Confirmer le détail des missions et la ville exacte du poste"]
+  }
+]

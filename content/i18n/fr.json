@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "siteName": "Souleymane DIAW",
+    "homeTitle": "Souleymane DIAW — Administrateur Linux, DBA Oracle & Ingénieur Full-Stack | Dakar",
+    "homeDescription": "Ingénieur Systèmes d'Information Répartis à Dakar : administration Linux, DBA Oracle, PL/SQL, Django, React, Spring Boot. Disponible pour un stage de fin d'études, une alternance ou un CDI.",
+    "cvTitle": "CV — Souleymane DIAW, Ingénieur Systèmes d'Information Répartis",
+    "cvDescription": "CV d'une page de Souleymane DIAW : Linux, Oracle, Django, React, Spring Boot. Dakar, Sénégal.",
+    "projectSuffix": "Étude de cas — Souleymane DIAW"
+  },
+  "a11y": {
+    "skip": "Aller au contenu",
+    "mainNav": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "language": "Langue",
+    "toTop": "Retour en haut",
+    "portrait": "Portrait de Souleymane DIAW en boubou gris aux broderies bleu roi",
+    "canvasHero": "Portrait de Souleymane DIAW rendu en particules lumineuses",
+    "canvasSkills": "Baie de serveurs en 3D représentant les cinq domaines de compétences",
+    "mobileBar": "Actions rapides"
+  },
+  "nav": {
+    "about": "À propos",
+    "experience": "Expérience",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "journey": "Parcours",
+    "github": "GitHub",
+    "contact": "Contact",
+    "cv": "CV",
+    "express": "Vue express",
+    "terminal": "Terminal",
+    "theme": "Thème"
+  },
+  "hero": {
+    "available": "Disponible",
+    "credibility": "Responsable informatique @ Wagadu Africa · Master 2 SIR — UCAD · Dakar, mobilité possible",
+    "ctaProjects": "Voir mes projets",
+    "ctaCv": "Télécharger le CV",
+    "ctaContact": "Me contacter",
+    "scroll": "scroll_",
+    "online": "online — Dakar, UTC+0"
+  },
+  "proofs": {
+    "projects": "projets en production",
+    "users": "utilisateurs servis",
+    "years": "ans d'expérience",
+    "tech": "technologies"
+  },
+  "trust": { "title": "Ils m'ont fait confiance" },
+  "sections": {
+    "about": { "eyebrow": "// 01 — À PROPOS", "title": "À propos" },
+    "stack": { "eyebrow": "// TECHNOLOGIES", "title": "Technologies" },
+    "experience": { "eyebrow": "// 02 — EXPÉRIENCE", "title": "Expérience" },
+    "projects": { "eyebrow": "// 03 — PROJETS", "title": "Projets" },
+    "skills": { "eyebrow": "[module::skills] loaded", "title": "Compétences" },
+    "journey": { "eyebrow": "// 04 — PARCOURS", "title": "Parcours" },
+    "github": { "eyebrow": "// 05 — GITHUB", "title": "GitHub" },
+    "contact": { "eyebrow": "// contact — hire_me.sh", "title": "Travaillons ensemble" },
+    "testimonials": { "eyebrow": "// recommandations", "title": "Recommandations" },
+    "certifications": { "eyebrow": "// certifications", "title": "Certifications" }
+  },
+  "about": {
+    "paragraphs": [
+      "Responsable informatique de l'ONG Wagadu Africa depuis 2024, j'administre des serveurs Linux, je conçois des bases de données et je livre des applications web et mobiles qui tournent en production.",
+      "Mes points forts : Linux, Oracle Database, SQL avancé, PL/SQL. Mes frameworks de prédilection : Django, React et Spring.",
+      "Je termine un Master 2 Ingénierie des Systèmes d'Information Répartis à l'UCAD. Je recherche un stage de fin d'études, une alternance ou un CDI."
+    ],
+    "highlights": ["Linux", "Oracle", "Django", "React", "production"],
+    "current": "Actuellement",
+    "languages": "Langues",
+    "since": "depuis"
+  },
+  "experience": {
+    "status": "active (running) since",
+    "missions": "Missions",
+    "stack": "Technologies",
+    "present": "aujourd'hui"
+  },
+  "projects": {
+    "filters": { "all": "Tous", "web": "Web", "mobile": "Mobile", "systeme": "Systèmes", "bdd": "BDD", "ia": "IA" },
+    "context": "Contexte",
+    "mission": "Mission",
+    "actions": "Actions",
+    "results": "Résultats",
+    "features": "Fonctionnalités",
+    "architecture": "Architecture",
+    "stack": "Technologies",
+    "role": "Rôle",
+    "repo": "Voir le dépôt",
+    "demo": "Voir la démo",
+    "private": "Dépôt privé",
+    "open": "Ouvrir l'étude de cas",
+    "prev": "Projet précédent",
+    "next": "Projet suivant",
+    "back": "Tous les projets",
+    "soon": "Étude de cas en cours de rédaction",
+    "filterBySkill": "Filtrer par compétence"
+  },
+  "skills": {
+    "primary": "PRINCIPAL",
+    "level": "Niveau",
+    "hint": "Survolez ou sélectionnez un serveur pour voir ses technologies."
+  },
+  "journey": { "now": "En cours" },
+  "github": {
+    "repos": "dépôts publics",
+    "stars": "étoiles",
+    "languages": "Langages",
+    "activity": "Activité récente",
+    "pinned": "Dépôts récents",
+    "profile": "Voir le profil GitHub",
+    "updated": "Données du"
+  },
+  "contact": {
+    "availability": "Disponible pour un stage de fin d'études, une alternance ou un CDI.",
+    "form": {
+      "name": "nom",
+      "email": "email",
+      "message": "message",
+      "send": "envoyer",
+      "sending": "envoi en cours…",
+      "success": "[ OK ] Message envoyé",
+      "error": "Échec de l'envoi. Écrivez-moi directement :",
+      "mailto": "Ouvrir mon client mail",
+      "errName": "Indiquez votre nom.",
+      "errEmail": "Adresse e-mail invalide.",
+      "errMessage": "Votre message est trop court (10 caractères minimum)."
+    },
+    "copyEmail": "Copier l'e-mail",
+    "copied": "E-mail copié",
+    "cvFr": "CV (FR)",
+    "cvEn": "CV (EN)"
+  },
+  "footer": {
+    "copyright": "© 2026 Souleymane DIAW — compilé statiquement, servi depuis Linux.",
+    "time": "Dakar"
+  },
+  "cvPage": {
+    "back": "Retour au site",
+    "print": "Imprimer",
+    "download": "Télécharger le PDF",
+    "profile": "Profil",
+    "experience": "Expérience",
+    "education": "Formation",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "languages": "Langues",
+    "contact": "Contact"
+  },
+  "notFound": {
+    "eyebrow": "kernel panic — 404",
+    "title": "Not syncing",
+    "text": "Cette page n'existe pas.",
+    "home": "Retour à l'accueil",
+    "cv": "Voir le CV"
+  },
+  "mobileBar": { "cv": "CV", "email": "E-mail", "whatsapp": "WhatsApp", "linkedin": "LinkedIn" }
+}
