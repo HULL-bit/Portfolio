@@ -14,6 +14,7 @@ import { Journey } from '@/components/journey/Journey';
 import { Github } from '@/components/github/Github';
 import { Testimonials, Certifications } from '@/components/contact/Optional';
 import { Contact } from '@/components/contact/Contact';
+import { Divider } from '@/components/ui/Divider';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -46,6 +47,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Hero lang={lang} />
       <Trust lang={lang} />
+      <Divider motif="feston" />
       <About lang={lang} />
       <TechCloud lang={lang} />
       <Experience lang={lang} />
@@ -55,6 +57,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <Github lang={lang} />
       <Testimonials lang={lang} />
       <Certifications lang={lang} />
+      <Divider motif="anneaux" />
       <Contact lang={lang} />
     </>
   );

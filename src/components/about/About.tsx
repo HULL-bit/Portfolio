@@ -3,6 +3,7 @@ import type { Lang } from '@/lib/i18n';
 import { Picture } from '@/components/ui/Picture';
 import { SectionHead } from '@/components/ui/SectionHead';
 import { period } from '@/lib/format';
+import { Motif } from '@/components/ui/Motif';
 
 export function About({ lang }: { lang: Lang }) {
   return (
@@ -15,9 +16,13 @@ export function About({ lang }: { lang: Lang }) {
               {tList(lang, 'about.paragraphs').map((p) => <p key={p}>{p}</p>)}
             </div>
           </div>
-          <figure className="photo-frame col-span-12 sm:col-span-8 sm:col-start-3 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2">
-            <Picture name="profil" alt={t(lang, 'a11y.portrait')} sizes="(min-width: 1024px) 28rem, 90vw" width={800} height={1067} />
-          </figure>
+          <div className="photo-wrap col-span-12 sm:col-span-8 sm:col-start-3 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2">
+            <Motif name="quatrefeuille" className="corner tl" />
+            <Motif name="quatrefeuille" className="corner br" />
+            <figure className="photo-frame" style={{ height: '100%' }}>
+              <Picture name="profil" alt={t(lang, 'a11y.portrait')} sizes="(min-width: 1024px) 28rem, 90vw" width={800} height={1067} />
+            </figure>
+          </div>
           <div className="glass col-span-12 lg:col-span-7">
             <span className="card-label">{t(lang, 'about.current')}</span>
             <p className="display" style={{ fontSize: 'clamp(1.6rem,2.6vw,2.4rem)', lineHeight: 1.05 }}>{pick(profile.current.role, lang)}</p>

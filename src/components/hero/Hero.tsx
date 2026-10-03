@@ -4,12 +4,14 @@ import { localePath } from '@/lib/site';
 import { pick, profile, t } from '@/lib/content';
 import type { Lang } from '@/lib/i18n';
 import { Picture } from '@/components/ui/Picture';
+import { Motif } from '@/components/ui/Motif';
 
 export function Hero({ lang }: { lang: Lang }) {
   const proofs = profile.keyFigures.filter((f) => f.hero);
   const types = profile.availability.types.map((x) => pick(x, lang)).join(' · ');
   return (
-    <section className="hero" aria-labelledby="hero-name">
+    <section id="hero" className="hero" aria-labelledby="hero-name">
+      <Motif name="rosace" variant="circuit" className="hero-rosace" />
       <div className="wrap hero-grid">
         <div>
           <p className="badge"><span className="dot" aria-hidden="true" />{t(lang, 'hero.available')} — {types}</p>

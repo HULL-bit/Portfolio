@@ -17,21 +17,32 @@ const server = createServer(async (req, res) => {
 }).listen(0);
 const port = server.address().port;
 
-const paths = process.argv.slice(2).length ? process.argv.slice(2) : ['/fr/', '/en/'];
+const args = process.argv.slice(2);
+// --at=#projects,#contact : captures du viewport après défilement jusqu'à ces ancres
+const at = (args.find((a) => a.startsWith('--at=')) ?? '').slice(5).split(',').filter(Boolean);
+const only = (args.find((a) => a.startsWith('--only=')) ?? '').slice(7);
+const argPaths = args.filter((a) => !a.startsWith('--'));
+const paths = argPaths.length ? argPaths : ['/fr/', '/en/'];
 await mkdir('.screenshots', { recursive: true });
-const browser = await chromium.launch();
+const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--enable-webgl'] });
 const errors = [];
-for (const [name, w, h, mobile] of [['desktop', 1440, 900, false], ['mobile', 390, 844, true]]) {
+for (const [name, w, h, mobile] of [['desktop', 1440, 900, false], ['mobile', 390, 844, true]].filter(([n]) => !only || n === only)) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, deviceScaleFactor: 1 });
   const page = await ctx.newPage();
   page.on('console', (m) => ['error', 'warning'].includes(m.type()) && errors.push(`[${name}] ${m.text()}`));
   page.on('pageerror', (e) => errors.push(`[${name}] ${e.message}`));
   for (const p of paths) {
     await page.goto(`http://localhost:${port}${p}`, { waitUntil: 'networkidle' });
-    await page.waitForTimeout(400);
+    await page.waitForSelector('canvas[data-ready]', { timeout: 5000 }).catch(() => {});
+    await page.waitForTimeout(600);
     const slug = p.replace(/\//g, '_').replace(/^_|_$/g, '') || 'root';
     await page.screenshot({ path: `.screenshots/${slug}-${name}-fold.png` });
-    await page.screenshot({ path: `.screenshots/${slug}-${name}.png`, fullPage: true });
+    for (const sel of at) {
+      await page.evaluate((q) => document.querySelector(q)?.scrollIntoView({ behavior: 'instant' }), sel);
+      await page.waitForTimeout(2200);
+      await page.screenshot({ path: `.screenshots/${slug}-${name}-at-${sel.replace(/\W/g, '')}.png` });
+    }
+    if (!at.length) await page.screenshot({ path: `.screenshots/${slug}-${name}.png`, fullPage: true });
   }
   await ctx.close();
 }
