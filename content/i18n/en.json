@@ -17,7 +17,9 @@
     "portrait": "Portrait of Souleymane DIAW wearing a grey boubou with royal-blue embroidery",
     "canvasHero": "Portrait of Souleymane DIAW rendered as glowing particles",
     "canvasSkills": "3D server rack representing the five skill domains",
-    "mobileBar": "Quick actions"
+    "mobileBar": "Quick actions",
+    "techBand": "Technologies",
+    "progress": "Reading progress"
   },
   "nav": {
     "about": "About",
@@ -47,18 +49,50 @@
     "years": "years of experience",
     "tech": "technologies"
   },
-  "trust": { "title": "Trusted by" },
+  "trust": {
+    "title": "Trusted by"
+  },
   "sections": {
-    "about": { "eyebrow": "// 01 — ABOUT", "title": "About" },
-    "stack": { "eyebrow": "// TECHNOLOGIES", "title": "Technologies" },
-    "experience": { "eyebrow": "// 02 — EXPERIENCE", "title": "Experience" },
-    "projects": { "eyebrow": "// 03 — PROJECTS", "title": "Projects" },
-    "skills": { "eyebrow": "[module::skills] loaded", "title": "Skills" },
-    "journey": { "eyebrow": "// 04 — JOURNEY", "title": "Journey" },
-    "github": { "eyebrow": "// 05 — GITHUB", "title": "GitHub" },
-    "contact": { "eyebrow": "// contact — hire_me.sh", "title": "Let's work together" },
-    "testimonials": { "eyebrow": "// recommendations", "title": "Recommendations" },
-    "certifications": { "eyebrow": "// certifications", "title": "Certifications" }
+    "about": {
+      "eyebrow": "// 01 — ABOUT",
+      "title": "About"
+    },
+    "stack": {
+      "eyebrow": "// TECHNOLOGIES",
+      "title": "Technologies"
+    },
+    "experience": {
+      "eyebrow": "// 02 — EXPERIENCE",
+      "title": "Experience"
+    },
+    "projects": {
+      "eyebrow": "// 03 — PROJECTS",
+      "title": "Projects"
+    },
+    "skills": {
+      "eyebrow": "[module::skills] loaded",
+      "title": "Skills"
+    },
+    "journey": {
+      "eyebrow": "// 04 — JOURNEY",
+      "title": "Journey"
+    },
+    "github": {
+      "eyebrow": "// 05 — GITHUB",
+      "title": "GitHub"
+    },
+    "contact": {
+      "eyebrow": "// contact — hire_me.sh",
+      "title": "Let's work together"
+    },
+    "testimonials": {
+      "eyebrow": "// recommendations",
+      "title": "Recommendations"
+    },
+    "certifications": {
+      "eyebrow": "// certifications",
+      "title": "Certifications"
+    }
   },
   "about": {
     "paragraphs": [
@@ -66,7 +100,13 @@
       "My strengths: Linux, Oracle Database, advanced SQL, PL/SQL. My go-to frameworks: Django, React and Spring.",
       "I am completing a Master 2 in Distributed Information Systems Engineering at UCAD. I am looking for an end-of-studies internship, a work-study contract or a permanent role."
     ],
-    "highlights": ["Linux", "Oracle", "Django", "React", "production"],
+    "highlights": [
+      "Linux",
+      "Oracle",
+      "Django",
+      "React",
+      "production"
+    ],
     "current": "Currently",
     "languages": "Languages",
     "since": "since"
@@ -78,7 +118,14 @@
     "present": "present"
   },
   "projects": {
-    "filters": { "all": "All", "web": "Web", "mobile": "Mobile", "systeme": "Systems", "bdd": "Databases", "ia": "AI" },
+    "filters": {
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "systeme": "Systems",
+      "bdd": "Databases",
+      "ia": "AI"
+    },
     "context": "Context",
     "mission": "Mission",
     "actions": "Actions",
@@ -102,7 +149,9 @@
     "level": "Level",
     "hint": "Hover or select a server to see its technologies."
   },
-  "journey": { "now": "In progress" },
+  "journey": {
+    "now": "In progress"
+  },
   "github": {
     "repos": "public repositories",
     "stars": "stars",
@@ -155,5 +204,15 @@
     "home": "Back to home",
     "cv": "View résumé"
   },
-  "mobileBar": { "cv": "Résumé", "email": "E-mail", "whatsapp": "WhatsApp", "linkedin": "LinkedIn" }
+  "mobileBar": {
+    "cv": "Résumé",
+    "email": "E-mail",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn"
+  },
+  "cursor": {
+    "view": "view",
+    "open": "open",
+    "drag": "drag"
+  }
 }

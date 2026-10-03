@@ -31,7 +31,7 @@ export function Hero({ lang }: { lang: Lang }) {
             ))}
           </dl>
           <div className="cta">
-            <a className="btn btn-gold" href={withBase(profile.cv[lang])} download data-track="cv-download">{t(lang, 'hero.ctaCv')}</a>
+            <a className="btn btn-gold" data-magnetic href={withBase(profile.cv[lang])} download data-track="cv-download">{t(lang, 'hero.ctaCv')}</a>
             <Link className="btn btn-line" href={`${localePath(lang)}#contact`}>{t(lang, 'hero.ctaContact')}</Link>
             <Link className="link-arrow" href={`${localePath(lang)}#projects`}>{t(lang, 'hero.ctaProjects')} →</Link>
           </div>

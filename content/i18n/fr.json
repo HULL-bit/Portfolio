@@ -17,7 +17,9 @@
     "portrait": "Portrait de Souleymane DIAW en boubou gris aux broderies bleu roi",
     "canvasHero": "Portrait de Souleymane DIAW rendu en particules lumineuses",
     "canvasSkills": "Baie de serveurs en 3D représentant les cinq domaines de compétences",
-    "mobileBar": "Actions rapides"
+    "mobileBar": "Actions rapides",
+    "techBand": "Technologies",
+    "progress": "Progression de lecture"
   },
   "nav": {
     "about": "À propos",
@@ -47,18 +49,50 @@
     "years": "ans d'expérience",
     "tech": "technologies"
   },
-  "trust": { "title": "Ils m'ont fait confiance" },
+  "trust": {
+    "title": "Ils m'ont fait confiance"
+  },
   "sections": {
-    "about": { "eyebrow": "// 01 — À PROPOS", "title": "À propos" },
-    "stack": { "eyebrow": "// TECHNOLOGIES", "title": "Technologies" },
-    "experience": { "eyebrow": "// 02 — EXPÉRIENCE", "title": "Expérience" },
-    "projects": { "eyebrow": "// 03 — PROJETS", "title": "Projets" },
-    "skills": { "eyebrow": "[module::skills] loaded", "title": "Compétences" },
-    "journey": { "eyebrow": "// 04 — PARCOURS", "title": "Parcours" },
-    "github": { "eyebrow": "// 05 — GITHUB", "title": "GitHub" },
-    "contact": { "eyebrow": "// contact — hire_me.sh", "title": "Travaillons ensemble" },
-    "testimonials": { "eyebrow": "// recommandations", "title": "Recommandations" },
-    "certifications": { "eyebrow": "// certifications", "title": "Certifications" }
+    "about": {
+      "eyebrow": "// 01 — À PROPOS",
+      "title": "À propos"
+    },
+    "stack": {
+      "eyebrow": "// TECHNOLOGIES",
+      "title": "Technologies"
+    },
+    "experience": {
+      "eyebrow": "// 02 — EXPÉRIENCE",
+      "title": "Expérience"
+    },
+    "projects": {
+      "eyebrow": "// 03 — PROJETS",
+      "title": "Projets"
+    },
+    "skills": {
+      "eyebrow": "[module::skills] loaded",
+      "title": "Compétences"
+    },
+    "journey": {
+      "eyebrow": "// 04 — PARCOURS",
+      "title": "Parcours"
+    },
+    "github": {
+      "eyebrow": "// 05 — GITHUB",
+      "title": "GitHub"
+    },
+    "contact": {
+      "eyebrow": "// contact — hire_me.sh",
+      "title": "Travaillons ensemble"
+    },
+    "testimonials": {
+      "eyebrow": "// recommandations",
+      "title": "Recommandations"
+    },
+    "certifications": {
+      "eyebrow": "// certifications",
+      "title": "Certifications"
+    }
   },
   "about": {
     "paragraphs": [
@@ -66,7 +100,13 @@
       "Mes points forts : Linux, Oracle Database, SQL avancé, PL/SQL. Mes frameworks de prédilection : Django, React et Spring.",
       "Je termine un Master 2 Ingénierie des Systèmes d'Information Répartis à l'UCAD. Je recherche un stage de fin d'études, une alternance ou un CDI."
     ],
-    "highlights": ["Linux", "Oracle", "Django", "React", "production"],
+    "highlights": [
+      "Linux",
+      "Oracle",
+      "Django",
+      "React",
+      "production"
+    ],
     "current": "Actuellement",
     "languages": "Langues",
     "since": "depuis"
@@ -78,7 +118,14 @@
     "present": "aujourd'hui"
   },
   "projects": {
-    "filters": { "all": "Tous", "web": "Web", "mobile": "Mobile", "systeme": "Systèmes", "bdd": "BDD", "ia": "IA" },
+    "filters": {
+      "all": "Tous",
+      "web": "Web",
+      "mobile": "Mobile",
+      "systeme": "Systèmes",
+      "bdd": "BDD",
+      "ia": "IA"
+    },
     "context": "Contexte",
     "mission": "Mission",
     "actions": "Actions",
@@ -102,7 +149,9 @@
     "level": "Niveau",
     "hint": "Survolez ou sélectionnez un serveur pour voir ses technologies."
   },
-  "journey": { "now": "En cours" },
+  "journey": {
+    "now": "En cours"
+  },
   "github": {
     "repos": "dépôts publics",
     "stars": "étoiles",
@@ -155,5 +204,15 @@
     "home": "Retour à l'accueil",
     "cv": "Voir le CV"
   },
-  "mobileBar": { "cv": "CV", "email": "E-mail", "whatsapp": "WhatsApp", "linkedin": "LinkedIn" }
+  "mobileBar": {
+    "cv": "CV",
+    "email": "E-mail",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn"
+  },
+  "cursor": {
+    "view": "voir",
+    "open": "ouvrir",
+    "drag": "glisser"
+  }
 }

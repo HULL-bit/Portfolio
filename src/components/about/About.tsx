@@ -4,6 +4,13 @@ import { Picture } from '@/components/ui/Picture';
 import { SectionHead } from '@/components/ui/SectionHead';
 import { period } from '@/lib/format';
 import { Motif } from '@/components/ui/Motif';
+import { RollingNumber } from '@/components/motion/RollingNumber';
+
+/** Entoure les mots-clés d'un <span class="kw"> (allumés en cyan après la révélation du texte). */
+function Highlighted({ text, words }: { text: string; words: string[] }) {
+  const re = new RegExp(`(${words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g');
+  return <>{text.split(re).map((part, i) => (words.includes(part) ? <span key={i} className="kw">{part}</span> : part))}</>;
+}
 
 export function About({ lang }: { lang: Lang }) {
   return (
@@ -12,8 +19,8 @@ export function About({ lang }: { lang: Lang }) {
         <SectionHead id="about-title" eyebrow={t(lang, 'sections.about.eyebrow')} title={t(lang, 'sections.about.title')} />
         <div className="grid12">
           <div className="glass col-span-12 lg:col-span-7">
-            <div className="prose">
-              {tList(lang, 'about.paragraphs').map((p) => <p key={p}>{p}</p>)}
+            <div className="prose" data-lines>
+              {tList(lang, 'about.paragraphs').map((p) => <p key={p}><Highlighted text={p} words={tList(lang, 'about.highlights')} /></p>)}
             </div>
           </div>
           <div className="photo-wrap col-span-12 sm:col-span-8 sm:col-start-3 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2">
@@ -44,7 +51,7 @@ export function About({ lang }: { lang: Lang }) {
           <dl className="col-span-12 grid grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             {profile.keyFigures.map((f) => (
               <div key={f.id}>
-                <dt className="figure-num">{f.value}{f.suffix}</dt>
+                <dt className="figure-num"><RollingNumber value={f.value} suffix={f.suffix} /></dt>
                 <dd className="muted mt-2" style={{ margin: 0 }}>{t(lang, `proofs.${f.id}`)}</dd>
               </div>
             ))}

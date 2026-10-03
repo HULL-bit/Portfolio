@@ -7,7 +7,7 @@ import type { Lang } from '@/lib/i18n';
 export function ProjectCard({ project, index, lang }: { project: Project; index: number; lang: Lang }) {
   const href = localePath(lang, `projets/${project.slug}/`);
   return (
-    <article className="glass project-card" style={{ ['--accent' as string]: project.accent }}>
+    <article className="glass project-card" data-cursor="open" style={{ ['--accent' as string]: project.accent }}>
       <span className="project-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
       <div className="visual" aria-hidden="true">{project.slug}.sys</div>
       <h3><Link href={href} className="stretched">{pick(project.title, lang)}</Link></h3>

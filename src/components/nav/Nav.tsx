@@ -5,6 +5,7 @@ import { t, profile } from '@/lib/content';
 import type { Lang } from '@/lib/i18n';
 import { Logo } from '@/components/ui/Logo';
 import { LangSwitch } from './LangSwitch';
+import { Menu } from './Menu';
 
 const LINKS = ['about', 'experience', 'projects', 'skills', 'journey', 'github'] as const;
 
@@ -24,17 +25,11 @@ export function Nav({ lang }: { lang: Lang }) {
             <LangSwitch lang={lang} label={t(lang, 'a11y.language')} />
             <a className="btn btn-gold btn-sm" href={withBase(profile.cv[lang])} download data-track="cv-download">{t(lang, 'nav.cv')}</a>
             <Link className="btn btn-line btn-sm nav-contact" href={`${home}#contact`}>{t(lang, 'nav.contact')}</Link>
-            <details className="menu">
-              <summary className="btn btn-line btn-sm menu-toggle" aria-label={t(lang, 'a11y.openMenu')}>Menu</summary>
-              <div className="menu-panel" style={{ position: 'fixed', top: '4.25rem', left: 0, right: 0 }}>
-                <div className="wrap">
-                  <ul>
-                    {links.map((l) => <li key={l.id}><Link href={l.href}>{l.label}</Link></li>)}
-                    <li><Link href={localePath(lang, 'cv/')}>{t(lang, 'nav.express')}</Link></li>
-                  </ul>
-                </div>
-              </div>
-            </details>
+            <Menu
+              items={[...links, { id: 'express', href: localePath(lang, 'cv/'), label: t(lang, 'nav.express') }, { id: 'contact', href: `${home}#contact`, label: t(lang, 'nav.contact') }]}
+              labels={{ menu: 'Menu', open: t(lang, 'a11y.openMenu'), close: t(lang, 'a11y.closeMenu') }}
+              cv={{ href: withBase(profile.cv[lang]), label: t(lang, 'hero.ctaCv') }}
+            />
           </div>
         </nav>
       </div>

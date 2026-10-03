@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import '@/styles/globals.css';
 import { FontFaces } from '@/components/ui/FontFaces';
+import { HeadScripts } from '@/components/ui/HeadScripts';
 import { LOCALES, isLang } from '@/lib/i18n';
 
 export const dynamicParams = false;
@@ -18,7 +19,7 @@ export default async function LangLayout({
   if (!isLang(lang)) notFound();
   return (
     <html lang={lang}>
-      <head><FontFaces /></head>
+      <head><FontFaces /><HeadScripts /></head>
       <body>
         <a className="skip-link" href="#main">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
         {children}
