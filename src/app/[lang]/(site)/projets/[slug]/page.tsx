@@ -4,6 +4,10 @@ import { notFound } from 'next/navigation';
 import { LOCALES, isLang } from '@/lib/i18n';
 import { getProject, pick, projects, t } from '@/lib/content';
 import { localePath, pageMeta } from '@/lib/site';
+import { LiquidVisual } from '@/components/projects/LiquidVisual';
+import { ProjectVisual } from '@/components/projects/ProjectVisual';
+import { ArchitectureDiagram } from '@/components/projects/ArchitectureDiagram';
+import { ResultValue } from '@/components/projects/ResultValue';
 
 export const dynamicParams = false;
 export const generateStaticParams = () => LOCALES.flatMap((lang) => projects.map((p) => ({ lang, slug: p.slug })));
@@ -42,7 +46,7 @@ export default async function ProjectPage({ params }: Params) {
             <span>{project.location}</span>{project.year ? <span>{project.year}</span> : null}
             <span>{project.categories.map((c) => t(lang, `projects.filters.${c}`)).join(' · ')}</span>
           </p>
-          <div className="visual mt-10" aria-hidden="true" style={{ aspectRatio: '21 / 9' }}>{project.slug}.sys</div>
+          <div className="project-visual mt-10"><LiquidVisual project={project} title={pick(project.title, lang)} /></div>
         </div>
       </header>
 
@@ -76,14 +80,14 @@ export default async function ProjectPage({ params }: Params) {
             <section className="glass col-span-12 lg:col-span-5">
               <span className="card-label">{label('results')}</span>
               {project.results.length ? (
-                <ul className="results">{project.results.map((r) => <li className="result" key={r.value}><strong>{r.value}</strong><span>{pick(r.label, lang)}</span></li>)}</ul>
+                <ul className="results">{project.results.map((r) => <li className="result" key={r.value}><strong><ResultValue value={r.value} /></strong><span>{pick(r.label, lang)}</span></li>)}</ul>
               ) : <p className="muted">—</p>}
             </section>
             {project.architecture.nodes.length ? (
               <section className="glass col-span-12">
                 <span className="card-label">{label('architecture')}</span>
-                <ul className="arch-list">{project.architecture.nodes.map((n) => <li className="arch-node" key={n.id}>{n.label}</li>)}</ul>
-                <ul className="muted mono mt-4" style={{ fontSize: '0.85rem' }}>
+                <ArchitectureDiagram architecture={project.architecture} title={pick(project.title, lang)} />
+                <ul className="sr-only">
                   {project.architecture.links.map((l) => <li key={l.from + l.to}>{names.get(l.from)} → {names.get(l.to)}</li>)}
                 </ul>
               </section>
@@ -96,8 +100,8 @@ export default async function ProjectPage({ params }: Params) {
           {project.private ? <span className="chip">{label('private')}</span> : null}
         </div>
         <nav className="pager" style={{ marginTop: '4rem' }} aria-label="Projets">
-          <Link className="glass" href={localePath(lang, `projets/${prev.slug}/`)}><small>← {label('prev')}</small><strong>{pick(prev.title, lang)}</strong></Link>
-          <Link className="glass" href={localePath(lang, `projets/${next.slug}/`)}><small>{label('next')} →</small><strong>{pick(next.title, lang)}</strong></Link>
+          <Link className="glass" href={localePath(lang, `projets/${prev.slug}/`)} data-cursor="open"><small>← {label('prev')}</small><strong>{pick(prev.title, lang)}</strong><div className="pager-preview" aria-hidden="true"><ProjectVisual project={prev} title={pick(prev.title, lang)} /></div></Link>
+          <Link className="glass" href={localePath(lang, `projets/${next.slug}/`)} data-cursor="open"><small>{label('next')} →</small><strong>{pick(next.title, lang)}</strong><div className="pager-preview" aria-hidden="true"><ProjectVisual project={next} title={pick(next.title, lang)} /></div></Link>
         </nav>
       </div>
     </article>

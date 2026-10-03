@@ -142,7 +142,11 @@
     "next": "Next project",
     "back": "All projects",
     "soon": "Case study being written",
-    "filterBySkill": "Filter by skill"
+    "filterBySkill": "Filter by skill",
+    "filterLabel": "Filter projects",
+    "clearTech": "Remove filter",
+    "shown": "projects shown",
+    "techFilter": "Filter by"
   },
   "skills": {
     "primary": "PRIMARY",

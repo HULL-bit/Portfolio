@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { prefersReduced } from '@/lib/motion';
 
 type Geo = { h: number; d: string; pads: { x: number; y: number; section: string }[] };
@@ -13,6 +14,7 @@ export function CircuitRail() {
   const [geo, setGeo] = useState<Geo | null>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (prefersReduced() || !window.matchMedia('(min-width: 1180px)').matches) return;
@@ -35,14 +37,16 @@ export function CircuitRail() {
       d += ` V ${h}`;
       setGeo({ h, d, pads });
     };
-    build();
+    setGeo(null);
+    const first = setTimeout(build, 60);
     let t: ReturnType<typeof setTimeout>;
     const onResize = () => { clearTimeout(t); t = setTimeout(build, 250); };
     window.addEventListener('resize', onResize);
     const ro = new ResizeObserver(onResize);
-    ro.observe(document.getElementById('main')!);
-    return () => { clearTimeout(t); window.removeEventListener('resize', onResize); ro.disconnect(); };
-  }, []);
+    const mainEl = document.getElementById('main');
+    if (mainEl) ro.observe(mainEl);
+    return () => { clearTimeout(first); clearTimeout(t); window.removeEventListener('resize', onResize); ro.disconnect(); };
+  }, [pathname]);
 
   useEffect(() => {
     if (!geo || !pathRef.current || !svgRef.current) return;

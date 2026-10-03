@@ -103,12 +103,12 @@ img { max-width: 100%; display: block; }
 .eyebrow { display: block; }
 
 /* ───────── Verre dépoli ───────── */
-.glass {
+.glass, .panel {
   position: relative; background: var(--surface); border-radius: var(--radius); padding: clamp(1.25rem, 2.2vw, 2rem);
   -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
   box-shadow: inset 0 0 60px rgba(61, 90, 254, 0.06);
 }
-.glass::before {
+.glass::before, .panel::before {
   content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
   background: linear-gradient(145deg, rgba(61, 90, 254, 0.7), rgba(61, 90, 254, 0.08) 45%, transparent 80%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
@@ -492,3 +492,64 @@ html.menu-open .nav { z-index: 70; transform: none; background: none; -webkit-ba
 .boot-skip { position: absolute; right: clamp(1rem, 4vw, 3rem); top: clamp(1rem, 4vw, 2.5rem); z-index: 2; font: inherit; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text); background: transparent; border: 1px solid rgba(245, 247, 255, 0.35); border-radius: 999px; padding: 0.45rem 1rem; cursor: pointer; }
 .boot-skip:disabled { opacity: 0.35; cursor: default; }
 .boot-skip:not(:disabled):hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* ───────── Projets : pile verticale (défaut) et défilement horizontal épinglé ───────── */
+.projects-section { padding-inline: 0; }
+.hscroll-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; margin-bottom: 2rem; }
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip-btn { cursor: pointer; font: inherit; font-family: var(--font-mono); font-size: 0.78rem; transition: background 0.25s, border-color 0.25s, color 0.25s; position: relative; z-index: 2; }
+.chip-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.chip-btn[aria-pressed='true'] { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+.chip-active { background: rgba(255, 184, 0, 0.14) !important; border-color: var(--gold) !important; color: var(--gold) !important; }
+.hscroll-meta { display: flex; align-items: center; gap: 1rem; color: var(--muted); font-size: 0.85rem; }
+.hbar { width: clamp(8rem, 18vw, 16rem); height: 2px; background: rgba(61, 90, 254, 0.25); overflow: hidden; }
+.hbar i { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--indigo), var(--gold)); }
+.projects-rail > .hscroll > .hscroll-bar, .projects-rail > .hscroll > .track { padding-inline: clamp(1rem, 4vw, 3rem); max-width: 1360px; margin-inline: auto; }
+.track { display: grid; gap: 1.6rem; }
+.project-panel { display: grid; gap: 1.6rem; position: sticky; top: calc(5.2rem + var(--i, 0) * 0.9rem); padding: clamp(1.25rem, 2.4vw, 2.2rem); }
+@media (min-width: 720px) { .project-panel { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; } }
+.panel-copy { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.panel-copy h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 3.4vw, 3.2rem); line-height: 1; letter-spacing: -0.03em; }
+.panel-copy .link-arrow { margin-top: 0.4rem; }
+.panel-visual { min-width: 0; }
+.liquid { position: relative; border-radius: calc(var(--radius) - 6px); overflow: hidden; border: 1px solid var(--line); background: var(--bg-2); box-shadow: 0 30px 80px -40px color-mix(in srgb, var(--accent) 60%, transparent); }
+.liquid .vis { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.vis-l1 { transform: translate(calc(var(--px, 0) * -5px), calc(var(--py, 0) * -4px)); }
+.vis-l2 { transform: translate(calc(var(--px, 0) * 9px), calc(var(--py, 0) * 7px)); }
+.vis-l3 { transform: translate(calc(var(--px, 0) * 15px), calc(var(--py, 0) * 11px)); }
+.project-num { font-size: clamp(4.5rem, 9vw, 8rem); }
+
+.hmode .hscroll { height: 100svh; overflow: hidden; display: flex; flex-direction: column; padding-top: 5.2rem; }
+.hmode .hscroll-bar { width: 100%; margin-bottom: 0; padding-bottom: 1rem; }
+.hmode .track { display: flex; flex: 1; width: max-content; max-width: none; margin: 0; padding-inline: 0; gap: 0; align-items: stretch; will-change: transform; }
+.hmode .project-panel { position: relative; top: auto; flex: 0 0 100vw; width: 100vw; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; border-radius: 0; padding: 1rem max(clamp(1rem, 4vw, 3rem), calc((100vw - 1360px) / 2 + 3rem)) 2.5rem; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; }
+.hmode .project-panel::before { display: none; }
+.hmode .project-num { font-size: clamp(8rem, 17vw, 17rem); color: transparent; }
+.hmode .liquid { box-shadow: 0 40px 120px -40px color-mix(in srgb, var(--accent) 70%, transparent); }
+.hmode .panel-copy { gap: 1.1rem; }
+.hmode .panel-copy h3 { font-size: clamp(2rem, 3.6vw, 3.8rem); }
+.result-value { display: inline-flex; align-items: baseline; }
+
+/* ───────── Transition de page : rideau brodé ───────── */
+.curtain { position: fixed; inset: 0; z-index: 150; background: var(--bg-2); display: grid; place-items: center; overflow: hidden; pointer-events: all; }
+.curtain-fade { background: var(--bg); }
+.curtain-band { position: absolute; left: 0; width: 100%; height: 3.2rem; color: var(--indigo); opacity: 0.7; }
+.curtain-band.top { top: 1.4rem; }
+.curtain-band.bottom { bottom: 1.4rem; }
+.curtain-rosace { position: absolute; width: min(90vw, 70vh); aspect-ratio: 1; color: var(--indigo); opacity: 0.22; animation: spin-slow 40s linear infinite; }
+.curtain-logo { position: relative; width: clamp(7rem, 16vw, 12rem); height: auto; color: var(--text); }
+.curtain-logo .logo-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-in 0.9s var(--ease-in-out-quart) 0.25s forwards; }
+@media (prefers-reduced-motion: reduce) { .curtain-rosace { animation: none; } .curtain-logo .logo-draw { animation: none; stroke-dashoffset: 0; } }
+
+/* ───────── Page projet : schéma d'architecture ───────── */
+.arch { width: 100%; height: auto; max-height: 26rem; display: block; overflow: visible; }
+.arch-link { stroke: rgba(61, 90, 254, 0.55); stroke-width: 1.4; stroke-dasharray: 4 5; }
+.arch-packet { offset-rotate: 0deg; filter: drop-shadow(0 0 5px currentColor); animation: packet 2.6s linear infinite; }
+@keyframes packet { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .arch-packet { animation: none; display: none; } }
+.pager a { position: relative; overflow: hidden; }
+.pager-preview { position: absolute; right: 0.8rem; bottom: 0.8rem; width: 46%; opacity: 0; transform: translateY(10px) scale(0.98); transition: opacity 0.45s var(--ease-out-expo), transform 0.45s var(--ease-out-expo); pointer-events: none; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.pager a:hover .pager-preview, .pager a:focus-visible .pager-preview { opacity: 1; transform: none; }
+.pager-preview svg { display: block; width: 100%; height: auto; }
+@media (max-width: 719px) { .pager-preview { display: none; } }
+.project-visual { max-width: 58rem; }

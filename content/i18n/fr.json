@@ -142,7 +142,11 @@
     "next": "Projet suivant",
     "back": "Tous les projets",
     "soon": "Étude de cas en cours de rédaction",
-    "filterBySkill": "Filtrer par compétence"
+    "filterBySkill": "Filtrer par compétence",
+    "filterLabel": "Filtrer les projets",
+    "clearTech": "Retirer le filtre",
+    "shown": "projets affichés",
+    "techFilter": "Filtrer par"
   },
   "skills": {
     "primary": "PRINCIPAL",

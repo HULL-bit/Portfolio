@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Motif } from '@/components/ui/Motif';
@@ -19,6 +20,8 @@ export function Menu({ items, labels, cv }: Props) {
   useEffect(() => setMounted(true), []);
   const first = useRef<HTMLAnchorElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
+  useEffect(() => setOpen(false), [pathname]);
 
   const close = useCallback(() => { setOpen(false); trigger.current?.focus(); }, []);
 

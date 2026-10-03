@@ -18,7 +18,7 @@ const server = createServer(async (req, res) => {
 const port = server.address().port;
 
 const args = process.argv.slice(2);
-// --at=#projects,#contact : captures du viewport après défilement jusqu'à ces ancres
+// --at=#projects,.hscroll@1500 (décalage en px après l'ancre) : captures du viewport après défilement jusqu'à ces ancres
 const at = (args.find((a) => a.startsWith('--at=')) ?? '').slice(5).split(',').filter(Boolean);
 const only = (args.find((a) => a.startsWith('--only=')) ?? '').slice(7);
 const argPaths = args.filter((a) => !a.startsWith('--'));
@@ -38,7 +38,8 @@ for (const [name, w, h, mobile] of [['desktop', 1440, 900, false], ['mobile', 39
     const slug = p.replace(/\//g, '_').replace(/^_|_$/g, '') || 'root';
     await page.screenshot({ path: `.screenshots/${slug}-${name}-fold.png` });
     for (const sel of at) {
-      await page.evaluate((q) => document.querySelector(q)?.scrollIntoView({ behavior: 'instant' }), sel);
+      const [q, off = '0'] = sel.split('@');
+      await page.evaluate(([qq, o]) => { document.querySelector(qq)?.scrollIntoView({ behavior: 'instant' }); window.scrollBy(0, Number(o)); }, [q, off]);
       await page.waitForTimeout(2200);
       await page.screenshot({ path: `.screenshots/${slug}-${name}-at-${sel.replace(/\W/g, '')}.png` });
     }

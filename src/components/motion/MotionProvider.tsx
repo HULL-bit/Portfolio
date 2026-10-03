@@ -1,5 +1,6 @@
 'use client';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { DUR, EASE, STAGGER, finePointer, prefersReduced } from '@/lib/motion';
 import { runtime, scrollToTarget } from '@/lib/runtime';
 
@@ -9,6 +10,7 @@ import { runtime, scrollToTarget } from '@/lib/runtime';
  * Tout le contenu est déjà dans le HTML : ceci n'est qu'une couche d'amélioration.
  */
 export function MotionProvider() {
+  const pathname = usePathname();
   useEffect(() => {
     if (prefersReduced()) return;
     let disposed = false;
@@ -176,7 +178,7 @@ export function MotionProvider() {
       disposed = true;
       teardown?.();
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

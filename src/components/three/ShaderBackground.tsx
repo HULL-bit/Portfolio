@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { BG_FRAGMENT, BG_VERTEX } from '@/shaders/background.glsl';
 import { prefersReducedMotion, type Tier } from '@/lib/gpu-tier';
 
@@ -28,6 +29,8 @@ function compile(gl: WebGL2RenderingContext, type: number, src: string) {
 
 export default function ShaderBackground({ tier }: { tier: Tier }) {
   const ref = useRef<HTMLCanvasElement>(null);
+  const pathname = usePathname();
+  const aim = useRef({ target: PALETTES.hero!, index: 0 });
 
   useEffect(() => {
     const canvas = ref.current;
@@ -64,27 +67,6 @@ export default function ShaderBackground({ tier }: { tier: Tier }) {
 
     // état courant (interpolé) et cible
     const cur = { a: [...PALETTES.hero![0]] as RGB, b: [...PALETTES.hero![1]] as RGB, c: [...PALETTES.hero![2]] as RGB, vein: 0.5, section: 0 };
-    let target = PALETTES.hero!;
-    let targetIndex = 0;
-
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id], .hero'));
-    const visible = new Map<Element, number>();
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) visible.set(e.target, e.intersectionRatio);
-        let best: Element | null = null;
-        let max = 0;
-        visible.forEach((r, el) => { if (r > max) { max = r; best = el; } });
-        if (best) {
-          const el = best as HTMLElement;
-          const id = el.classList.contains('hero') ? 'hero' : el.id;
-          if (PALETTES[id]) { target = PALETTES[id]; targetIndex = ORDER.indexOf(id); }
-        }
-      },
-      { threshold: [0, 0.15, 0.3, 0.5, 0.75, 1] },
-    );
-    sections.forEach((s) => io.observe(s));
-
     const reduced = prefersReducedMotion();
     let raf = 0;
     let last = 0;
@@ -92,6 +74,7 @@ export default function ShaderBackground({ tier }: { tier: Tier }) {
     const frameGap = tier === 'high' ? 1000 / 45 : 1000 / 30;
 
     const draw = (dt: number) => {
+      const { target, index: targetIndex } = aim.current;
       const k = 1 - Math.exp(-dt * 2.2);
       for (let i = 0; i < 3; i++) {
         cur.a[i] = cur.a[i]! + (target[0][i]! - cur.a[i]!) * k;
@@ -130,12 +113,34 @@ export default function ShaderBackground({ tier }: { tier: Tier }) {
 
     return () => {
       stop();
-      io.disconnect();
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVis);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [tier]);
+
+  // les sections observées changent à chaque page : la palette suit la section visible
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id], .hero'));
+    if (!sections.length) { aim.current = { target: PALETTES.hero!, index: 0 }; return; }
+    const visible = new Map<Element, number>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) visible.set(e.target, e.intersectionRatio);
+        let best: Element | null = null;
+        let max = 0;
+        visible.forEach((r, el) => { if (r > max) { max = r; best = el; } });
+        if (best) {
+          const el = best as HTMLElement;
+          const id = el.classList.contains('hero') ? 'hero' : el.id;
+          if (PALETTES[id]) aim.current = { target: PALETTES[id], index: ORDER.indexOf(id) };
+        }
+      },
+      { threshold: [0, 0.15, 0.3, 0.5, 0.75, 1] },
+    );
+    sections.forEach((sec) => io.observe(sec));
+    return () => io.disconnect();
+  }, [pathname]);
 
   return <canvas ref={ref} className="bg-canvas" aria-hidden="true" />;
 }
