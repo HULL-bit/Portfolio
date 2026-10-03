@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, type ComponentType } from 'react';
-import { getGpuTier, prefersReducedMotion } from '@/lib/gpu-tier';
+import { getGpuTier, prefersReducedMotion, quickTier } from '@/lib/gpu-tier';
 
 type Comp = ComponentType<{ tier: 'high' | 'mid'; label: string }>;
 
@@ -15,7 +15,8 @@ export function HeroLoader({ label }: { label: string }) {
     if (prefersReducedMotion()) return;
     let off = false;
     (async () => {
-      const chunk = import('@/components/three/HeroParticles'); // démarre le téléchargement tout de suite
+      if ((await quickTier()) === 'low') return; // pas de téléchargement du chunk 3D inutile
+      const chunk = import('@/components/three/HeroParticles'); // le téléchargement démarre pendant la mesure du FPS
       const tier = await getGpuTier();
       if (off || tier === 'low') return;
       const mod = await chunk;

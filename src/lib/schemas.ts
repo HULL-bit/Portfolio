@@ -83,36 +83,45 @@ export const skillsSchema = z.object({
 export const CATEGORIES = ['web', 'mobile', 'systeme', 'bdd', 'ia'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
+export const STATUSES = ['live', 'delivered', 'in-progress', 'prototype'] as const;
+export type Status = (typeof STATUSES)[number];
+
 export const projectSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/),
   order: z.number().int(),
+  /** Projet mis en avant : grande ligne éditoriale dans la section Projets (les autres : cartes compactes). */
+  featured: z.boolean().default(false),
   title: L,
-  client: z.string(),
-  location: z.string(),
+  client: z.string().default(''),
+  location: z.string().default(''),
   year: z.number().int().nullable(),
   categories: z.array(z.enum(CATEGORIES)).min(1),
   role: L,
+  status: z.enum(STATUSES),
+  statusNote: L.nullable().default(null),
   summary: L,
   context: L,
   mission: L,
   actions: z.array(L),
   features: z.array(L),
+  /** Réalisation technique : points détaillés (titre + texte). */
+  technical: z.array(z.object({ title: L, text: L })),
   architecture: z.object({
     nodes: z.array(
-      z.object({ id: z.string(), label: z.string(), kind: z.enum(['front', 'proxy', 'api', 'db', 'host']) }),
+      z.object({ id: z.string(), label: z.string(), kind: z.enum(['front', 'proxy', 'api', 'db', 'host', 'ext']) }),
     ),
     links: z.array(z.object({ from: z.string(), to: z.string() })),
   }),
   stack: z.array(z.string()),
   results: z.array(z.object({ value: z.string(), label: L })).max(3),
+  /** Noms des captures dans content-images/<slug>/ (déclinées dans public/images/projects/<slug>/). */
   images: z.array(z.string()),
+  imageKind: z.enum(['web', 'mobile']).default('web'),
   repo: z.url().nullable(),
+  repoLabel: L.nullable().default(null),
   demo: z.url().nullable(),
-  private: z.boolean(),
   accent: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
   todo: z.array(z.string()).default([]),
-  /** Description incomplète : la page affiche « étude de cas en cours de rédaction ». */
-  draft: z.boolean().default(false),
 });
 export type Project = z.infer<typeof projectSchema>;
 
@@ -130,6 +139,12 @@ export const projectsSchema = z
       });
     });
   });
+
+/** Manifeste des images de projets, généré par scripts/optimize-images.mjs. */
+export const imagesManifestSchema = z.record(
+  z.string(),
+  z.record(z.string(), z.object({ width: z.number().int(), height: z.number().int(), widths: z.array(z.number().int()).min(1) })),
+);
 
 export const testimonialsSchema = z.array(
   z.object({ author: z.string(), role: L, company: z.string(), quote: L, url: z.url().optional() }),
@@ -149,6 +164,7 @@ export const githubSchema = z.object({
       name: z.string(),
       url: z.url(),
       description: z.string().nullable(),
+      homepage: z.string().nullable().optional(),
       language: z.string().nullable(),
       stars: z.number().int(),
       pushedAt: z.string(),

@@ -1,10 +1,19 @@
 'use client';
 import { useEffect, useState, type ComponentType } from 'react';
 import { getGpuTier, type Tier } from '@/lib/gpu-tier';
+import { getTheme } from '@/lib/theme';
 
 /** Charge le fond shader après l'affichage (requestIdleCallback), uniquement si l'appareil le permet. */
 export function BackgroundLoader() {
   const [state, setState] = useState<{ C: ComponentType<{ tier: Tier }>; tier: Tier } | null>(null);
+  const [light, setLight] = useState(false);
+  // mode jour : fond uni (aucun shader, aucun coût GPU)
+  useEffect(() => {
+    const sync = () => setLight(getTheme() === 'light');
+    sync();
+    window.addEventListener('diaw:theme', sync);
+    return () => window.removeEventListener('diaw:theme', sync);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -20,5 +29,5 @@ export function BackgroundLoader() {
     return () => { cancelled = true; };
   }, []);
 
-  return state ? <state.C tier={state.tier} /> : null;
+  return state && !light ? <state.C tier={state.tier} /> : null;
 }

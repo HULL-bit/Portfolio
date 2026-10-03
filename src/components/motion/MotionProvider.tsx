@@ -16,7 +16,7 @@ export function MotionProvider() {
     let disposed = false;
     let teardown: (() => void) | null = null;
 
-    (async () => {
+    const start = async () => {
       const [{ gsap }, { ScrollTrigger }, { SplitText }, { default: Lenis }] = await Promise.all([
         import('gsap'),
         import('gsap/ScrollTrigger'),
@@ -172,10 +172,13 @@ export function MotionProvider() {
         html.classList.remove('lenis');
         nav?.classList.remove('is-hidden');
       };
-    })();
+    };
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    const idle = w.requestIdleCallback ? w.requestIdleCallback(() => { start(); }, { timeout: 1200 }) : (setTimeout(start, 400) as unknown as number);
 
     return () => {
       disposed = true;
+      w.cancelIdleCallback?.(idle);
       teardown?.();
     };
   }, [pathname]);

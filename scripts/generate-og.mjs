@@ -3,7 +3,7 @@
 // Sorties mises en cache : régénérées seulement si le contenu ou ce script changent.
 import { chromium } from 'playwright';
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 
 const read = (f) => JSON.parse(readFileSync(f, 'utf8'));
 const profile = read('content/profile.json');
@@ -59,6 +59,8 @@ for (const l of ['fr', 'en']) {
 }
 
 mkdirSync(OUT, { recursive: true });
+const expected = new Set(pages.map(([name]) => `${name}.png`));
+for (const f of readdirSync(OUT)) if (f.endsWith('.png') && !expected.has(f)) unlinkSync(`${OUT}/${f}`); // images d'anciens projets
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 for (const [name, data] of pages) {

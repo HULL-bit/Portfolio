@@ -28,11 +28,6 @@ const LOGS = [
   '[  OK  ] Reached target Portfolio.',
 ];
 
-const bar = (pct: number) => {
-  const k = Math.round((pct / 100) * 12);
-  return `[${'█'.repeat(k)}${'░'.repeat(12 - k)}] ${String(pct).padStart(2, ' ')}%`;
-};
-
 /** Points (px viewport) du texte « ACCESS GRANTED » : positions de départ des particules du Hero. */
 function sampleText(el: HTMLElement, count: number): Float32Array | null {
   const spans = Array.from(el.querySelectorAll<HTMLElement>('span'));
@@ -45,11 +40,9 @@ function sampleText(el: HTMLElement, count: number): Float32Array | null {
   if (!ctx) return null;
   ctx.fillStyle = '#fff';
   ctx.textAlign = 'center';
-  ctx.textBaseline = 'alphabetic';
   for (const s of spans) {
     const r = s.getBoundingClientRect();
-    const cs = getComputedStyle(s);
-    const px = parseFloat(cs.fontSize);
+    const px = parseFloat(getComputedStyle(s).fontSize);
     ctx.font = `700 ${px * sc}px "Clash Display", system-ui, sans-serif`;
     (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = `${-0.04 * px * sc}px`;
     ctx.fillText(s.textContent ?? '', (r.left + r.width / 2) * sc, (r.top + r.height * 0.78) * sc);
@@ -69,15 +62,13 @@ function sampleText(el: HTMLElement, count: number): Float32Array | null {
 }
 
 /**
- * Boot sequence (≤ 1,2 s), première visite de l'accueil uniquement. C'est une surcouche : le HTML du Hero est déjà dans la page.
- * 0 → logs noyau Linux + barre ASCII · 0,48 s ACCESS GRANTED (glitch 150 ms) · 0,72 s implosion en particules · ~1 s fin.
+ * Boot sequence (≈ 1 s), première visite de l'accueil uniquement. Surcouche : le HTML du Hero est déjà dans la page.
+ * La chronologie visuelle (logs, barre ASCII, ACCESS GRANTED + glitch 150 ms, fondu) est entièrement en CSS : elle part
+ * du premier rendu et ne dépend pas de l'hydratation. Le JS ajoute l'implosion en particules, « Passer » et la mémorisation.
  */
 export function BootSequence({ labels }: { labels: { welcome: string; skip: string } }) {
   const root = useRef<HTMLDivElement>(null);
-  const log = useRef<HTMLPreElement>(null);
-  const barEl = useRef<HTMLDivElement>(null);
   const big = useRef<HTMLDivElement>(null);
-  const skip = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -85,54 +76,48 @@ export function BootSequence({ labels }: { labels: { welcome: string; skip: stri
     if (!el || !html.classList.contains('booting')) return;
     let done = false;
     const timers: ReturnType<typeof setTimeout>[] = [];
-    const at = (ms: number, fn: () => void) => timers.push(setTimeout(fn, ms));
+    const t0 = (window as unknown as { __bootT0?: number }).__bootT0 ?? performance.now();
+    const left = (ms: number) => Math.max(0, ms - (performance.now() - t0));
 
     const finish = (implode: boolean) => {
       if (done) return;
       done = true;
-      timers.forEach(clearTimeout);
-      if (implode) {
-        let pts: Float32Array | null = null;
-        try { pts = big.current ? sampleText(big.current, 24000) : null; } catch { pts = null; }
-        heroBus.emitImplode(pts);
-      } else heroBus.emitImplode(null);
+      let pts: Float32Array | null = null;
+      if (implode) { try { pts = big.current ? sampleText(big.current, 24000) : null; } catch { pts = null; } }
+      heroBus.emitImplode(pts);
       try { localStorage.setItem('diaw:booted', '1'); } catch { /* stockage indisponible */ }
-      html.classList.remove('booting');
       window.dispatchEvent(new Event('diaw:boot-done'));
     };
+    const end = () => { html.classList.remove('booting'); };
 
-    if (prefersReduced()) { finish(false); return; }
-
-    at(300, () => { if (skip.current) skip.current.disabled = false; });
-    // logs : ~22 lignes très rapides, barre de progression synchronisée
-    let n = 0;
-    const iv = setInterval(() => {
-      n = Math.min(LOGS.length, n + 1);
-      if (log.current) log.current.innerHTML = LOGS.slice(0, n).map((l) => (l.startsWith('[  OK  ]') ? `<span class="ok">[  OK  ]</span>${l.slice(8)}` : l)).join('\n');
-      if (barEl.current) barEl.current.textContent = bar(Math.round((n / LOGS.length) * 100));
-      if (n >= LOGS.length) clearInterval(iv);
-    }, 16);
-    timers.push(iv as unknown as ReturnType<typeof setTimeout>);
-    at(480, () => el.classList.add('granted'));          // ACCESS GRANTED + glitch
-    at(720, () => { el.classList.add('implode'); finish(true); }); // texte → particules, le fond noir se dissout
-    at(980, () => { el.hidden = true; });
-
-    const onSkip = () => { el.classList.add('implode'); finish(false); setTimeout(() => { el.hidden = true; }, 250); };
-    const btn = skip.current;
-    btn?.addEventListener('click', onSkip);
-    return () => { clearInterval(iv); timers.forEach(clearTimeout); btn?.removeEventListener('click', onSkip); };
+    if (prefersReduced()) { finish(false); end(); return; }
+    timers.push(setTimeout(() => finish(true), left(720)));   // implosion : texte → particules
+    timers.push(setTimeout(end, left(1000)));                   // fin du boot
+    const btn = el.querySelector<HTMLButtonElement>('.boot-skip');
+    const skip = () => { finish(false); end(); };
+    btn?.addEventListener('click', skip);
+    return () => { timers.forEach(clearTimeout); btn?.removeEventListener('click', skip); };
   }, []);
 
   return (
     <div ref={root} className="boot" role="presentation">
-      <pre ref={log} className="boot-log" aria-hidden="true" />
-      <div ref={barEl} className="boot-bar" aria-hidden="true" />
+      <pre className="boot-log" aria-hidden="true">
+        {LOGS.map((l, i) => (
+          <span key={i} className="bl" style={{ ['--i' as string]: i }}>
+            {l.startsWith('[  OK  ]') ? <><span className="ok">[  OK  ]</span>{l.slice(8)}</> : l}
+            {'\n'}
+          </span>
+        ))}
+      </pre>
+      <div className="boot-bar" aria-hidden="true">
+        [<span className="bb-wrap"><span className="bb-fill">████████████</span></span>]<span className="bb-pct" />
+      </div>
       <span className="boot-cursor" aria-hidden="true" />
       <div className="boot-grant" aria-hidden="true">
         <div ref={big} className="boot-big"><span>ACCESS</span><span>GRANTED</span></div>
         <p className="boot-welcome">— {labels.welcome}</p>
       </div>
-      <button ref={skip} type="button" className="boot-skip" disabled>{labels.skip}</button>
+      <button type="button" className="boot-skip">{labels.skip}</button>
     </div>
   );
 }

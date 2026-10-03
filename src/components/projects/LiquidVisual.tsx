@@ -4,13 +4,13 @@ import { prefersReduced } from '@/lib/motion';
 import { ProjectVisual } from './ProjectVisual';
 import type { Project } from '@/lib/schemas';
 
-type Props = { project: Pick<Project, 'slug' | 'categories' | 'accent' | 'stack'>; title: string };
+type Props = { project: Pick<Project, 'slug' | 'categories' | 'accent' | 'stack'>; title: string; tag?: string };
 
 /**
  * Visuel du projet : distorsion liquide au survol (feTurbulence + feDisplacementMap, animée) et léger parallaxe interne.
  * Repli SVG choisi plutôt qu'un plan WebGL par panneau : aucun canvas supplémentaire, même rendu sur tous les appareils.
  */
-export function LiquidVisual({ project, title }: Props) {
+export function LiquidVisual({ project, title, tag }: Props) {
   const id = useId().replace(/:/g, '');
   const frame = useRef<HTMLDivElement>(null);
   const turb = useRef<SVGFETurbulenceElement>(null);
@@ -60,6 +60,7 @@ export function LiquidVisual({ project, title }: Props) {
         </filter>
       </svg>
       <ProjectVisual className="vis" project={project} title={title} />
+      {tag ? <span className="schematic-tag" aria-hidden="true">{tag}</span> : null}
     </div>
   );
 }

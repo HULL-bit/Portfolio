@@ -1,11 +1,16 @@
 // Récupère les données GitHub publiques AU BUILD uniquement → content/github.json.
 // En cas d'échec (réseau, quota), le fichier existant est conservé et le build continue.
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { writeFileSync, existsSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 
 const USER = 'HULL-bit';
 const OUT = 'content/github.json';
 const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'system-diaw-build' };
-if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+// jeton : GITHUB_TOKEN (CI) ou, en local, la session `gh auth login` si elle existe (évite la limite de 60 requêtes/h)
+let token = process.env.GITHUB_TOKEN;
+if (!token) { try { token = execSync('gh auth token', { stdio: ['ignore', 'pipe', 'ignore'], timeout: 5000 }).toString().trim(); } catch { /* gh absent */ } }
+if (token) headers.Authorization = `Bearer ${token}`;
+const IGNORED = new Set(['Portfolio']);
 
 const api = async (path) => {
   const res = await fetch(`https://api.github.com${path}`, { headers, signal: AbortSignal.timeout(15000) });
@@ -15,17 +20,21 @@ const api = async (path) => {
 
 try {
   const all = await api(`/users/${USER}/repos?per_page=100&sort=pushed`);
-  const repos = all.filter((r) => !r.fork && !r.private);
-  const langTotals = {};
+  // dépôts publics, hors forks, hors dépôts vides et hors ce portfolio
+  const repos = all.filter((r) => !r.fork && !r.private && r.size > 0 && !IGNORED.has(r.name));
+  // Langages : chaque dépôt pèse autant (part de chaque langage dans le dépôt), pour qu'un dépôt volumineux
+  // (ex. un environnement virtuel versionné) ne fausse pas la répartition.
+  const share = {};
+  const bytesTotal = {};
   for (const r of repos) {
     const langs = await api(`/repos/${USER}/${r.name}/languages`);
-    for (const [k, v] of Object.entries(langs)) langTotals[k] = (langTotals[k] ?? 0) + v;
+    const sum = Object.values(langs).reduce((a, b) => a + b, 0) || 1;
+    for (const [k, v] of Object.entries(langs)) { share[k] = (share[k] ?? 0) + v / sum; bytesTotal[k] = (bytesTotal[k] ?? 0) + v; }
   }
-  const total = Object.values(langTotals).reduce((a, b) => a + b, 0) || 1;
-  const languages = Object.entries(langTotals)
+  const languages = Object.entries(share)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 8)
-    .map(([name, bytes]) => ({ name, bytes, percent: Math.round((bytes / total) * 1000) / 10 }));
+    .map(([name, v]) => ({ name, bytes: bytesTotal[name], percent: Math.round((v / (repos.length || 1)) * 1000) / 10 }));
 
   // L'API publique n'expose pas le calendrier de contributions : on approxime avec les événements publics récents.
   const activity = {};
@@ -52,6 +61,7 @@ try {
       name: r.name,
       url: r.html_url,
       description: r.description,
+      homepage: r.homepage || null,
       language: r.language,
       stars: r.stargazers_count,
       pushedAt: r.pushed_at,

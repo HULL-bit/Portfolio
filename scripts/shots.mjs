@@ -28,6 +28,7 @@ const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--ena
 const errors = [];
 for (const [name, w, h, mobile] of [['desktop', 1440, 900, false], ['mobile', 390, 844, true]].filter(([n]) => !only || n === only)) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, deviceScaleFactor: 1 });
+  await ctx.addInitScript(({ boot, theme }) => { localStorage.setItem('diaw:gpu', 'force'); if (theme) localStorage.setItem('diaw:theme', theme); if (!boot) localStorage.setItem('diaw:booted', '1'); }, { boot: process.env.BOOT === '1', theme: process.env.THEME ?? '' });
   const page = await ctx.newPage();
   page.on('console', (m) => ['error', 'warning'].includes(m.type()) && errors.push(`[${name}] ${m.text()}`));
   page.on('pageerror', (e) => errors.push(`[${name}] ${e.message}`));

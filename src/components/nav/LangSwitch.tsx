@@ -10,7 +10,7 @@ export function LangSwitch({ lang, label }: { lang: Lang; label: string }) {
   return (
     <div className="lang-switch" role="group" aria-label={label}>
       {LOCALES.map((l) => (
-        <Link key={l} href={`/${l}${rest === '/' ? '/' : rest}`} hrefLang={l} lang={l} aria-current={l === lang} scroll={false}>
+        <Link key={l} href={`/${l}${rest === '/' ? '/' : rest}`} hrefLang={l} lang={l} aria-current={l === lang} scroll={false} prefetch={false}>
           {l.toUpperCase()}
         </Link>
       ))}

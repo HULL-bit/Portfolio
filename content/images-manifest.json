@@ -1,0 +1,72 @@
+{
+  "blue-track": {
+    "home": {
+      "width": 1440,
+      "height": 2400,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    }
+  },
+  "daara-dbm": {
+    "home": {
+      "width": 1440,
+      "height": 2400,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    }
+  },
+  "deliver-eat": {
+    "home": {
+      "width": 511,
+      "height": 877,
+      "widths": [
+        480,
+        511
+      ]
+    },
+    "orders": {
+      "width": 528,
+      "height": 961,
+      "widths": [
+        480,
+        528
+      ]
+    },
+    "tracking": {
+      "width": 528,
+      "height": 961,
+      "widths": [
+        480,
+        528
+      ]
+    }
+  },
+  "ocrystal": {
+    "home": {
+      "width": 1440,
+      "height": 2400,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    }
+  },
+  "wagadu-africa": {
+    "home": {
+      "width": 1440,
+      "height": 2400,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    }
+  }
+}

@@ -4,6 +4,8 @@ import { HeadScripts } from '@/components/ui/HeadScripts';
 import { withBase } from '@/lib/base';
 import { Motif } from '@/components/ui/Motif';
 
+export const metadata = { title: '404 — Not syncing | Souleymane DIAW', robots: { index: false } };
+
 export default function NotFound() {
   return (
     <html lang="fr">

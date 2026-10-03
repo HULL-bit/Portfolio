@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState, type ComponentType } from 'react';
-import { getGpuTier, prefersReducedMotion } from '@/lib/gpu-tier';
+import { getGpuTier, prefersReducedMotion, quickTier } from '@/lib/gpu-tier';
 import type { RackDomain, RackLabels } from './skills-data';
 
 type RackProps = { domains: RackDomain[]; labels: RackLabels; tier: 'high' | 'mid'; visible: boolean };
@@ -24,6 +24,7 @@ export function SkillsLoader({ domains, labels }: { domains: RackDomain[]; label
     );
     io.observe(el);
     const load = async () => {
+      if ((await quickTier()) === 'low') return;
       const tier = await getGpuTier();
       if (off || tier === 'low') return;
       const mod = await import('@/components/three/SkillsRack');

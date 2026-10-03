@@ -9,14 +9,13 @@ export function RoleCycler({ roles }: { roles: string[] }) {
 
   useEffect(() => {
     if (prefersReduced() || roles.length < 2) return;
-    document.documentElement.classList.add('roles-live');
     let g: ReturnType<typeof setTimeout>;
     const iv = setInterval(() => {
       setI((v) => (v + 1) % roles.length);
       setGlitch(true);
       g = setTimeout(() => setGlitch(false), 320);
     }, 2600);
-    return () => { clearInterval(iv); clearTimeout(g); document.documentElement.classList.remove('roles-live'); };
+    return () => { clearInterval(iv); clearTimeout(g); };
   }, [roles]);
 
   return (

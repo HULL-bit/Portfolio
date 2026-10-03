@@ -7,7 +7,7 @@ import { Grain } from '@/components/ui/Grain';
 import { FaviconState } from '@/components/ui/FaviconState';
 import { MotionProvider } from '@/components/motion/MotionProvider';
 import { ReadingProgress } from '@/components/motion/ReadingProgress';
-import { Cursor } from '@/components/motion/Cursor';
+import { CursorMount } from '@/components/motion/CursorMount';
 import { CircuitRail } from '@/components/motion/CircuitRail';
 import { profile, t } from '@/lib/content';
 import { withBase } from '@/lib/base';
@@ -24,7 +24,7 @@ export default async function SiteLayout({ children, params }: { children: React
       <FaviconState />
       <MotionProvider />
       <ReadingProgress label={t(lang, 'a11y.progress')} />
-      <Cursor labels={{ view: t(lang, 'cursor.view'), open: t(lang, 'cursor.open'), drag: t(lang, 'cursor.drag') }} />
+      <CursorMount labels={{ view: t(lang, 'cursor.view'), open: t(lang, 'cursor.open'), drag: t(lang, 'cursor.drag') }} />
       <Nav lang={lang} />
       <main id="main" style={{ position: 'relative' }}>
         <CircuitRail />

@@ -28,10 +28,10 @@ type Line = { text: string; kind?: 'in' | 'err' | 'ok' | 'dim'; href?: string };
 const bar = (n: number) => '●'.repeat(n) + '○'.repeat(5 - n);
 
 /** Terminal plein écran (touche ` ou bouton >_). Réponses issues de content/terminal.json et des contenus du site. */
-export function Terminal({ data }: { data: TerminalData }) {
+export function Terminal({ data, initialOpen = false }: { data: TerminalData; initialOpen?: boolean }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(initialOpen);
   const [lines, setLines] = useState<Line[]>([]);
   const [value, setValue] = useState('');
   const [mode, setMode] = useState<'cmd' | 'password'>('cmd');

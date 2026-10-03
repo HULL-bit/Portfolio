@@ -20,7 +20,7 @@ export default async function CvPage({ params }: { params: Promise<{ lang: strin
   if (!isLang(lang)) notFound();
   const c = profile.contact;
   const L = (k: string) => t(lang, `cvPage.${k}`);
-  const shown = projects.filter((p) => !p.draft);
+  const shown = projects.filter((p) => p.featured).slice(0, 4);
   return (
     <div className="cv-page">
       <TrackView event="express-open" />
@@ -57,7 +57,7 @@ export default async function CvPage({ params }: { params: Promise<{ lang: strin
           <h2>{L('projects')}</h2>
           {shown.map((p) => (
             <div key={p.slug} className="cv-item">
-              <p className="cv-row"><strong>{pick(p.title, lang)}</strong><span>{p.stack.join(' · ')}</span></p>
+              <p className="cv-row"><strong>{pick(p.title, lang)}</strong><span>{p.stack.slice(0, 6).join(' · ')}</span></p>
               <p>{pick(p.summary, lang)}{p.results.length ? ` ${p.results.map((r) => `${r.value} ${pick(r.label, lang)}`).join(' ; ')}.` : ''}</p>
             </div>
           ))}

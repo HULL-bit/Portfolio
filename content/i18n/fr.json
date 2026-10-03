@@ -146,7 +146,28 @@
     "filterLabel": "Filtrer les projets",
     "clearTech": "Retirer le filtre",
     "shown": "projets affichés",
-    "techFilter": "Filtrer par"
+    "techFilter": "Filtrer par",
+    "status": {
+      "live": "En ligne",
+      "delivered": "Livré",
+      "in-progress": "En cours",
+      "prototype": "Prototype"
+    },
+    "visit": "Voir le site en ligne",
+    "code": "Code source",
+    "technical": "Réalisation technique",
+    "others": "Autres réalisations",
+    "allRepos": "Tous mes dépôts GitHub",
+    "none": "Aucun projet ne correspond à ce filtre.",
+    "reset": "Réinitialiser les filtres",
+    "hint": "Survolez pour parcourir la page",
+    "shotAlt": "Capture d’écran du site {title}",
+    "links": "Liens",
+    "intro": "Sites en ligne, plateformes métier et applications mobiles. Chaque projet détaille le contexte, ma réalisation technique et les liens.",
+    "noSite": "Pas encore déployé",
+    "repoPublic": "Dépôt public",
+    "details": "Détails techniques",
+    "schematic": "Aperçu schématique"
   },
   "skills": {
     "primary": "PRINCIPAL",

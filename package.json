@@ -10,7 +10,8 @@
     "postbuild": "node scripts/check-static.mjs",
     "preview": "npx serve out",
     "lint": "eslint src",
-    "shots": "node scripts/shots.mjs"
+    "shots": "node scripts/shots.mjs",
+    "a11y": "node scripts/audit-a11y.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -28,8 +29,10 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/eslintrc": "^3.3.7",
     "@fontsource/jetbrains-mono": "^5.3.0",
+    "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
@@ -37,9 +40,11 @@
     "@types/three": "^0.182.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "^15.5.27",
+    "lighthouse": "^13.5.0",
     "playwright": "^1.63.0",
     "postcss": "^8.5.28",
     "prettier": "^3.9.9",
+    "serve": "^14.2.6",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"

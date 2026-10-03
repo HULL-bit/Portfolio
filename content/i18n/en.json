@@ -146,7 +146,28 @@
     "filterLabel": "Filter projects",
     "clearTech": "Remove filter",
     "shown": "projects shown",
-    "techFilter": "Filter by"
+    "techFilter": "Filter by",
+    "status": {
+      "live": "Live",
+      "delivered": "Delivered",
+      "in-progress": "In progress",
+      "prototype": "Prototype"
+    },
+    "visit": "Visit the live site",
+    "code": "Source code",
+    "technical": "Technical implementation",
+    "others": "More projects",
+    "allRepos": "All my GitHub repositories",
+    "none": "No project matches this filter.",
+    "reset": "Reset filters",
+    "hint": "Hover to scroll the page",
+    "shotAlt": "Screenshot of the {title} website",
+    "links": "Links",
+    "intro": "Live websites, business platforms and mobile apps. Each project details the context, my technical implementation and the links.",
+    "noSite": "Not deployed yet",
+    "repoPublic": "Public repository",
+    "details": "Technical details",
+    "schematic": "Schematic preview"
   },
   "skills": {
     "primary": "PRIMARY",

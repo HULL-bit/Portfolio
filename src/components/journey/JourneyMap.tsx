@@ -7,7 +7,7 @@ export function JourneyMap({ from, to, label }: { from: string; to: string; labe
       <path d={d} fill="none" stroke="#00E5FF" strokeWidth="2" strokeLinejoin="round" />
       <circle r="3.6" className="jmap-packet" fill="#FFB800" style={{ offsetPath: `path('${d}')` }} />
       {[[232, 84], [196, 118], [150, 142], [74, 120]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r="4.5" fill="#05060A" stroke={i === 0 || i === 3 ? '#FFB800' : '#3D5AFE'} strokeWidth="2" />)}
-      <g fontFamily="var(--font-mono)" fontSize="11" fill="#F5F7FF">
+      <g fontFamily="var(--font-mono)" fontSize="11" fill="currentColor">
         <text x="232" y="68" textAnchor="middle">{from}</text>
         <text x="74" y="146" textAnchor="middle">{to}</text>
       </g>

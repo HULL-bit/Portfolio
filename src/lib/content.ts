@@ -7,6 +7,7 @@ import testimonialsJson from '@content/testimonials.json';
 import certificationsJson from '@content/certifications.json';
 import githubJson from '@content/github.json';
 import terminalJson from '@content/terminal.json';
+import imagesManifestJson from '@content/images-manifest.json';
 import fr from '@content/i18n/fr.json';
 import en from '@content/i18n/en.json';
 import type { Lang } from './i18n';
@@ -15,6 +16,7 @@ import {
   educationSchema,
   experienceSchema,
   githubSchema,
+  imagesManifestSchema,
   profileSchema,
   projectsSchema,
   skillsSchema,
@@ -35,6 +37,10 @@ export const testimonials = testimonialsSchema.parse(testimonialsJson);
 export const certifications = certificationsSchema.parse(certificationsJson);
 export const github = githubSchema.parse(githubJson);
 export const terminal = terminalSchema.parse(terminalJson);
+export const imagesManifest = imagesManifestSchema.parse(imagesManifestJson);
+
+/** Métadonnées d'une capture de projet (tailles générées), ou undefined si elle n'existe pas. */
+export const getShot = (slug: string, name: string) => imagesManifest[slug]?.[name];
 
 const dictionaries: Record<Lang, Tree> = { fr: treeSchema.parse(fr), en: treeSchema.parse(en) };
 

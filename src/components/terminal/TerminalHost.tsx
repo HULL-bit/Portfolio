@@ -2,7 +2,8 @@ import { pick, profile, projects, skills, t, terminal } from '@/lib/content';
 import { withBase } from '@/lib/base';
 import { localePath } from '@/lib/site';
 import type { Lang } from '@/lib/i18n';
-import { Terminal, type TerminalData } from './Terminal';
+import type { TerminalData } from './Terminal';
+import { TerminalLazy } from './TerminalLazy';
 
 type L = { fr: string | string[]; en: string | string[] };
 const r = (key: string, lang: Lang) => (terminal.responses[key] as L)[lang];
@@ -15,7 +16,7 @@ export function TerminalHost({ lang }: { lang: Lang }) {
     prompt: terminal.prompt,
     welcome: terminal.welcome[lang],
     commands: terminal.commands.map((x) => ({ name: x.name, usage: x.usage, description: pick(x.description, lang) })),
-    projects: projects.filter((p) => !p.draft).map((p) => ({ slug: p.slug, title: pick(p.title, lang), href: localePath(lang, `projets/${p.slug}/`) })),
+    projects: projects.map((p) => ({ slug: p.slug, title: pick(p.title, lang), href: localePath(lang, `projets/${p.slug}/`) })),
     skills: skills.domains.filter((d) => d.primary).map((d) => ({ name: pick(d.name, lang), items: d.items })),
     whoami: r('whoami', lang) as string[],
     uname: r('uname', lang) as string[],
@@ -40,5 +41,5 @@ export function TerminalHost({ lang }: { lang: Lang }) {
     nextLang: { fr: 'en', en: 'fr' },
     labels: { title: r('terminalTitle', lang) as string, close: r('close', lang) as string },
   };
-  return <Terminal data={data} />;
+  return <TerminalLazy data={data} />;
 }

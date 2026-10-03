@@ -28,7 +28,7 @@ export function Picture({ name, widths = [480, 800], alt, sizes, eager = false, 
         height={height}
         className={className}
         loading={eager ? 'eager' : 'lazy'}
-        fetchPriority={eager ? 'high' : 'auto'}
+        fetchPriority={eager ? 'low' : 'auto'}
         decoding={eager ? 'sync' : 'async'}
       />
     </picture>

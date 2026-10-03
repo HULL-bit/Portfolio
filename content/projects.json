@@ -1,226 +1,2191 @@
 [
   {
-    "slug": "dgap-senegal", "order": 1,
-    "title": { "fr": "Système DGAP Sénégal", "en": "DGAP Senegal system" },
-    "client": "DGAP Sénégal", "location": "Sénégal", "year": null,
-    "categories": ["web", "systeme", "bdd"],
-    "role": { "fr": "Conception et développement full-stack", "en": "Full-stack design and development" },
+    "slug": "blue-track",
+    "order": 1,
+    "featured": true,
+    "title": {
+      "fr": "BLUE TRACK — suivi des pirogues",
+      "en": "BLUE TRACK — pirogue tracking"
+    },
+    "client": "ONG Wagadu Africa",
+    "location": "Sénégal",
+    "year": 2025,
+    "categories": [
+      "web",
+      "systeme",
+      "bdd"
+    ],
+    "role": {
+      "fr": "Conception, développement et déploiement",
+      "en": "Design, development and deployment"
+    },
+    "status": "live",
+    "statusNote": null,
     "summary": {
-      "fr": "Quatre modules intégrés : site vitrine, intranet, portail d'administration et plateforme d'admission.",
-      "en": "Four integrated modules: public website, intranet, administration portal and admission platform."
+      "fr": "Plateforme au service de la pêche artisanale : suivi GPS des pirogues en temps réel, carte marine, météo maritime et alertes de sécurité pour les pêcheurs et les coordinateurs.",
+      "en": "A platform for small-scale fishing: real-time GPS tracking of pirogues, marine map, marine weather and safety alerts for fishers and coordinators."
     },
     "context": {
-      "fr": "Une institution qui gère concours et inscriptions à fort volume, avec des normes de sécurité et de qualité élevées.",
-      "en": "An institution handling high-volume competitive exams and registrations under strict security and quality standards."
+      "fr": "Au Sénégal, la pêche artisanale est exposée aux risques en mer et à la pression des activités pétrolières et gazières. L'ONG Wagadu Africa porte le programme Blue Track pour protéger les pêcheurs et les ressources marines.",
+      "en": "In Senegal, small-scale fishing faces risks at sea and pressure from oil and gas activity. The NGO Wagadu Africa runs the Blue Track programme to protect fishers and marine resources."
     },
     "mission": {
-      "fr": "Livrer un système d'information unique couvrant la communication, le travail interne, l'administration et les admissions.",
-      "en": "Deliver a single information system covering communication, internal work, administration and admissions."
+      "fr": "Donner aux pêcheurs, aux organisations et aux coordinateurs un outil fiable : savoir où sont les pirogues, être alerté avant que la météo ne tourne, garder l'historique des trajets, sur un service disponible en permanence.",
+      "en": "Give fishers, organisations and coordinators a dependable tool: know where the pirogues are, get warned before the weather turns, keep trip history — on a service that stays up."
     },
     "actions": [
-      { "fr": "J'ai conçu l'architecture des quatre modules autour d'un socle de données commun.", "en": "I designed the four modules around a shared data foundation." },
-      { "fr": "J'ai développé les interfaces et les API (Django, React, Spring).", "en": "I built the interfaces and APIs (Django, React, Spring)." },
-      { "fr": "J'ai déployé l'ensemble sur serveur Linux.", "en": "I deployed everything on a Linux server." }
+      {
+        "fr": "J'ai conçu et développé l'application web (React, TypeScript) et l'API (Django, PostgreSQL/PostGIS).",
+        "en": "I designed and built the web app (React, TypeScript) and the API (Django, PostgreSQL/PostGIS)."
+      },
+      {
+        "fr": "J'ai mis en place le suivi GPS en temps réel, la carte marine, la gestion de flotte, la météo maritime et les alertes.",
+        "en": "I implemented real-time GPS tracking, the marine map, fleet management, marine weather and alerts."
+      },
+      {
+        "fr": "J'ai défini les rôles — pêcheur, organisation (GIE), administrateur — et l'authentification REST/JWT.",
+        "en": "I defined the roles — fisher, organisation (GIE), administrator — and REST/JWT authentication."
+      },
+      {
+        "fr": "J'ai déployé et j'administre le serveur Linux dédié (conteneurs Docker).",
+        "en": "I deployed and run the dedicated Linux server (Docker containers)."
+      }
     ],
     "features": [
-      { "fr": "Site vitrine", "en": "Public website" },
-      { "fr": "Intranet", "en": "Intranet" },
-      { "fr": "Portail d'administration", "en": "Administration portal" },
-      { "fr": "Plateforme d'admission : concours et inscriptions", "en": "Admission platform: exams and registrations" }
+      {
+        "fr": "Suivi GPS en temps réel",
+        "en": "Real-time GPS tracking"
+      },
+      {
+        "fr": "Carte marine et zones de sécurité",
+        "en": "Marine map and safety zones"
+      },
+      {
+        "fr": "Gestion de la flotte",
+        "en": "Fleet management"
+      },
+      {
+        "fr": "Météo maritime",
+        "en": "Marine weather"
+      },
+      {
+        "fr": "Alertes et bouton SOS",
+        "en": "Alerts and SOS button"
+      },
+      {
+        "fr": "Historique des trajets",
+        "en": "Trip history"
+      },
+      {
+        "fr": "Messagerie avec partage de position",
+        "en": "Messaging with position sharing"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Application web",
+          "en": "Web application"
+        },
+        "text": {
+          "fr": "React et TypeScript avec Vite et Tailwind CSS ; interface adaptée à chaque rôle (pêcheur, organisation, administrateur), bilingue FR/EN.",
+          "en": "React and TypeScript with Vite and Tailwind CSS; interface tailored to each role (fisher, organisation, administrator), bilingual FR/EN."
+        }
+      },
+      {
+        "title": {
+          "fr": "API et données",
+          "en": "API and data"
+        },
+        "text": {
+          "fr": "API Django REST ; PostgreSQL avec l'extension PostGIS pour les positions, les trajets et les zones ; authentification JWT.",
+          "en": "Django REST API; PostgreSQL with the PostGIS extension for positions, trips and zones; JWT authentication."
+        }
+      },
+      {
+        "title": {
+          "fr": "Carte et temps réel",
+          "en": "Map and real time"
+        },
+        "text": {
+          "fr": "Carte marine interactive, zones de sécurité, partage de position, centre d'alertes avec acquittement et bouton SOS.",
+          "en": "Interactive marine map, safety zones, position sharing, alert centre with acknowledgement and an SOS button."
+        }
+      },
+      {
+        "title": {
+          "fr": "Balises GPS",
+          "en": "GPS beacons"
+        },
+        "text": {
+          "fr": "Intégration d'une plateforme GPS tierce (Totarget) pour remonter les positions des embarcations.",
+          "en": "Integration of a third-party GPS platform (Totarget) to bring in vessel positions."
+        }
+      },
+      {
+        "title": {
+          "fr": "Déploiement",
+          "en": "Deployment"
+        },
+        "text": {
+          "fr": "Conteneurs Docker sur un serveur Linux dédié.",
+          "en": "Docker containers on a dedicated Linux server."
+        }
+      }
     ],
     "architecture": {
       "nodes": [
-        { "id": "nginx", "label": "Nginx", "kind": "proxy" },
-        { "id": "react", "label": "React", "kind": "front" },
-        { "id": "django", "label": "Django API", "kind": "api" },
-        { "id": "spring", "label": "Spring", "kind": "api" },
-        { "id": "db", "label": "Oracle / PostgreSQL", "kind": "db" },
-        { "id": "linux", "label": "Linux", "kind": "host" }
+        {
+          "id": "react",
+          "label": "React · TypeScript",
+          "kind": "front"
+        },
+        {
+          "id": "api",
+          "label": "Django REST",
+          "kind": "api"
+        },
+        {
+          "id": "db",
+          "label": "PostgreSQL · PostGIS",
+          "kind": "db"
+        },
+        {
+          "id": "gps",
+          "label": "Plateforme GPS tierce",
+          "kind": "ext"
+        },
+        {
+          "id": "linux",
+          "label": "Linux · Docker",
+          "kind": "host"
+        }
       ],
       "links": [
-        { "from": "react", "to": "nginx" }, { "from": "nginx", "to": "django" }, { "from": "nginx", "to": "spring" },
-        { "from": "django", "to": "db" }, { "from": "spring", "to": "db" }, { "from": "linux", "to": "nginx" }
+        {
+          "from": "react",
+          "to": "api"
+        },
+        {
+          "from": "api",
+          "to": "db"
+        },
+        {
+          "from": "api",
+          "to": "gps"
+        },
+        {
+          "from": "linux",
+          "to": "api"
+        }
       ]
     },
-    "stack": ["Django", "React", "Spring", "Oracle", "PostgreSQL", "Linux"],
-    "results": [{ "value": "4", "label": { "fr": "modules livrés", "en": "modules delivered" } }],
-    "images": [], "repo": null, "demo": null, "private": true, "accent": "#3D5AFE",
-    "todo": ["Année, périmètre exact du rôle, volumes (candidats, inscriptions) et répartition Oracle/PostgreSQL", "Architecture à valider"]
-  },
-  {
-    "slug": "wagadu-pirogues", "order": 2,
-    "title": { "fr": "Suivi de pirogues — Wagadu Africa", "en": "Pirogue tracking — Wagadu Africa" },
-    "client": "ONG Wagadu Africa", "location": "Kayar", "year": null,
-    "categories": ["web", "mobile", "systeme"],
-    "role": { "fr": "Conception, développement et administration du serveur", "en": "Design, development and server administration" },
-    "summary": {
-      "fr": "Géolocalisation des pirogues en temps réel, alertes météo et tableaux de bord pour les coordinateurs.",
-      "en": "Real-time pirogue geolocation, weather alerts and dashboards for coordinators."
-    },
-    "context": {
-      "fr": "Des pirogues de pêche opèrent au large de Kayar, avec peu de visibilité sur leur position et les risques météo.",
-      "en": "Fishing pirogues operate off the coast of Kayar with little visibility on their position and weather risks."
-    },
-    "mission": {
-      "fr": "Suivre les pirogues en temps réel et alerter les coordinateurs, avec un service disponible en permanence.",
-      "en": "Track pirogues in real time and alert coordinators, on a service that stays available."
-    },
-    "actions": [
-      { "fr": "J'ai conçu et développé l'API Django, l'application web React et l'application mobile Flutter.", "en": "I built the Django API, the React web app and the Flutter mobile app." },
-      { "fr": "J'ai mis en place la géolocalisation en temps réel et les alertes météo.", "en": "I implemented real-time geolocation and weather alerts." },
-      { "fr": "J'ai administré le serveur Linux dédié pour la haute disponibilité.", "en": "I administered the dedicated Linux server for high availability." }
+    "stack": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Django",
+      "PostgreSQL",
+      "PostGIS",
+      "REST/JWT",
+      "Docker",
+      "Linux"
     ],
-    "features": [
-      { "fr": "Géolocalisation en temps réel", "en": "Real-time geolocation" },
-      { "fr": "Alertes météo", "en": "Weather alerts" },
-      { "fr": "Tableaux de bord pour 3 coordinateurs", "en": "Dashboards for 3 coordinators" }
-    ],
-    "architecture": {
-      "nodes": [
-        { "id": "flutter", "label": "Flutter", "kind": "front" },
-        { "id": "react", "label": "React", "kind": "front" },
-        { "id": "nginx", "label": "Nginx", "kind": "proxy" },
-        { "id": "django", "label": "Django API", "kind": "api" },
-        { "id": "db", "label": "PostgreSQL", "kind": "db" },
-        { "id": "linux", "label": "Linux", "kind": "host" }
-      ],
-      "links": [
-        { "from": "flutter", "to": "nginx" }, { "from": "react", "to": "nginx" }, { "from": "nginx", "to": "django" },
-        { "from": "django", "to": "db" }, { "from": "linux", "to": "nginx" }
-      ]
-    },
-    "stack": ["Django", "React", "Flutter", "PostgreSQL", "REST/JWT", "Linux"],
     "results": [
-      { "value": "−40 %", "label": { "fr": "grâce aux alertes météo", "en": "thanks to weather alerts" } },
-      { "value": "3", "label": { "fr": "coordinateurs équipés de tableaux de bord", "en": "coordinators equipped with dashboards" } }
+      {
+        "value": "−40 %",
+        "label": {
+          "fr": "grâce aux alertes météo",
+          "en": "thanks to weather alerts"
+        }
+      },
+      {
+        "value": "6",
+        "label": {
+          "fr": "modules : GPS, carte, flotte, météo, alertes, trajets",
+          "en": "modules: GPS, map, fleet, weather, alerts, trips"
+        }
+      },
+      {
+        "value": "3",
+        "label": {
+          "fr": "coordinateurs avec tableau de bord",
+          "en": "coordinators with a dashboard"
+        }
+      }
     ],
-    "images": [], "repo": "https://github.com/HULL-bit/ProjetOuagadou", "demo": null, "private": false, "accent": "#00E5FF",
-    "todo": ["Préciser ce que mesure −40 % (incidents ? risques ?)", "Nombre de pirogues suivies (50+ ou 200+)", "Année de mise en production", "Architecture à valider"]
+    "images": [
+      "home"
+    ],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/ProjetOuagadou",
+    "repoLabel": {
+      "fr": "Prototype public (Pirogue Smart)",
+      "en": "Public prototype (Pirogue Smart)"
+    },
+    "demo": "https://blue-track.net/",
+    "accent": "#00E5FF",
+    "todo": [
+      "Préciser ce que mesure −40 % (incidents ? risques ?)",
+      "Nombre de pirogues suivies (50+ ou 200+)",
+      "Application mobile Flutter citée dans le brief initial : à confirmer",
+      "Le code de production est dans un dépôt privé : seul le prototype public est lié"
+    ]
   },
   {
-    "slug": "multi-market", "order": 3,
-    "title": { "fr": "Multi-Market — mémoire de Licence", "en": "Multi-Market — Bachelor's thesis" },
-    "client": "UCAD", "location": "Dakar", "year": 2025,
-    "categories": ["web", "mobile", "ia"],
-    "role": { "fr": "Conception et développement complets (mémoire)", "en": "End-to-end design and development (thesis)" },
+    "slug": "ocrystal",
+    "order": 2,
+    "featured": true,
+    "title": {
+      "fr": "O'Crystal — site de marque et espace pro",
+      "en": "O'Crystal — brand website and pro area"
+    },
+    "client": "O'Crystal",
+    "location": "Sénégal",
+    "year": 2026,
+    "categories": [
+      "web",
+      "systeme"
+    ],
+    "role": {
+      "fr": "Conception et développement full-stack",
+      "en": "Full-stack design and development"
+    },
+    "status": "live",
+    "statusNote": null,
     "summary": {
-      "fr": "Gestion des ventes de plusieurs boutiques, automatisation, tickets et IA de calcul des bénéfices.",
-      "en": "Multi-shop sales management with automation, receipts and AI-based profit calculation."
+      "fr": "Site bilingue d'une marque d'eau minérale naturelle du Sénégal : gamme, source de Niague, carte des points de vente, actualités et espace professionnel pour les distributeurs.",
+      "en": "Bilingual website for a Senegalese natural mineral water brand: range, the Niague spring, a map of points of sale, news and a professional area for distributors."
     },
     "context": {
-      "fr": "Des commerçants gèrent plusieurs points de vente sans outil commun pour les ventes, les revenus et les stocks.",
-      "en": "Merchants run several points of sale without a common tool for sales, revenue and stock."
+      "fr": "O'Crystal est une eau minérale naturelle puisée à Niague. La marque veut une vitrine premium, bilingue, et un canal dédié aux professionnels et aux futurs distributeurs.",
+      "en": "O'Crystal is a natural mineral water drawn at Niague. The brand wants a premium bilingual showcase and a dedicated channel for professionals and prospective distributors."
     },
     "mission": {
-      "fr": "Centraliser la gestion multi-boutiques et aider à décider grâce à l'automatisation et à l'IA.",
-      "en": "Centralize multi-shop management and support decisions through automation and AI."
+      "fr": "Livrer un site de marque rapide et soigné, administrable sans développeur, avec un espace professionnel, des formulaires et des e-mails transactionnels.",
+      "en": "Deliver a fast, polished brand site that can be managed without a developer, with a professional area, forms and transactional e-mails."
     },
     "actions": [
-      { "fr": "J'ai conçu le système et ses modules : ventes, revenus, tickets.", "en": "I designed the system and its modules: sales, revenue, receipts." },
-      { "fr": "J'ai intégré une IA de calcul des bénéfices.", "en": "I integrated an AI profit-calculation feature." },
-      { "fr": "J'ai développé les applications web et mobile (Django, React, Flutter, Spring).", "en": "I built the web and mobile apps (Django, React, Flutter, Spring)." }
+      {
+        "fr": "J'ai conçu l'architecture : Next.js avec Payload CMS embarqué et PostgreSQL.",
+        "en": "I designed the architecture: Next.js with an embedded Payload CMS and PostgreSQL."
+      },
+      {
+        "fr": "J'ai développé le site, l'espace pro et les e-mails transactionnels.",
+        "en": "I built the site, the pro area and the transactional e-mails."
+      },
+      {
+        "fr": "J'ai mis en place les tests (unitaires, E2E, accessibilité) et le suivi d'erreurs.",
+        "en": "I set up the tests (unit, E2E, accessibility) and error monitoring."
+      },
+      {
+        "fr": "J'ai préparé et documenté le déploiement (VPS avec Docker Compose, ou Render).",
+        "en": "I prepared and documented deployment (VPS with Docker Compose, or Render)."
+      }
     ],
     "features": [
-      { "fr": "Ventes multi-boutiques", "en": "Multi-shop sales" },
-      { "fr": "Gestion des revenus et tickets", "en": "Revenue and receipts" },
-      { "fr": "IA de calcul des bénéfices", "en": "AI profit calculation" }
+      {
+        "fr": "Gamme de produits avec visuels interactifs",
+        "en": "Product range with interactive visuals"
+      },
+      {
+        "fr": "Carte des points de vente",
+        "en": "Map of points of sale"
+      },
+      {
+        "fr": "Actualités et recherche",
+        "en": "News and search"
+      },
+      {
+        "fr": "Espace pro : comptes et commandes",
+        "en": "Pro area: accounts and orders"
+      },
+      {
+        "fr": "Formulaires de contact et de candidature distributeur",
+        "en": "Contact and distributor-application forms"
+      },
+      {
+        "fr": "Site bilingue FR / EN",
+        "en": "Bilingual FR / EN site"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Framework",
+          "en": "Framework"
+        },
+        "text": {
+          "fr": "Next.js (rendu serveur) avec Payload CMS embarqué : pages, produits et actualités administrables, versions et publication programmée.",
+          "en": "Next.js (server rendering) with an embedded Payload CMS: manageable pages, products and news, versioning and scheduled publishing."
+        }
+      },
+      {
+        "title": {
+          "fr": "Données et médias",
+          "en": "Data and media"
+        },
+        "text": {
+          "fr": "PostgreSQL via l'adaptateur Payload ; fichiers sur un stockage compatible S3 (Cloudflare R2).",
+          "en": "PostgreSQL through the Payload adapter; files on S3-compatible storage (Cloudflare R2)."
+        }
+      },
+      {
+        "title": {
+          "fr": "Internationalisation et SEO",
+          "en": "Internationalisation and SEO"
+        },
+        "text": {
+          "fr": "Français et anglais avec next-intl, sitemap, robots et métadonnées par page, PWA (manifest et service worker).",
+          "en": "French and English with next-intl, sitemap, robots and per-page metadata, PWA (manifest and service worker)."
+        }
+      },
+      {
+        "title": {
+          "fr": "Expérience",
+          "en": "Experience"
+        },
+        "text": {
+          "fr": "Animations (Motion), scènes 3D (react-three-fiber), carte interactive MapLibre, recherche.",
+          "en": "Animations (Motion), 3D scenes (react-three-fiber), MapLibre interactive map, search."
+        }
+      },
+      {
+        "title": {
+          "fr": "Espace pro et sécurité",
+          "en": "Pro area and security"
+        },
+        "text": {
+          "fr": "Comptes professionnels, 2FA TOTP pour l'administration, limitation de débit et captcha sur les formulaires, e-mails via Resend et React Email.",
+          "en": "Professional accounts, TOTP 2FA for administration, rate limiting and captcha on forms, e-mails via Resend and React Email."
+        }
+      },
+      {
+        "title": {
+          "fr": "Qualité et déploiement",
+          "en": "Quality and deployment"
+        },
+        "text": {
+          "fr": "Tests Vitest et Playwright (dont accessibilité avec axe-core), Sentry ; Docker Compose + Caddy sur VPS, ou service Node sur Render derrière Cloudflare.",
+          "en": "Vitest and Playwright tests (including accessibility with axe-core), Sentry; Docker Compose + Caddy on a VPS, or a Node service on Render behind Cloudflare."
+        }
+      }
     ],
     "architecture": {
       "nodes": [
-        { "id": "flutter", "label": "Flutter", "kind": "front" },
-        { "id": "react", "label": "React", "kind": "front" },
-        { "id": "django", "label": "Django API", "kind": "api" },
-        { "id": "spring", "label": "Spring", "kind": "api" },
-        { "id": "db", "label": "MySQL", "kind": "db" }
+        {
+          "id": "web",
+          "label": "Navigateur · PWA",
+          "kind": "front"
+        },
+        {
+          "id": "next",
+          "label": "Next.js · Payload CMS",
+          "kind": "api"
+        },
+        {
+          "id": "db",
+          "label": "PostgreSQL",
+          "kind": "db"
+        },
+        {
+          "id": "r2",
+          "label": "Cloudflare R2",
+          "kind": "db"
+        },
+        {
+          "id": "mail",
+          "label": "Resend (e-mails)",
+          "kind": "ext"
+        },
+        {
+          "id": "host",
+          "label": "Docker · Linux",
+          "kind": "host"
+        }
       ],
       "links": [
-        { "from": "flutter", "to": "django" }, { "from": "react", "to": "django" },
-        { "from": "django", "to": "db" }, { "from": "spring", "to": "db" }
+        {
+          "from": "web",
+          "to": "next"
+        },
+        {
+          "from": "next",
+          "to": "db"
+        },
+        {
+          "from": "next",
+          "to": "r2"
+        },
+        {
+          "from": "next",
+          "to": "mail"
+        },
+        {
+          "from": "host",
+          "to": "next"
+        }
       ]
     },
-    "stack": ["Django", "React", "Flutter", "Spring", "MySQL"],
-    "results": [
-      { "value": "5", "label": { "fr": "points de vente gérés", "en": "points of sale managed" } },
-      { "value": "−60 %", "label": { "fr": "de ruptures de stock", "en": "stock-outs" } }
+    "stack": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Payload CMS",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Three.js",
+      "MapLibre",
+      "next-intl",
+      "Docker"
     ],
-    "images": [], "repo": "https://github.com/HULL-bit/Ocass-Digital", "demo": null, "private": false, "accent": "#FFB800",
-    "todo": ["Confirmer que le dépôt Ocass-Digital correspond bien à ce projet", "Architecture à valider"]
+    "results": [
+      {
+        "value": "FR / EN",
+        "label": {
+          "fr": "site bilingue",
+          "en": "bilingual site"
+        }
+      },
+      {
+        "value": "2FA",
+        "label": {
+          "fr": "administration protégée (TOTP)",
+          "en": "administration protected (TOTP)"
+        }
+      },
+      {
+        "value": "a11y",
+        "label": {
+          "fr": "tests d'accessibilité automatisés (axe-core)",
+          "en": "automated accessibility tests (axe-core)"
+        }
+      }
+    ],
+    "images": [
+      "home"
+    ],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/O-Crystal",
+    "repoLabel": null,
+    "demo": "https://ocrystale.com/",
+    "accent": "#4DA3FF",
+    "todo": [
+      "Confirmer le rôle exact et l'année",
+      "Autorisation d'afficher la marque et la capture d'O'Crystal"
+    ]
   },
   {
-    "slug": "daara-dbm", "order": 4,
-    "title": { "fr": "Gestion de Daara — Barakatoul Mahaahidi", "en": "Daara management — Barakatoul Mahaahidi" },
-    "client": "Daara Barakatoul Mahaahidi", "location": "Touba", "year": null,
-    "categories": ["web", "mobile"],
-    "role": { "fr": "Conception et développement web et mobile", "en": "Web and mobile design and development" },
+    "slug": "w-hub",
+    "order": 3,
+    "featured": true,
+    "title": {
+      "fr": "Wagadu Hub — portail interne de l'ONG",
+      "en": "Wagadu Hub — the NGO's internal portal"
+    },
+    "client": "ONG Wagadu Africa",
+    "location": "Sénégal",
+    "year": 2026,
+    "categories": [
+      "web",
+      "systeme",
+      "bdd"
+    ],
+    "role": {
+      "fr": "Conception et développement full-stack",
+      "en": "Full-stack design and development"
+    },
+    "status": "delivered",
+    "statusNote": null,
     "summary": {
-      "fr": "Membres, finances, ressources humaines, conservatoire et calendrier, en web et en mobile.",
-      "en": "Members, finances, HR, conservatory and calendar, on web and mobile."
+      "fr": "Portail interne unique, sécurisé et mobile-first (PWA) : ressources humaines, courrier, tâches, documents, messagerie, visioconférence et agenda de l'ONG.",
+      "en": "A single, secure, mobile-first (PWA) internal portal: HR, mail, tasks, documents, messaging, video calls and calendar for the NGO."
     },
     "context": {
-      "fr": "Un daara de Touba qui administre ses membres, ses finances et ses activités sans outil numérique unifié.",
-      "en": "A daara in Touba managing its members, finances and activities without a unified digital tool."
+      "fr": "Au quotidien, l'ONG Wagadu Africa gère ses équipes, son courrier et ses documents. Le programme Blue Track a besoin d'un outil interne commun pour coordonner tout cela.",
+      "en": "Day to day, the NGO Wagadu Africa manages its teams, its mail and its documents. The Blue Track programme needs a shared internal tool to coordinate all of it."
     },
     "mission": {
-      "fr": "Fournir une plateforme unique de gestion, accessible depuis le web et le mobile.",
-      "en": "Provide a single management platform available on web and mobile."
+      "fr": "Centraliser les processus internes dans un portail unique, avec des droits fins et un journal d'audit, utilisable aussi sur téléphone.",
+      "en": "Centralise internal processes in one portal, with fine-grained permissions and an audit log, usable on a phone too."
     },
     "actions": [
-      { "fr": "J'ai conçu les modules : membres, finances, RH, conservatoire, calendrier.", "en": "I designed the modules: members, finances, HR, conservatory, calendar." },
-      { "fr": "J'ai développé l'API Django, les interfaces React / Next.js et l'application Flutter.", "en": "I built the Django API, the React / Next.js interfaces and the Flutter app." }
+      {
+        "fr": "J'ai conçu l'architecture : API Django REST, interface Next.js installable (PWA), PostgreSQL, Redis et Celery, stockage MinIO.",
+        "en": "I designed the architecture: Django REST API, installable Next.js interface (PWA), PostgreSQL, Redis and Celery, MinIO storage."
+      },
+      {
+        "fr": "J'ai livré les six phases du cahier des charges : socle, RH et courrier, tâches, documents, communication temps réel, demandes transverses.",
+        "en": "I delivered the six phases of the specification: foundation, HR and mail, tasks, documents, real-time communication, cross-cutting requests."
+      },
+      {
+        "fr": "J'ai modélisé les rôles, les permissions (avec exceptions individuelles) et des circuits de validation réutilisables.",
+        "en": "I modelled roles, permissions (with individual exceptions) and reusable validation workflows."
+      },
+      {
+        "fr": "J'ai écrit les tests et la CI, et préparé le déploiement Docker Compose derrière Nginx.",
+        "en": "I wrote the tests and the CI, and prepared the Docker Compose deployment behind Nginx."
+      }
     ],
     "features": [
-      { "fr": "Membres", "en": "Members" }, { "fr": "Finances", "en": "Finances" },
-      { "fr": "Ressources humaines", "en": "Human resources" }, { "fr": "Conservatoire", "en": "Conservatory" },
-      { "fr": "Calendrier", "en": "Calendar" }
+      {
+        "fr": "Ressources humaines : fiches, contrats, congés avec validation",
+        "en": "HR: records, contracts, leave with approval"
+      },
+      {
+        "fr": "Courrier : numérotation automatique, affectation, traçabilité",
+        "en": "Mail: automatic numbering, assignment, traceability"
+      },
+      {
+        "fr": "Tâches : kanban, calendrier, récurrence, rappels",
+        "en": "Tasks: kanban, calendar, recurrence, reminders"
+      },
+      {
+        "fr": "Documents : diffusion ciblée, suivi de lecture, recherche plein texte",
+        "en": "Documents: targeted distribution, read tracking, full-text search"
+      },
+      {
+        "fr": "Messagerie, visioconférence et agenda",
+        "en": "Messaging, video calls and calendar"
+      },
+      {
+        "fr": "Journal d'audit, rôles et exceptions individuelles",
+        "en": "Audit log, roles and individual exceptions"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "API et métier",
+          "en": "API and business logic"
+        },
+        "text": {
+          "fr": "Django 5 et Django REST Framework : authentification JWT, rôles et permissions avec exceptions individuelles, circuits de validation réutilisables, journal d'audit.",
+          "en": "Django 5 and Django REST Framework: JWT authentication, roles and permissions with individual exceptions, reusable validation workflows, audit log."
+        }
+      },
+      {
+        "title": {
+          "fr": "Interface",
+          "en": "Interface"
+        },
+        "text": {
+          "fr": "Next.js / React en PWA : installable sur téléphone, une seule interface pour le web et le mobile.",
+          "en": "Next.js / React as a PWA: installable on a phone, a single interface for web and mobile."
+        }
+      },
+      {
+        "title": {
+          "fr": "Données et tâches de fond",
+          "en": "Data and background jobs"
+        },
+        "text": {
+          "fr": "PostgreSQL 16 ; Redis et Celery (notifications, rappels, e-mails, PDF, purge du journal) ; stockage de fichiers MinIO compatible S3.",
+          "en": "PostgreSQL 16; Redis and Celery (notifications, reminders, e-mails, PDF, log purge); S3-compatible MinIO file storage."
+        }
+      },
+      {
+        "title": {
+          "fr": "Communication",
+          "en": "Communication"
+        },
+        "text": {
+          "fr": "Intégrations Rocket.Chat (SSO) et Jitsi Meet, activables par configuration ; agenda autonome.",
+          "en": "Rocket.Chat (SSO) and Jitsi Meet integrations, enabled through configuration; standalone calendar."
+        }
+      },
+      {
+        "title": {
+          "fr": "Infrastructure",
+          "en": "Infrastructure"
+        },
+        "text": {
+          "fr": "Docker Compose derrière Nginx (TLS, en-têtes de sécurité, limitation de débit), Cloudflare en frontal.",
+          "en": "Docker Compose behind Nginx (TLS, security headers, rate limiting), Cloudflare in front."
+        }
+      },
+      {
+        "title": {
+          "fr": "Qualité",
+          "en": "Quality"
+        },
+        "text": {
+          "fr": "171 tests pytest, 86 vérifications de bout en bout, eslint, vitest et build Next.js en CI ; documentation d'architecture, de base de données et de déploiement.",
+          "en": "171 pytest tests, 86 end-to-end checks, eslint, vitest and Next.js build in CI; architecture, database and deployment documentation."
+        }
+      }
     ],
     "architecture": {
       "nodes": [
-        { "id": "flutter", "label": "Flutter", "kind": "front" },
-        { "id": "next", "label": "Next.js / React", "kind": "front" },
-        { "id": "django", "label": "Django API", "kind": "api" },
-        { "id": "db", "label": "PostgreSQL", "kind": "db" }
+        {
+          "id": "pwa",
+          "label": "Next.js · PWA",
+          "kind": "front"
+        },
+        {
+          "id": "nginx",
+          "label": "Nginx · TLS",
+          "kind": "proxy"
+        },
+        {
+          "id": "api",
+          "label": "Django + DRF",
+          "kind": "api"
+        },
+        {
+          "id": "celery",
+          "label": "Celery (worker)",
+          "kind": "api"
+        },
+        {
+          "id": "pg",
+          "label": "PostgreSQL 16",
+          "kind": "db"
+        },
+        {
+          "id": "redis",
+          "label": "Redis",
+          "kind": "db"
+        },
+        {
+          "id": "minio",
+          "label": "MinIO (S3)",
+          "kind": "db"
+        },
+        {
+          "id": "chat",
+          "label": "Rocket.Chat · Jitsi",
+          "kind": "ext"
+        },
+        {
+          "id": "host",
+          "label": "Docker · Linux",
+          "kind": "host"
+        }
       ],
-      "links": [{ "from": "flutter", "to": "django" }, { "from": "next", "to": "django" }, { "from": "django", "to": "db" }]
+      "links": [
+        {
+          "from": "pwa",
+          "to": "nginx"
+        },
+        {
+          "from": "nginx",
+          "to": "api"
+        },
+        {
+          "from": "api",
+          "to": "pg"
+        },
+        {
+          "from": "api",
+          "to": "redis"
+        },
+        {
+          "from": "redis",
+          "to": "celery"
+        },
+        {
+          "from": "api",
+          "to": "minio"
+        },
+        {
+          "from": "api",
+          "to": "chat"
+        },
+        {
+          "from": "host",
+          "to": "nginx"
+        }
+      ]
     },
-    "stack": ["Django", "React", "Next.js", "Flutter", "PostgreSQL"],
-    "results": [],
-    "images": [], "repo": "https://github.com/HULL-bit/DBM", "demo": null, "private": false, "accent": "#7C3AED",
-    "todo": ["Nombre d'utilisateurs (100+ ou 500+)", "Année", "Architecture à valider"]
+    "stack": [
+      "Django",
+      "DRF",
+      "Next.js",
+      "React",
+      "PostgreSQL",
+      "Redis",
+      "Celery",
+      "MinIO",
+      "Docker",
+      "Nginx"
+    ],
+    "results": [
+      {
+        "value": "6",
+        "label": {
+          "fr": "phases du cahier des charges livrées",
+          "en": "specification phases delivered"
+        }
+      },
+      {
+        "value": "171",
+        "label": {
+          "fr": "tests pytest",
+          "en": "pytest tests"
+        }
+      },
+      {
+        "value": "86",
+        "label": {
+          "fr": "vérifications de bout en bout",
+          "en": "end-to-end checks"
+        }
+      }
+    ],
+    "images": [],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/W-HUB",
+    "repoLabel": null,
+    "demo": null,
+    "accent": "#7C3AED",
+    "todo": [
+      "Chiffres de tests à actualiser (issus de docs/roadmap.md)",
+      "Le dépôt public contient le cahier des charges de l'ONG : vérifier qu'il peut rester public",
+      "Pas de capture : application interne à accès restreint"
+    ]
   },
   {
-    "slug": "baaxil-xadiim", "order": 5,
-    "title": { "fr": "BAAXIL-XADIIM", "en": "BAAXIL-XADIIM" },
-    "client": "TODO", "location": "Sénégal", "year": null,
-    "categories": ["web"],
-    "role": { "fr": "Développement", "en": "Development" },
-    "summary": { "fr": "Description à venir.", "en": "Description coming soon." },
-    "context": { "fr": "Description à venir.", "en": "Description coming soon." },
-    "mission": { "fr": "Description à venir.", "en": "Description coming soon." },
-    "actions": [],
-    "features": [],
-    "architecture": { "nodes": [], "links": [] },
-    "stack": ["JavaScript"],
-    "results": [],
-    "images": [], "repo": "https://github.com/HULL-bit/BAAXIL-XADIIM", "demo": null, "private": false, "accent": "#FF2E88",
-    "todo": ["Description complète, client, année, rôle, résultats"],
-    "draft": true
+    "slug": "wagadu-africa",
+    "order": 4,
+    "featured": true,
+    "title": {
+      "fr": "Site de l'ONG Wagadu Africa",
+      "en": "Wagadu Africa NGO website"
+    },
+    "client": "ONG Wagadu Africa",
+    "location": "Sénégal",
+    "year": null,
+    "categories": [
+      "web"
+    ],
+    "role": {
+      "fr": "Réalisation et administration du site",
+      "en": "Build and administration of the website"
+    },
+    "status": "live",
+    "statusNote": null,
+    "summary": {
+      "fr": "Site institutionnel bilingue de l'ONG : valeurs, thématiques (Maât, technologie, environnement), dons en ligne et accès direct à la plateforme Blue Track.",
+      "en": "Bilingual institutional website for the NGO: values, themes (Maat, technology, environment), online donations and direct access to the Blue Track platform."
+    },
+    "context": {
+      "fr": "L'ONG Wagadu Africa a besoin d'une vitrine claire pour présenter ses valeurs, ses thématiques d'action et son programme Blue Track à ses partenaires et au public, en français et en anglais.",
+      "en": "The NGO Wagadu Africa needs a clear showcase to present its values, its themes of action and its Blue Track programme to partners and the public, in French and English."
+    },
+    "mission": {
+      "fr": "Mettre en ligne un site institutionnel bilingue que l'équipe peut faire vivre sans développeur.",
+      "en": "Put a bilingual institutional site online that the team can keep alive without a developer."
+    },
+    "actions": [
+      {
+        "fr": "J'ai réalisé le site avec WordPress et Elementor (thème Kadence), selon l'identité visuelle de l'ONG.",
+        "en": "I built the site with WordPress and Elementor (Kadence theme), following the NGO's visual identity."
+      },
+      {
+        "fr": "J'ai mis en place le bilinguisme FR/EN (Weglot) et les dons en ligne (GiveWP).",
+        "en": "I set up FR/EN bilingualism (Weglot) and online donations (GiveWP)."
+      },
+      {
+        "fr": "J'ai relié le site à la plateforme Blue Track et j'en assure l'administration au quotidien.",
+        "en": "I linked the site to the Blue Track platform and run its day-to-day administration."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Accueil, À propos, Thématiques, Contact",
+        "en": "Home, About, Themes, Contact"
+      },
+      {
+        "fr": "Valeurs : éthique, vérité, transparence",
+        "en": "Values: ethics, truth, transparency"
+      },
+      {
+        "fr": "Trois thématiques : Maât, technologie, environnement",
+        "en": "Three themes: Maat, technology, environment"
+      },
+      {
+        "fr": "Page de dons en ligne",
+        "en": "Online donation page"
+      },
+      {
+        "fr": "Version française et anglaise",
+        "en": "French and English versions"
+      },
+      {
+        "fr": "Accès direct à Blue Track",
+        "en": "Direct access to Blue Track"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "CMS",
+          "en": "CMS"
+        },
+        "text": {
+          "fr": "WordPress avec Elementor et le thème Kadence : mise en page visuelle, contenus modifiables par l'équipe sans développeur.",
+          "en": "WordPress with Elementor and the Kadence theme: visual layout, content the team can edit without a developer."
+        }
+      },
+      {
+        "title": {
+          "fr": "Bilinguisme",
+          "en": "Bilingualism"
+        },
+        "text": {
+          "fr": "Traduction FR/EN avec Weglot et sélecteur de langue dans l'en-tête.",
+          "en": "FR/EN translation with Weglot and a language switcher in the header."
+        }
+      },
+      {
+        "title": {
+          "fr": "Dons",
+          "en": "Donations"
+        },
+        "text": {
+          "fr": "Formulaire de dons en ligne avec GiveWP.",
+          "en": "Online donation form with GiveWP."
+        }
+      },
+      {
+        "title": {
+          "fr": "Identité et performance",
+          "en": "Identity and performance"
+        },
+        "text": {
+          "fr": "Charte graphique de l'ONG (jaune, motifs africains) et sections animées légères.",
+          "en": "The NGO's graphic identity (yellow, African patterns) and light animated sections."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [],
+      "links": []
+    },
+    "stack": [
+      "WordPress",
+      "Elementor",
+      "Kadence",
+      "Weglot",
+      "GiveWP"
+    ],
+    "results": [
+      {
+        "value": "FR / EN",
+        "label": {
+          "fr": "site bilingue (Weglot)",
+          "en": "bilingual site (Weglot)"
+        }
+      },
+      {
+        "value": "Dons",
+        "label": {
+          "fr": "collecte en ligne (GiveWP)",
+          "en": "online fundraising (GiveWP)"
+        }
+      }
+    ],
+    "images": [
+      "home"
+    ],
+    "imageKind": "web",
+    "repo": null,
+    "repoLabel": null,
+    "demo": "https://wagadu-africa.org/",
+    "accent": "#FFB800",
+    "todo": [
+      "Confirmer l'année et le périmètre exact (réalisation vs administration)",
+      "Autorisation d'afficher la capture (photos de personnes sur l'accueil)"
+    ]
   },
   {
-    "slug": "marketplace-pieces", "order": 6,
-    "title": { "fr": "Marketplace de pièces détachées", "en": "Spare-parts marketplace" },
-    "client": "TODO", "location": "Sénégal", "year": null,
-    "categories": ["web"],
-    "role": { "fr": "Développement", "en": "Development" },
-    "summary": { "fr": "Description à venir.", "en": "Description coming soon." },
-    "context": { "fr": "Description à venir.", "en": "Description coming soon." },
-    "mission": { "fr": "Description à venir.", "en": "Description coming soon." },
-    "actions": [],
-    "features": [],
-    "architecture": { "nodes": [], "links": [] },
-    "stack": [],
-    "results": [],
-    "images": [], "repo": "https://github.com/HULL-bit/MarketPlace-PiecesDetaches", "demo": null, "private": false, "accent": "#3D5AFE",
-    "todo": ["Description complète, stack, client, année, rôle, résultats"],
-    "draft": true
+    "slug": "daara-dbm",
+    "order": 5,
+    "featured": true,
+    "title": {
+      "fr": "Daara Barakatul Mahaahidi — plateforme de gestion",
+      "en": "Daara Barakatul Mahaahidi — management platform"
+    },
+    "client": "Daara Barakatul Mahaahidi",
+    "location": "Touba",
+    "year": 2026,
+    "categories": [
+      "web",
+      "mobile"
+    ],
+    "role": {
+      "fr": "Conception et développement web et mobile",
+      "en": "Web and mobile design and development"
+    },
+    "status": "live",
+    "statusNote": null,
+    "summary": {
+      "fr": "Site public et plateforme de gestion d'une daara : membres, finances, activités culturelles, communication, action sociale, conservatoire, ressources scientifiques et organisation, par rôle.",
+      "en": "Public website and management platform for a daara: members, finances, cultural activities, communication, social work, conservatory, scientific resources and organisation, by role."
+    },
+    "context": {
+      "fr": "La Daara Barakatul Mahaahidi est un lieu d'enseignement, de spiritualité et de vie communautaire. Elle a besoin d'un outil commun pour gérer ses membres, ses cotisations et ses activités.",
+      "en": "The Daara Barakatul Mahaahidi is a place of teaching, spirituality and community life. It needs a shared tool to manage its members, contributions and activities."
+    },
+    "mission": {
+      "fr": "Fournir une plateforme unique, accessible sur le web et sur mobile, avec des interfaces adaptées à chaque rôle.",
+      "en": "Provide a single platform, available on web and mobile, with interfaces tailored to each role."
+    },
+    "actions": [
+      {
+        "fr": "J'ai conçu les modules métier : informations, finance, culturel (Kamil), communication, social, conservatoire, scientifique, organisation.",
+        "en": "I designed the business modules: information, finance, cultural (Kamil), communication, social, conservatory, scientific, organisation."
+      },
+      {
+        "fr": "J'ai développé l'API Django, l'interface React (Vite, MUI) avec un menu par rôle, et l'application mobile Flutter.",
+        "en": "I built the Django API, the React interface (Vite, MUI) with a role-based menu, and the Flutter mobile app."
+      },
+      {
+        "fr": "J'ai mis la plateforme en production (Render, PostgreSQL) et configuré le stockage S3 pour que les fichiers survivent aux redéploiements.",
+        "en": "I put the platform into production (Render, PostgreSQL) and configured S3 storage so files survive redeployments."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Site public : informations, guide, historique, réalisations",
+        "en": "Public site: information, guide, history, achievements"
+      },
+      {
+        "fr": "Connexion par rôle : administrateur, membre, jewrin",
+        "en": "Role-based login: administrator, member, jewrin"
+      },
+      {
+        "fr": "Finances et cotisations",
+        "en": "Finances and contributions"
+      },
+      {
+        "fr": "Kamil (suivi culturel) et validations",
+        "en": "Kamil (cultural follow-up) and validations"
+      },
+      {
+        "fr": "Bibliothèque de documents PDF",
+        "en": "PDF document library"
+      },
+      {
+        "fr": "Application mobile Flutter",
+        "en": "Flutter mobile app"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Backend",
+          "en": "Backend"
+        },
+        "text": {
+          "fr": "Django organisé en applications par domaine (accounts, informations, finance, culturelle, communication, sociale, conservatoire, scientifique, organisation) ; PostgreSQL en production.",
+          "en": "Django organised in per-domain apps (accounts, information, finance, cultural, communication, social, conservatory, scientific, organisation); PostgreSQL in production."
+        }
+      },
+      {
+        "title": {
+          "fr": "Interface web",
+          "en": "Web interface"
+        },
+        "text": {
+          "fr": "React avec Vite et Material UI : en-tête, barre latérale par rôle, tableaux de bord et pages par module ; charte graphique de la daara (vert, or, beige).",
+          "en": "React with Vite and Material UI: header, role-based sidebar, dashboards and pages per module; the daara's graphic identity (green, gold, beige)."
+        }
+      },
+      {
+        "title": {
+          "fr": "Mobile",
+          "en": "Mobile"
+        },
+        "text": {
+          "fr": "Application mobile développée avec Flutter.",
+          "en": "Mobile app built with Flutter."
+        }
+      },
+      {
+        "title": {
+          "fr": "Fichiers",
+          "en": "Files"
+        },
+        "text": {
+          "fr": "Stockage compatible S3 : les documents et PDF restent disponibles après chaque redéploiement.",
+          "en": "S3-compatible storage: documents and PDFs stay available after every redeployment."
+        }
+      },
+      {
+        "title": {
+          "fr": "Déploiement",
+          "en": "Deployment"
+        },
+        "text": {
+          "fr": "Service Django et base PostgreSQL sur Render, migrations appliquées à chaque déploiement, nom de domaine dédié.",
+          "en": "Django service and PostgreSQL database on Render, migrations applied on every deployment, dedicated domain name."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "react",
+          "label": "React · Vite · MUI",
+          "kind": "front"
+        },
+        {
+          "id": "flutter",
+          "label": "Flutter (mobile)",
+          "kind": "front"
+        },
+        {
+          "id": "api",
+          "label": "Django (9 apps)",
+          "kind": "api"
+        },
+        {
+          "id": "pg",
+          "label": "PostgreSQL",
+          "kind": "db"
+        },
+        {
+          "id": "s3",
+          "label": "Stockage S3",
+          "kind": "db"
+        },
+        {
+          "id": "render",
+          "label": "Render",
+          "kind": "host"
+        }
+      ],
+      "links": [
+        {
+          "from": "react",
+          "to": "api"
+        },
+        {
+          "from": "flutter",
+          "to": "api"
+        },
+        {
+          "from": "api",
+          "to": "pg"
+        },
+        {
+          "from": "api",
+          "to": "s3"
+        },
+        {
+          "from": "render",
+          "to": "api"
+        }
+      ]
+    },
+    "stack": [
+      "Django",
+      "React",
+      "Vite",
+      "MUI",
+      "Flutter",
+      "PostgreSQL",
+      "S3",
+      "Render"
+    ],
+    "results": [
+      {
+        "value": "8",
+        "label": {
+          "fr": "modules métier",
+          "en": "business modules"
+        }
+      },
+      {
+        "value": "3",
+        "label": {
+          "fr": "rôles : administrateur, membre, jewrin",
+          "en": "roles: administrator, member, jewrin"
+        }
+      },
+      {
+        "value": "Web + mobile",
+        "label": {
+          "fr": "React et Flutter",
+          "en": "React and Flutter"
+        }
+      }
+    ],
+    "images": [
+      "home"
+    ],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/DBM",
+    "repoLabel": null,
+    "demo": "https://darabarakatulmahahidi.online/",
+    "accent": "#3DDC84",
+    "todo": [
+      "Nombre d'utilisateurs (100+ ou 500+)",
+      "Autorisation d'afficher la capture de la daara"
+    ]
+  },
+  {
+    "slug": "dgap-senegal",
+    "order": 6,
+    "featured": true,
+    "title": {
+      "fr": "DGAP Sénégal — portail et socle SI",
+      "en": "DGAP Senegal — portal and IS foundation"
+    },
+    "client": "DGAP Sénégal",
+    "location": "Sénégal",
+    "year": 2026,
+    "categories": [
+      "web",
+      "systeme",
+      "bdd"
+    ],
+    "role": {
+      "fr": "Conception et développement full-stack",
+      "en": "Full-stack design and development"
+    },
+    "status": "in-progress",
+    "statusNote": {
+      "fr": "Pas encore déployé",
+      "en": "Not deployed yet"
+    },
+    "summary": {
+      "fr": "Refonte du portail de la Direction Générale de l'Administration Pénitentiaire et socle de son système d'information : portail, démarches en ligne, intranet et back-office.",
+      "en": "Overhaul of the portal of the Senegalese Prison Administration (DGAP) and the foundation of its information system: portal, online services, intranet and back-office."
+    },
+    "context": {
+      "fr": "La DGAP veut remplacer son site actuel par un portail institutionnel moderne et poser un socle commun pour ses téléservices citoyens et ses outils internes, avec de fortes exigences de sécurité et d'accessibilité.",
+      "en": "The DGAP wants to replace its current website with a modern institutional portal and lay a common foundation for its citizen e-services and internal tools, with strong security and accessibility requirements."
+    },
+    "mission": {
+      "fr": "Livrer, bloc par bloc, un socle sécurisé et réversible : quatre applications partageant une même API, un design system et une même chaîne de qualité.",
+      "en": "Deliver, block by block, a secure and reversible foundation: four applications sharing one API, a design system and one quality pipeline."
+    },
+    "actions": [
+      {
+        "fr": "J'ai conçu l'architecture : API Django REST et quatre applications React (portail, démarches, intranet, back-office) en workspace pnpm, avec un design system partagé.",
+        "en": "I designed the architecture: a Django REST API and four React applications (portal, online services, intranet, back-office) in a pnpm workspace, with a shared design system."
+      },
+      {
+        "fr": "J'ai mis en place la sécurité : rôles (RBAC), authentification multifacteur, cloisonnement des accès et en-têtes HTTP.",
+        "en": "I implemented security: roles (RBAC), multi-factor authentication, access segregation and HTTP headers."
+      },
+      {
+        "fr": "J'ai conçu les téléservices, dont le concours : candidatures avec suivi d'état et paiement.",
+        "en": "I designed the e-services, including the competitive exam: applications with status tracking and payment."
+      },
+      {
+        "fr": "J'ai monté la chaîne de qualité : CI, tests, audit des dépendances, scan d'images et documentation d'architecture.",
+        "en": "I set up the quality pipeline: CI, tests, dependency audit, image scanning and architecture documentation."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Portail institutionnel",
+        "en": "Institutional portal"
+      },
+      {
+        "fr": "Démarches en ligne pour les citoyens",
+        "en": "Online services for citizens"
+      },
+      {
+        "fr": "Téléservice concours : candidature, paiement, suivi",
+        "en": "Exam e-service: application, payment, tracking"
+      },
+      {
+        "fr": "Intranet réservé aux agents",
+        "en": "Intranet reserved for staff"
+      },
+      {
+        "fr": "Back-office d'administration",
+        "en": "Administration back-office"
+      },
+      {
+        "fr": "Authentification multifacteur",
+        "en": "Multi-factor authentication"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Architecture",
+          "en": "Architecture"
+        },
+        "text": {
+          "fr": "API Django REST Framework ; quatre applications React (Vite, TypeScript) dans un workspace pnpm avec un design system partagé documenté sous Storybook.",
+          "en": "Django REST Framework API; four React applications (Vite, TypeScript) in a pnpm workspace with a shared design system documented in Storybook."
+        }
+      },
+      {
+        "title": {
+          "fr": "Données et fichiers",
+          "en": "Data and files"
+        },
+        "text": {
+          "fr": "PostgreSQL 16, Celery pour les tâches asynchrones, MinIO pour le stockage d'objets.",
+          "en": "PostgreSQL 16, Celery for asynchronous jobs, MinIO for object storage."
+        }
+      },
+      {
+        "title": {
+          "fr": "Sécurité",
+          "en": "Security"
+        },
+        "text": {
+          "fr": "RBAC, MFA (TOTP), cloisonnement par sous-domaine, en-têtes de sécurité ; intranet et back-office non indexables.",
+          "en": "RBAC, MFA (TOTP), sub-domain segregation, security headers; intranet and back-office are not indexable."
+        }
+      },
+      {
+        "title": {
+          "fr": "Accessibilité",
+          "en": "Accessibility"
+        },
+        "text": {
+          "fr": "Cible RGAA 4 / WCAG 2.1 AA, documentée dans le dépôt.",
+          "en": "RGAA 4 / WCAG 2.1 AA target, documented in the repository."
+        }
+      },
+      {
+        "title": {
+          "fr": "Infrastructure",
+          "en": "Infrastructure"
+        },
+        "text": {
+          "fr": "Docker Compose et Nginx multi-sites (portail, démarches, intranet, back-office), TLS de développement ; 100 % open source et réversible.",
+          "en": "Docker Compose and multi-site Nginx (portal, services, intranet, back-office), development TLS; 100% open source and reversible."
+        }
+      },
+      {
+        "title": {
+          "fr": "Qualité",
+          "en": "Quality"
+        },
+        "text": {
+          "fr": "CI GitHub Actions et GitLab CI : lint, types, tests, build, audit de dépendances, scan d'image Trivy ; schéma OpenAPI 3.1 et décisions d'architecture (ADR).",
+          "en": "GitHub Actions and GitLab CI: lint, types, tests, build, dependency audit, Trivy image scan; OpenAPI 3.1 schema and architecture decision records (ADRs)."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "apps",
+          "label": "4 apps React",
+          "kind": "front"
+        },
+        {
+          "id": "nginx",
+          "label": "Nginx multi-sites",
+          "kind": "proxy"
+        },
+        {
+          "id": "api",
+          "label": "Django REST",
+          "kind": "api"
+        },
+        {
+          "id": "celery",
+          "label": "Celery",
+          "kind": "api"
+        },
+        {
+          "id": "pg",
+          "label": "PostgreSQL 16",
+          "kind": "db"
+        },
+        {
+          "id": "minio",
+          "label": "MinIO",
+          "kind": "db"
+        },
+        {
+          "id": "host",
+          "label": "Docker · Linux",
+          "kind": "host"
+        }
+      ],
+      "links": [
+        {
+          "from": "apps",
+          "to": "nginx"
+        },
+        {
+          "from": "nginx",
+          "to": "api"
+        },
+        {
+          "from": "api",
+          "to": "pg"
+        },
+        {
+          "from": "api",
+          "to": "minio"
+        },
+        {
+          "from": "api",
+          "to": "celery"
+        },
+        {
+          "from": "host",
+          "to": "nginx"
+        }
+      ]
+    },
+    "stack": [
+      "Django",
+      "DRF",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Celery",
+      "MinIO",
+      "Docker",
+      "Nginx"
+    ],
+    "results": [
+      {
+        "value": "4",
+        "label": {
+          "fr": "applications : portail, démarches, intranet, back-office",
+          "en": "applications: portal, services, intranet, back-office"
+        }
+      },
+      {
+        "value": "MFA",
+        "label": {
+          "fr": "authentification multifacteur",
+          "en": "multi-factor authentication"
+        }
+      }
+    ],
+    "images": [],
+    "imageKind": "web",
+    "repo": null,
+    "repoLabel": null,
+    "demo": null,
+    "accent": "#FF2E88",
+    "todo": [
+      "Le dépôt GitHub HULL-bit/DGAP est public (projet d'État) : décider s'il doit être lié ou rendu privé",
+      "Le brief initial citait Spring et Oracle : à confirmer (le dépôt montre Django, React, PostgreSQL)",
+      "Volumes (candidats, inscriptions) à renseigner après déploiement"
+    ]
+  },
+  {
+    "slug": "g-services",
+    "order": 7,
+    "featured": true,
+    "title": {
+      "fr": "G-SERVICES — services et produits géolocalisés",
+      "en": "G-SERVICES — geolocated services and products"
+    },
+    "client": "",
+    "location": "",
+    "year": 2026,
+    "categories": [
+      "web",
+      "bdd"
+    ],
+    "role": {
+      "fr": "Modélisation UML, conception et développement",
+      "en": "UML modelling, design and development"
+    },
+    "status": "delivered",
+    "statusNote": null,
+    "summary": {
+      "fr": "Plateforme de gestion de services et produits géolocalisés : back-office d'administration complet (RBAC) et front public au design cinématique, bâtis sur un modèle UML d'environ 28 classes.",
+      "en": "A platform to manage geolocated services and products: a full administration back-office (RBAC) and a cinematic public front, built on a UML model of about 28 classes."
+    },
+    "context": {
+      "fr": "Un modèle UML complet — environ 28 classes, 2 paquetages, 4 classes d'association — devait devenir une application réelle, administrable et testée.",
+      "en": "A complete UML model — about 28 classes, 2 packages, 4 association classes — had to become a real, manageable and tested application."
+    },
+    "mission": {
+      "fr": "Implémenter tout le modèle en base, en JPA et en services, l'administrer via une interface web et exposer un front public.",
+      "en": "Implement the whole model in the database, in JPA and in services, manage it through a web interface and expose a public front."
+    },
+    "actions": [
+      {
+        "fr": "J'ai modélisé le domaine en UML puis implémenté chaque classe en JPA, avec des migrations Flyway versionnées.",
+        "en": "I modelled the domain in UML then implemented every class in JPA, with versioned Flyway migrations."
+      },
+      {
+        "fr": "J'ai construit le back-office en Jakarta Faces et PrimeFaces, protégé par Spring Security (rôles et surcharges de permissions par personne).",
+        "en": "I built the back-office with Jakarta Faces and PrimeFaces, secured by Spring Security (roles and per-person permission overrides)."
+      },
+      {
+        "fr": "J'ai développé le front public animé et les règles de gestion : prix net, stock par lots, avis modérés.",
+        "en": "I built the animated public front and the business rules: net price, stock by batch, moderated reviews."
+      },
+      {
+        "fr": "J'ai testé les règles métier (JUnit 5) et le démarrage complet (Testcontainers), puis tout conteneurisé avec Docker Compose.",
+        "en": "I tested the business rules (JUnit 5) and the full startup (Testcontainers), then containerised everything with Docker Compose."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Back-office complet avec rôles et permissions",
+        "en": "Full back-office with roles and permissions"
+      },
+      {
+        "fr": "Catalogue de services et produits géolocalisés",
+        "en": "Catalogue of geolocated services and products"
+      },
+      {
+        "fr": "Stock par lots et alertes de seuil",
+        "en": "Stock by batch and threshold alerts"
+      },
+      {
+        "fr": "Promotions et prix net",
+        "en": "Promotions and net price"
+      },
+      {
+        "fr": "Avis modérés",
+        "en": "Moderated reviews"
+      },
+      {
+        "fr": "Front public animé",
+        "en": "Animated public front"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Stack",
+          "en": "Stack"
+        },
+        "text": {
+          "fr": "Java 21, Spring Boot 3.3 ; interface Jakarta Faces (Mojarra) et PrimeFaces 14 via JoinFaces.",
+          "en": "Java 21, Spring Boot 3.3; Jakarta Faces (Mojarra) and PrimeFaces 14 interface via JoinFaces."
+        }
+      },
+      {
+        "title": {
+          "fr": "Persistance",
+          "en": "Persistence"
+        },
+        "text": {
+          "fr": "Spring Data JPA / Hibernate 6 ; PostgreSQL 16 ; 19 migrations Flyway ; mapping DTO avec MapStruct.",
+          "en": "Spring Data JPA / Hibernate 6; PostgreSQL 16; 19 Flyway migrations; DTO mapping with MapStruct."
+        }
+      },
+      {
+        "title": {
+          "fr": "Sécurité",
+          "en": "Security"
+        },
+        "text": {
+          "fr": "Spring Security 6 : rôles et profils, surcharges de permissions par personne, verrouillage de compte.",
+          "en": "Spring Security 6: roles and profiles, per-person permission overrides, account locking."
+        }
+      },
+      {
+        "title": {
+          "fr": "Tests",
+          "en": "Tests"
+        },
+        "text": {
+          "fr": "20 tests unitaires sur les règles de gestion et un test d'intégration Testcontainers qui applique toutes les migrations.",
+          "en": "20 unit tests on business rules and a Testcontainers integration test that applies every migration."
+        }
+      },
+      {
+        "title": {
+          "fr": "Livraison",
+          "en": "Delivery"
+        },
+        "text": {
+          "fr": "Une commande suffit : docker compose up --build (application, PostgreSQL, pgAdmin).",
+          "en": "One command is enough: docker compose up --build (application, PostgreSQL, pgAdmin)."
+        }
+      },
+      {
+        "title": {
+          "fr": "Mobile",
+          "en": "Mobile"
+        },
+        "text": {
+          "fr": "Client Flutter en complément (dossier mobile du dépôt).",
+          "en": "Flutter client as a complement (mobile folder of the repository)."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "faces",
+          "label": "JSF · PrimeFaces",
+          "kind": "front"
+        },
+        {
+          "id": "boot",
+          "label": "Spring Boot · Security",
+          "kind": "api"
+        },
+        {
+          "id": "pg",
+          "label": "PostgreSQL 16 · Flyway",
+          "kind": "db"
+        },
+        {
+          "id": "host",
+          "label": "Docker Compose",
+          "kind": "host"
+        }
+      ],
+      "links": [
+        {
+          "from": "faces",
+          "to": "boot"
+        },
+        {
+          "from": "boot",
+          "to": "pg"
+        },
+        {
+          "from": "host",
+          "to": "boot"
+        }
+      ]
+    },
+    "stack": [
+      "Java",
+      "Spring Boot",
+      "Spring Security",
+      "JPA/Hibernate",
+      "PrimeFaces",
+      "PostgreSQL",
+      "Flyway",
+      "Docker"
+    ],
+    "results": [
+      {
+        "value": "28",
+        "label": {
+          "fr": "classes UML implémentées",
+          "en": "UML classes implemented"
+        }
+      },
+      {
+        "value": "19",
+        "label": {
+          "fr": "migrations Flyway",
+          "en": "Flyway migrations"
+        }
+      },
+      {
+        "value": "20",
+        "label": {
+          "fr": "tests unitaires + 1 d'intégration",
+          "en": "unit tests + 1 integration test"
+        }
+      }
+    ],
+    "images": [],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/G-Services",
+    "repoLabel": null,
+    "demo": null,
+    "accent": "#3D5AFE",
+    "todo": [
+      "Préciser le cadre (projet personnel, académique ?) et le client éventuel"
+    ]
+  },
+  {
+    "slug": "baaxil-xadiim",
+    "order": 8,
+    "featured": false,
+    "title": {
+      "fr": "BAAXIL-XADIIM — plateforme Ahibahil Khadim",
+      "en": "BAAXIL-XADIIM — Ahibahil Khadim platform"
+    },
+    "client": "Ahibahil Khadim",
+    "location": "Sénégal",
+    "year": 2026,
+    "categories": [
+      "web"
+    ],
+    "role": {
+      "fr": "Conception et développement full-stack",
+      "en": "Full-stack design and development"
+    },
+    "status": "delivered",
+    "statusNote": null,
+    "summary": {
+      "fr": "Plateforme de gestion pour l'association Ahibahil Khadim : interfaces par rôle et modules informations, finance, culturel, communication, social, conservatoire, scientifique et organisation.",
+      "en": "Management platform for the Ahibahil Khadim association: role-based interfaces and modules for information, finance, culture, communication, social work, conservatory, science and organisation."
+    },
+    "context": {
+      "fr": "L'association souhaite digitaliser sa gestion — membres, cotisations, activités — dans un outil unique.",
+      "en": "The association wants to digitise its management — members, contributions, activities — in a single tool."
+    },
+    "mission": {
+      "fr": "Livrer une plateforme web par rôle (administrateur, membre, jewrin) avec les modules métier de l'association.",
+      "en": "Deliver a role-based web platform (administrator, member, jewrin) with the association's business modules."
+    },
+    "actions": [
+      {
+        "fr": "J'ai repris l'architecture éprouvée de la plateforme de la daara : API Django et interface React (Vite, MUI).",
+        "en": "I reused the proven architecture of the daara platform: Django API and React interface (Vite, MUI)."
+      },
+      {
+        "fr": "J'ai adapté les modules, les rôles et la charte graphique (vert, or, beige) aux besoins de l'association.",
+        "en": "I adapted the modules, roles and graphic identity (green, gold, beige) to the association's needs."
+      },
+      {
+        "fr": "J'ai migré la base vers PostgreSQL et configuré le stockage S3 pour la persistance des fichiers.",
+        "en": "I migrated the database to PostgreSQL and configured S3 storage for file persistence."
+      },
+      {
+        "fr": "J'ai déployé l'application sur Render.",
+        "en": "I deployed the application on Render."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Neuf applications Django par domaine",
+        "en": "Nine per-domain Django apps"
+      },
+      {
+        "fr": "Rôles : administrateur, membre, jewrin",
+        "en": "Roles: administrator, member, jewrin"
+      },
+      {
+        "fr": "Cotisations et finances",
+        "en": "Contributions and finances"
+      },
+      {
+        "fr": "Bibliothèque de documents",
+        "en": "Document library"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Backend",
+          "en": "Backend"
+        },
+        "text": {
+          "fr": "Django organisé en applications par domaine ; script de migration vers PostgreSQL.",
+          "en": "Django organised in per-domain apps; migration script to PostgreSQL."
+        }
+      },
+      {
+        "title": {
+          "fr": "Interface",
+          "en": "Interface"
+        },
+        "text": {
+          "fr": "React avec Vite et Material UI, menu et tableaux de bord par rôle.",
+          "en": "React with Vite and Material UI, role-based menu and dashboards."
+        }
+      },
+      {
+        "title": {
+          "fr": "Fichiers",
+          "en": "Files"
+        },
+        "text": {
+          "fr": "Stockage compatible S3 pour que les uploads survivent aux redéploiements.",
+          "en": "S3-compatible storage so uploads survive redeployments."
+        }
+      },
+      {
+        "title": {
+          "fr": "Déploiement",
+          "en": "Deployment"
+        },
+        "text": {
+          "fr": "Service web sur Render, interface d'administration accessible sur /#/admin.",
+          "en": "Web service on Render, administration interface available at /#/admin."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "react",
+          "label": "React · Vite · MUI",
+          "kind": "front"
+        },
+        {
+          "id": "api",
+          "label": "Django",
+          "kind": "api"
+        },
+        {
+          "id": "pg",
+          "label": "PostgreSQL",
+          "kind": "db"
+        },
+        {
+          "id": "s3",
+          "label": "Stockage S3",
+          "kind": "db"
+        },
+        {
+          "id": "render",
+          "label": "Render",
+          "kind": "host"
+        }
+      ],
+      "links": [
+        {
+          "from": "react",
+          "to": "api"
+        },
+        {
+          "from": "api",
+          "to": "pg"
+        },
+        {
+          "from": "api",
+          "to": "s3"
+        },
+        {
+          "from": "render",
+          "to": "api"
+        }
+      ]
+    },
+    "stack": [
+      "Django",
+      "React",
+      "Vite",
+      "MUI",
+      "PostgreSQL",
+      "S3",
+      "Render"
+    ],
+    "results": [
+      {
+        "value": "8",
+        "label": {
+          "fr": "modules métier",
+          "en": "business modules"
+        }
+      },
+      {
+        "value": "3",
+        "label": {
+          "fr": "rôles",
+          "en": "roles"
+        }
+      }
+    ],
+    "images": [],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/BAAXIL-XADIIM",
+    "repoLabel": null,
+    "demo": "https://baaxil-xadiim-1.onrender.com/#/admin",
+    "accent": "#D4AF37",
+    "todo": [
+      "Le service Render répond actuellement « Service Suspended » : le réactiver (ou retirer le lien)"
+    ]
+  },
+  {
+    "slug": "deliver-eat",
+    "order": 9,
+    "featured": false,
+    "title": {
+      "fr": "DeliverEat — livraison de repas à Dakar",
+      "en": "DeliverEat — meal delivery in Dakar"
+    },
+    "client": "",
+    "location": "Dakar",
+    "year": 2026,
+    "categories": [
+      "mobile"
+    ],
+    "role": {
+      "fr": "Conception et développement de l'application",
+      "en": "Design and development of the app"
+    },
+    "status": "delivered",
+    "statusNote": null,
+    "summary": {
+      "fr": "Application Flutter (Android, iOS, Linux) de commande et de suivi de livraison de repas à Dakar, connectée à une API REST et à un suivi de commande en direct.",
+      "en": "Flutter app (Android, iOS, Linux) to order meals and follow deliveries in Dakar, connected to a REST API and live order tracking."
+    },
+    "context": {
+      "fr": "Commander un repas suppose de trouver un restaurant, composer un panier et suivre sa commande, y compris avec une connexion instable.",
+      "en": "Ordering a meal means finding a restaurant, building a basket and following the order — even on an unstable connection."
+    },
+    "mission": {
+      "fr": "Construire un client mobile robuste : aucune donnée métier en dur, sessions sécurisées, suivi en direct, FR/EN et mode sombre.",
+      "en": "Build a robust mobile client: no hard-coded business data, secure sessions, live tracking, FR/EN and dark mode."
+    },
+    "actions": [
+      {
+        "fr": "J'ai structuré l'application en couches strictes : interface, providers à état typé, services réseau, modèles.",
+        "en": "I structured the app in strict layers: UI, typed-state providers, network services, models."
+      },
+      {
+        "fr": "J'ai géré l'authentification : jetons en stockage sécurisé et rafraîchissement transparent, avec un verrou contre les doubles refresh.",
+        "en": "I handled authentication: tokens in secure storage and transparent refresh, with a lock against double refreshes."
+      },
+      {
+        "fr": "J'ai implémenté le suivi de commande par WebSocket, avec reconnexion à délai croissant et repli sur de l'interrogation REST.",
+        "en": "I implemented order tracking over WebSocket, with back-off reconnection and a fallback to REST polling."
+      },
+      {
+        "fr": "J'ai ajouté la résilience : relances sur erreurs transitoires, bannière hors ligne, cache d'images, messages d'erreur FR/EN.",
+        "en": "I added resilience: retries on transient errors, offline banner, image cache, FR/EN error messages."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Catalogue de restaurants et recherche",
+        "en": "Restaurant catalogue and search"
+      },
+      {
+        "fr": "Panier et commande",
+        "en": "Basket and ordering"
+      },
+      {
+        "fr": "Favoris",
+        "en": "Favourites"
+      },
+      {
+        "fr": "Suivi de commande en direct",
+        "en": "Live order tracking"
+      },
+      {
+        "fr": "Profil, mode sombre, FR / EN",
+        "en": "Profile, dark mode, FR / EN"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Architecture",
+          "en": "Architecture"
+        },
+        "text": {
+          "fr": "Flutter / Dart en couches (UI, providers, services, réseau) ; état typé ViewState générique ; Provider.",
+          "en": "Flutter / Dart in layers (UI, providers, services, network); generic typed ViewState; Provider."
+        }
+      },
+      {
+        "title": {
+          "fr": "Réseau",
+          "en": "Networking"
+        },
+        "text": {
+          "fr": "Dio avec intercepteurs : authentification, refresh de jeton single-flight, relances sur 429 et erreurs réseau.",
+          "en": "Dio with interceptors: authentication, single-flight token refresh, retries on 429 and network errors."
+        }
+      },
+      {
+        "title": {
+          "fr": "Temps réel",
+          "en": "Real time"
+        },
+        "text": {
+          "fr": "WebSocket avec reconnexion à backoff et jeton régénéré ; bascule automatique sur du polling REST.",
+          "en": "WebSocket with back-off reconnection and a regenerated token; automatic fallback to REST polling."
+        }
+      },
+      {
+        "title": {
+          "fr": "Stockage et cache",
+          "en": "Storage and cache"
+        },
+        "text": {
+          "fr": "flutter_secure_storage pour les jetons, cached_network_image, connectivity_plus pour le mode hors ligne.",
+          "en": "flutter_secure_storage for tokens, cached_network_image, connectivity_plus for offline mode."
+        }
+      },
+      {
+        "title": {
+          "fr": "Internationalisation",
+          "en": "Internationalisation"
+        },
+        "text": {
+          "fr": "Localisation FR / EN, thèmes clair et sombre.",
+          "en": "FR / EN localisation, light and dark themes."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "app",
+          "label": "Application Flutter",
+          "kind": "front"
+        },
+        {
+          "id": "api",
+          "label": "API REST DeliverEat",
+          "kind": "api"
+        },
+        {
+          "id": "ws",
+          "label": "WebSocket (suivi)",
+          "kind": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "api"
+        },
+        {
+          "from": "app",
+          "to": "ws"
+        }
+      ]
+    },
+    "stack": [
+      "Flutter",
+      "Dart",
+      "Provider",
+      "Dio",
+      "WebSocket"
+    ],
+    "results": [
+      {
+        "value": "3",
+        "label": {
+          "fr": "plateformes : Android, iOS, Linux",
+          "en": "platforms: Android, iOS, Linux"
+        }
+      },
+      {
+        "value": "FR / EN",
+        "label": {
+          "fr": "localisation",
+          "en": "localisation"
+        }
+      }
+    ],
+    "images": [
+      "home",
+      "orders",
+      "tracking"
+    ],
+    "imageKind": "mobile",
+    "repo": "https://github.com/HULL-bit/DeliverEat",
+    "repoLabel": null,
+    "demo": null,
+    "accent": "#FF7A45",
+    "todo": [
+      "Préciser le cadre (projet académique ? client ?)"
+    ]
+  },
+  {
+    "slug": "multi-market",
+    "order": 10,
+    "featured": false,
+    "title": {
+      "fr": "Multi-Market — mémoire de Licence",
+      "en": "Multi-Market — Bachelor's thesis"
+    },
+    "client": "UCAD",
+    "location": "Dakar",
+    "year": 2025,
+    "categories": [
+      "web",
+      "ia"
+    ],
+    "role": {
+      "fr": "Conception et développement complets (mémoire)",
+      "en": "End-to-end design and development (thesis)"
+    },
+    "status": "delivered",
+    "statusNote": null,
+    "summary": {
+      "fr": "Plateforme commerciale multi-boutiques : stock multi-dépôts avec codes-barres, point de vente, facturation, paiements mobiles et tableaux de bord en temps réel.",
+      "en": "Multi-shop commerce platform: multi-warehouse stock with barcodes, point of sale, invoicing, mobile payments and real-time dashboards."
+    },
+    "context": {
+      "fr": "Des commerçants gèrent plusieurs points de vente sans outil commun pour les ventes, le stock et les revenus.",
+      "en": "Merchants run several points of sale without a common tool for sales, stock and revenue."
+    },
+    "mission": {
+      "fr": "Centraliser la gestion multi-boutiques et aider à décider grâce à l'automatisation et au calcul assisté des bénéfices.",
+      "en": "Centralise multi-shop management and support decisions through automation and assisted profit calculation."
+    },
+    "actions": [
+      {
+        "fr": "J'ai conçu le système et ses trois interfaces : administrateur, entrepreneur, client.",
+        "en": "I designed the system and its three interfaces: administrator, entrepreneur, customer."
+      },
+      {
+        "fr": "J'ai développé l'API Django (PostgreSQL/PostGIS, Redis, Celery, Channels) et l'interface React (TypeScript, Redux Toolkit, Tailwind, PWA).",
+        "en": "I built the Django API (PostgreSQL/PostGIS, Redis, Celery, Channels) and the React interface (TypeScript, Redux Toolkit, Tailwind, PWA)."
+      },
+      {
+        "fr": "J'ai intégré le stock multi-dépôts avec codes-barres, le point de vente, la facturation et les paiements mobiles (Wave, Orange Money).",
+        "en": "I integrated multi-warehouse stock with barcodes, the point of sale, invoicing and mobile payments (Wave, Orange Money)."
+      },
+      {
+        "fr": "J'ai documenté le déploiement sur Render et les procédures de test.",
+        "en": "I documented the Render deployment and the test procedures."
+      }
+    ],
+    "features": [
+      {
+        "fr": "Stock multi-dépôts avec codes-barres et QR",
+        "en": "Multi-warehouse stock with barcodes and QR"
+      },
+      {
+        "fr": "Point de vente tactile",
+        "en": "Touch point of sale"
+      },
+      {
+        "fr": "Facturation",
+        "en": "Invoicing"
+      },
+      {
+        "fr": "CRM clients",
+        "en": "Customer CRM"
+      },
+      {
+        "fr": "Paiements mobiles (Wave, Orange Money)",
+        "en": "Mobile payments (Wave, Orange Money)"
+      },
+      {
+        "fr": "Tableaux de bord temps réel",
+        "en": "Real-time dashboards"
+      }
+    ],
+    "technical": [
+      {
+        "title": {
+          "fr": "Backend",
+          "en": "Backend"
+        },
+        "text": {
+          "fr": "Django 4.2 en 16 applications modulaires ; PostgreSQL/PostGIS ; Redis, Celery et Django Channels (WebSockets) ; JWT, OAuth2 et MFA.",
+          "en": "Django 4.2 in 16 modular apps; PostgreSQL/PostGIS; Redis, Celery and Django Channels (WebSockets); JWT, OAuth2 and MFA."
+        }
+      },
+      {
+        "title": {
+          "fr": "Frontend",
+          "en": "Frontend"
+        },
+        "text": {
+          "fr": "React 18 et TypeScript, Redux Toolkit, Tailwind CSS, Framer Motion ; PWA avec mode hors ligne.",
+          "en": "React 18 and TypeScript, Redux Toolkit, Tailwind CSS, Framer Motion; PWA with offline mode."
+        }
+      },
+      {
+        "title": {
+          "fr": "Rôles",
+          "en": "Roles"
+        },
+        "text": {
+          "fr": "Trois interfaces : administrateur, entrepreneur, client.",
+          "en": "Three interfaces: administrator, entrepreneur, customer."
+        }
+      },
+      {
+        "title": {
+          "fr": "Déploiement",
+          "en": "Deployment"
+        },
+        "text": {
+          "fr": "Docker et guides de déploiement Render ; jeux de données de test et scripts de maintenance des stocks.",
+          "en": "Docker and Render deployment guides; test datasets and stock maintenance scripts."
+        }
+      }
+    ],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "react",
+          "label": "React · PWA",
+          "kind": "front"
+        },
+        {
+          "id": "api",
+          "label": "Django 4.2 (16 apps)",
+          "kind": "api"
+        },
+        {
+          "id": "ws",
+          "label": "Channels · Celery",
+          "kind": "api"
+        },
+        {
+          "id": "pg",
+          "label": "PostgreSQL · PostGIS",
+          "kind": "db"
+        },
+        {
+          "id": "redis",
+          "label": "Redis",
+          "kind": "db"
+        }
+      ],
+      "links": [
+        {
+          "from": "react",
+          "to": "api"
+        },
+        {
+          "from": "api",
+          "to": "ws"
+        },
+        {
+          "from": "api",
+          "to": "pg"
+        },
+        {
+          "from": "ws",
+          "to": "redis"
+        }
+      ]
+    },
+    "stack": [
+      "Django",
+      "PostgreSQL",
+      "PostGIS",
+      "Redis",
+      "Celery",
+      "React",
+      "TypeScript",
+      "Redux",
+      "Tailwind CSS",
+      "Docker"
+    ],
+    "results": [
+      {
+        "value": "5",
+        "label": {
+          "fr": "points de vente gérés",
+          "en": "points of sale managed"
+        }
+      },
+      {
+        "value": "−60 %",
+        "label": {
+          "fr": "de ruptures de stock",
+          "en": "stock-outs"
+        }
+      },
+      {
+        "value": "16",
+        "label": {
+          "fr": "applications Django modulaires",
+          "en": "modular Django apps"
+        }
+      }
+    ],
+    "images": [],
+    "imageKind": "web",
+    "repo": "https://github.com/HULL-bit/Ocass-Digital",
+    "repoLabel": null,
+    "demo": null,
+    "accent": "#00C2A8",
+    "todo": [
+      "Confirmer que ce dépôt correspond au mémoire (le brief initial citait Spring, Flutter et MySQL)",
+      "Valider « 5 points de vente » et « −60 % de ruptures »"
+    ]
   }
 ]

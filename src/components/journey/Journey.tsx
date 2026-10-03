@@ -4,6 +4,7 @@ import { SectionHead } from '@/components/ui/SectionHead';
 import { period } from '@/lib/format';
 import { JourneyThread } from './JourneyThread';
 import { JourneyMap } from './JourneyMap';
+import { InView } from '@/components/ui/InView';
 
 export function Journey({ lang }: { lang: Lang }) {
   return (
@@ -25,6 +26,7 @@ export function Journey({ lang }: { lang: Lang }) {
             <JourneyThread />
           </div>
           <aside className="glass col-span-12 lg:col-span-4 journey-map-card">
+            <InView />
             <span className="card-label">Touba · Mbacké → Dakar</span>
             <JourneyMap from="Touba / Mbacké" to="Dakar" label={t(lang, 'journey.map')} />
             <p className="muted mono" style={{ fontSize: '0.8rem' }}>2022 → 2026</p>
