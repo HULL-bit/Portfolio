@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Link from 'next/link';
 import { withBase } from '@/lib/base';
 import { localePath } from '@/lib/site';
@@ -22,7 +23,7 @@ export function Hero({ lang }: { lang: Lang }) {
         <div>
           <p className="badge"><span className="dot" aria-hidden="true" />{t(lang, 'hero.available')} — {types}</p>
           <h1 id="hero-name" className="display hero-name">
-            {profile.name.split(' ').map((w) => <span key={w} className="hn-word">{w}</span>)}
+            {profile.name.split(' ').map((w, i) => <Fragment key={w}>{i ? ' ' : null}<span className="hn-word">{w}</span></Fragment>)}
           </h1>
           <p className="hero-title">{pick(profile.title, lang)} <span>{profile.stackLine}</span></p>
           <RoleCycler roles={profile.roles.map((r) => pick(r, lang))} />
