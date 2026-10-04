@@ -100,6 +100,14 @@
       }
     },
     {
+      "name": "gpu",
+      "usage": "gpu [on | off | auto]",
+      "description": {
+        "fr": "Qualité 3D : état, forcer, couper ou automatique",
+        "en": "3D quality: status, force, disable or auto"
+      }
+    },
+    {
       "name": "sudo",
       "usage": "sudo hire-me",
       "description": {
@@ -215,6 +223,22 @@
     "close": {
       "fr": "Fermer le terminal",
       "en": "Close terminal"
+    },
+    "gpuStatus": {
+      "fr": "3D : niveau « {tier} » — moteur de rendu : {renderer}{software} — mode : {mode}",
+      "en": "3D: tier “{tier}” — renderer: {renderer}{software} — mode: {mode}"
+    },
+    "gpuSoftware": {
+      "fr": " (logiciel : la 3D est coupée par défaut — tapez « gpu on » pour la forcer)",
+      "en": " (software: 3D is off by default — type “gpu on” to force it)"
+    },
+    "gpuSet": {
+      "fr": "Mode 3D « {mode} » enregistré. Rechargement…",
+      "en": "3D mode “{mode}” saved. Reloading…"
+    },
+    "usageGpu": {
+      "fr": "usage : gpu [on | off | auto]",
+      "en": "usage: gpu [on | off | auto]"
     }
   }
 }

@@ -1,6 +1,5 @@
 'use client';
-import { useRef, useState, type FormEvent } from 'react';
-import { z } from 'zod';
+import { useCallback, useRef, useState, type FormEvent } from 'react';
 import { track } from '@/lib/track';
 
 type Labels = {
@@ -9,11 +8,7 @@ type Labels = {
 };
 type Status = 'idle' | 'sending' | 'ok' | 'error' | 'mail';
 
-const schema = z.object({
-  name: z.string().trim().min(2),
-  email: z.email(),
-  message: z.string().trim().min(10).max(4000),
-});
+type SchemaModule = typeof import('./contact-schema');
 const ENDPOINT = 'https://api.web3forms.com/submit';
 
 /** Confettis de particules or : canvas 2D, ~1,6 s, sans dépendance. */
@@ -50,15 +45,20 @@ export function ContactForm({ labels, to }: { labels: Labels; to: string }) {
   const hp = useRef<HTMLInputElement>(null);
   const confetti = useRef<HTMLCanvasElement>(null);
 
-  const parsed = schema.safeParse(v);
-  const bad = new Set(parsed.success ? [] : parsed.error.issues.map((i) => String(i.path[0])));
+  // Zod est chargé à la première interaction avec le formulaire (focus), pas au chargement de la page
+  const [mod, setMod] = useState<SchemaModule | null>(null);
+  const loadSchema = useCallback(() => import('./contact-schema').then((m) => { setMod(m); return m; }), []);
+  const parsed = mod ? mod.schema.safeParse(v) : null;
+  const bad = new Set(parsed && !parsed.success ? parsed.error.issues.map((i) => String(i.path[0])) : []);
   const err = (k: 'name' | 'email' | 'message') => (touched[k] && bad.has(k) ? labels[k === 'name' ? 'errName' : k === 'email' ? 'errEmail' : 'errMessage'] : null);
   const mailto = `mailto:${to}?subject=${encodeURIComponent(labels.subject)}&body=${encodeURIComponent(`${v.message}\n\n— ${v.name} (${v.email})`)}`;
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setTouched({ name: true, email: true, message: true });
-    if (!parsed.success || status === 'sending') return;
+    let m: SchemaModule;
+    try { m = mod ?? (await loadSchema()); } catch { setStatus('error'); return; } // chargement impossible : on propose le repli e-mail
+    if (!m.schema.safeParse(v).success || status === 'sending') return;
     if (hp.current?.checked) { setStatus('ok'); return; } // honeypot : on fait semblant
     const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
     if (!key) { track('form-submit'); window.location.href = mailto; setStatus('mail'); return; } // repli mailto
@@ -92,7 +92,7 @@ export function ContactForm({ labels, to }: { labels: Labels; to: string }) {
           <canvas ref={confetti} className="confetti" aria-hidden="true" />
         </div>
       ) : (
-        <form className="term-body" onSubmit={onSubmit} noValidate>
+        <form className="term-body" onSubmit={onSubmit} onFocusCapture={() => { void loadSchema(); }} noValidate>
           <p className="term-intro">{labels.intro}</p>
           {(['name', 'email', 'message'] as const).map((k) => {
             const id = `f-${k}`;

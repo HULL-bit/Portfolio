@@ -65,6 +65,25 @@ for (const p of projects) {
   });
 }
 
+// ── Mise en page bureau : le nom du héros et la navigation ne débordent jamais ──
+await check('Héros et navigation : aucun débordement de 390 à 2560 px', async () => {
+  for (const [w, h] of [[390, 844], [768, 1024], [1100, 760], [1240, 720], [1366, 768], [1536, 864], [1920, 1080], [2560, 1440]]) {
+    await page.setViewportSize({ width: w, height: h });
+    await page.goto(`${origin}/fr/`, { waitUntil: 'networkidle' });
+    const r = await page.evaluate(() => {
+      const range = document.createRange();
+      const right = Math.max(...[...document.querySelectorAll('.hn-word')].map((e) => { range.selectNodeContents(e.firstChild); return range.getBoundingClientRect().right; }));
+      const col = document.querySelector('.hero-grid > div').getBoundingClientRect();
+      const nav = document.querySelector('.nav-inner');
+      return { right, colRight: col.right, navOverflow: nav.scrollWidth > nav.clientWidth + 1, hscroll: document.documentElement.scrollWidth > innerWidth + 1 };
+    });
+    ok(r.right <= r.colRight + 1, `${w}px : le nom déborde de sa colonne (${Math.round(r.right)} > ${Math.round(r.colRight)})`);
+    ok(!r.navOverflow, `${w}px : la navigation déborde`);
+    ok(!r.hscroll, `${w}px : défilement horizontal parasite`);
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+});
+
 // ── Cursus ──
 await check('Cursus : 5 domaines, Oracle 19c, SQL Server, C#, .NET', async () => {
   await page.goto(`${origin}/fr/`, { waitUntil: 'networkidle' });
@@ -121,6 +140,20 @@ await check('Terminal : touche `, help, ls projects, open, Échap', async () => 
   await page.waitForURL(/\/projets\/blue-track\/$/, { timeout: 8000 });
 });
 
+// ── Commande gpu (diagnostic et forçage de la 3D) ──
+await check('Terminal : gpu (état), gpu on / auto (forçage mémorisé)', async () => {
+  await page.goto(`${origin}/fr/`, { waitUntil: 'networkidle' });
+  await page.evaluate(() => localStorage.removeItem('diaw:gpu'));
+  await page.keyboard.press('`');
+  await page.waitForSelector('.terminal.is-open', { timeout: 8000 });
+  await page.keyboard.type('gpu'); await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.querySelector('.terminal-out')?.textContent?.includes('niveau'), null, { timeout: 8000 });
+  await page.keyboard.type('gpu on'); await page.keyboard.press('Enter');
+  await page.waitForFunction(() => localStorage.getItem('diaw:gpu') === 'force', null, { timeout: 5000 });
+  await page.waitForLoadState('load');
+  await page.evaluate(() => localStorage.removeItem('diaw:gpu'));
+});
+
 // ── Thème ──
 await check('Thème : bascule clair / sombre mémorisée', async () => {
   await page.goto(`${origin}/fr/`, { waitUntil: 'networkidle' });
@@ -129,6 +162,8 @@ await check('Thème : bascule clair / sombre mémorisée', async () => {
   await page.reload({ waitUntil: 'networkidle' });
   ok(await page.locator('html').getAttribute('data-theme') === 'light', 'thème non mémorisé');
   await page.locator('.nav-tools button[aria-pressed]').click();
+  ok(await page.locator('html').getAttribute('data-theme') === null, 'le retour au thème sombre ne fonctionne pas');
+  ok(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme) === 'dark', 'color-scheme: dark attendu');
 });
 
 // ── Formulaire ──
@@ -136,6 +171,7 @@ await check('Formulaire : validation en direct et repli mailto', async () => {
   await page.goto(`${origin}/fr/`, { waitUntil: 'networkidle' });
   await page.locator('#contact').scrollIntoViewIfNeeded();
   await page.locator('button[type=submit]').click();
+  await page.waitForFunction(() => document.querySelectorAll('.term-err').length === 3, null, { timeout: 5000 }).catch(() => {});
   ok((await page.locator('.term-err').count()) === 3, 'les 3 erreurs de validation sont attendues');
   await page.fill('#f-name', 'Awa Ndiaye');
   await page.fill('#f-email', 'awa@example.com');

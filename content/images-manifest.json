@@ -47,6 +47,18 @@
       ]
     }
   },
+  "g-services": {
+    "uml": {
+      "width": 3061,
+      "height": 1584,
+      "widths": [
+        480,
+        800,
+        1200,
+        2400
+      ]
+    }
+  },
   "ocrystal": {
     "home": {
       "width": 1440,

@@ -17,11 +17,13 @@ export function Hero({ lang }: { lang: Lang }) {
     <section id="hero" className="hero" aria-labelledby="hero-name">
       <Motif name="rosace" variant="circuit" className="hero-rosace" />
       <HeroLoader label={t(lang, 'a11y.canvasHero')} />
-      <HeroFx name={profile.name} />
+      <HeroFx />
       <div className="wrap hero-grid">
         <div>
           <p className="badge"><span className="dot" aria-hidden="true" />{t(lang, 'hero.available')} — {types}</p>
-          <h1 id="hero-name" className="display hero-name">{profile.name}</h1>
+          <h1 id="hero-name" className="display hero-name">
+            {profile.name.split(' ').map((w) => <span key={w} className="hn-word">{w}</span>)}
+          </h1>
           <p className="hero-title">{pick(profile.title, lang)} <span>{profile.stackLine}</span></p>
           <RoleCycler roles={profile.roles.map((r) => pick(r, lang))} />
           <ul className="hero-roles">

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { DUR, EASE, STAGGER, finePointer, prefersReduced } from '@/lib/motion';
 import { runtime, scrollToTarget } from '@/lib/runtime';
+import { whenIdleOrInteract } from '@/lib/defer';
 
 /**
  * Moteur d'animation : Lenis (défilement) + GSAP (ScrollTrigger, SplitText).
@@ -82,7 +83,7 @@ export function MotionProvider() {
         splitText = mod.SplitText;
         return splitText;
       };
-      const show = (el: HTMLElement) => { el.style.visibility = 'visible'; };
+      const show = (el: HTMLElement) => { el.style.opacity = '1'; };
       const splitIo = new IntersectionObserver(
         (entries) => {
           for (const e of entries) {
@@ -158,12 +159,11 @@ export function MotionProvider() {
         nav?.classList.remove('is-hidden');
       };
     };
-    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
-    const idle = w.requestIdleCallback ? w.requestIdleCallback(() => { start(); }, { timeout: 1200 }) : (setTimeout(start, 400) as unknown as number);
+    const cancel = whenIdleOrInteract(() => { start(); }, 1200);
 
     return () => {
       disposed = true;
-      w.cancelIdleCallback?.(idle);
+      cancel();
       teardown?.();
     };
   }, [pathname]);

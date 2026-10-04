@@ -136,7 +136,7 @@ export const projectSchema = z.object({
   results: z.array(z.object({ value: z.string(), label: L })).max(3),
   /** Noms des captures dans content-images/<slug>/ (déclinées dans public/images/projects/<slug>/). */
   images: z.array(z.string()),
-  imageKind: z.enum(['web', 'mobile']).default('web'),
+  imageKind: z.enum(['web', 'mobile', 'diagram']).default('web'),
   repo: z.url().nullable(),
   repoLabel: L.nullable().default(null),
   demo: z.url().nullable(),

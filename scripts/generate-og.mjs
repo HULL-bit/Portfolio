@@ -23,7 +23,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&l
 const card = ({ eyebrow, title, sub, accent = '#3D5AFE', chips = [] }) => `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Clash;font-weight:700;src:url(${font('ClashDisplay-Bold.woff2')})}
 @font-face{font-family:Sat;font-weight:500;src:url(${font('Satoshi-Medium.woff2')})}
-@font-face{font-family:Mono;font-weight:500;src:url(${font('jetbrains-mono-latin-500-normal.woff2')})}
+@font-face{font-family:Mono;font-weight:500;src:url(${font('jetbrains-mono-latin-400-normal.woff2')})}
 *{box-sizing:border-box;margin:0}
 body{width:1200px;height:630px;background:#05060A;color:#F5F7FF;position:relative;overflow:hidden;font-family:Sat}
 .glow{position:absolute;inset:0;background:radial-gradient(700px 420px at 85% 10%,${accent}66,transparent 70%),radial-gradient(600px 400px at 0% 100%,#7C3AED44,transparent 70%)}

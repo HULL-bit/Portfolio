@@ -167,7 +167,9 @@
     "noSite": "Not deployed yet",
     "repoPublic": "Public repository",
     "details": "Technical details",
-    "schematic": "Schematic preview"
+    "schematic": "Schematic preview",
+    "diagramCaption": "G-SERVICES UML class diagram: about 28 classes, 2 packages (GestServices, GestUser).",
+    "openFull": "Open the diagram full size"
   },
   "skills": {
     "primary": "PRIMARY",

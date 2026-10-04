@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { prefersReduced } from '@/lib/motion';
+import { whenIdleOrInteract } from '@/lib/defer';
 
 type Geo = { h: number; d: string; pads: { x: number; y: number; section: string }[] };
 const X = [12, 30];
@@ -38,14 +39,15 @@ export function CircuitRail() {
       setGeo({ h, d, pads });
     };
     setGeo(null);
-    const first = setTimeout(build, 60);
+    let started = false;
+    const first = whenIdleOrInteract(() => { started = true; build(); }, 1600);
     let t: ReturnType<typeof setTimeout>;
-    const onResize = () => { clearTimeout(t); t = setTimeout(build, 250); };
+    const onResize = () => { if (!started) return; clearTimeout(t); t = setTimeout(build, 250); };
     window.addEventListener('resize', onResize);
     const ro = new ResizeObserver(onResize);
     const mainEl = document.getElementById('main');
     if (mainEl) ro.observe(mainEl);
-    return () => { clearTimeout(first); clearTimeout(t); window.removeEventListener('resize', onResize); ro.disconnect(); };
+    return () => { first(); clearTimeout(t); window.removeEventListener('resize', onResize); ro.disconnect(); };
   }, [pathname]);
 
   useEffect(() => {

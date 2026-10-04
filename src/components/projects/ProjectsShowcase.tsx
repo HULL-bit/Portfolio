@@ -11,6 +11,8 @@ export type ShowcaseItem = {
   technical: { title: string; text: string }[]; results: { value: string; label: string }[];
   stack: string[]; categories: Category[]; accent: string; href: string; demo: string | null; repo: string | null; repoLabel: string | null;
   media: ReactNode;
+  /** Le média contient déjà un lien (ex. diagramme « ouvrir en grand ») : on ne l'enveloppe pas dans un second <a> (imbrication invalide). */
+  mediaHasLink?: boolean;
 };
 export type ShowcaseLabels = {
   filters: Record<'all' | Category, string>; filterLabel: string; clearTech: string; techFilter: string; shown: string; open: string; visit: string;
@@ -71,7 +73,11 @@ export function ProjectsShowcase({ items, labels }: { items: ShowcaseItem[]; lab
         {featured.map((it, i) => (
           <article key={it.slug} className={`pj${i % 2 ? ' is-flip' : ''}`} data-pj data-cats={it.categories.join(' ')} data-stack={it.stack.join('|')} style={{ ['--accent' as string]: it.accent }}>
             <div className="pj-media">
-              <a href={withBase(it.href)} tabIndex={-1} aria-hidden="true" className="pj-media-link" data-cursor="open">{it.media}</a>
+              {it.mediaHasLink ? (
+                <div className="pj-media-link">{it.media}</div>
+              ) : (
+                <a href={withBase(it.href)} tabIndex={-1} aria-hidden="true" className="pj-media-link" data-cursor="open">{it.media}</a>
+              )}
             </div>
             <div className="pj-body">
               <div className="pj-top">

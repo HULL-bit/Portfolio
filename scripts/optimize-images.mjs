@@ -49,7 +49,9 @@ if (existsSync('content-images')) {
       const src = join(dir, f);
       const name = basename(f, extname(f));
       const meta = await sharp(src).metadata();
-      const widths = [...new Set([...WIDTHS.filter((w) => w < (meta.width ?? 0)), Math.min(meta.width ?? 1200, 1200)])].sort((a, b) => a - b);
+      // les diagrammes (uml*, diagram*) gardent une résolution plus élevée pour rester lisibles au zoom
+      const maxW = /^(uml|diagram)/i.test(name) ? 2400 : 1200;
+      const widths = [...new Set([...WIDTHS, 1200, 2400].filter((w) => w < (meta.width ?? 0) && w <= maxW).concat(Math.min(meta.width ?? 1200, maxW)))].sort((a, b) => a - b);
       const outDir = join('public/images/projects', slug);
       mkdirSync(outDir, { recursive: true });
       for (const w of widths) {

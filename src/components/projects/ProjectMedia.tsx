@@ -3,7 +3,7 @@ import type { Lang } from '@/lib/i18n';
 import type { Project } from '@/lib/schemas';
 import { BrowserFrame } from './BrowserFrame';
 import { LiquidVisual } from './LiquidVisual';
-import { ProjectShot } from './ProjectShot';
+import { ProjectShot, shotHref } from './ProjectShot';
 
 /**
  * Visuel d'un projet : vraie capture dans une maquette navigateur (sites en ligne), captures d'application (mobile),
@@ -20,6 +20,17 @@ export function ProjectMedia({ project, lang, sizes, eager = false }: { project:
             <ProjectShot key={name} slug={project.slug} name={name} alt={`${alt} (${i + 1}/${project.images.length})`} sizes={sizes} eager={eager && i === 0} />
           ))}
         </div>
+      );
+    }
+    if (project.imageKind === 'diagram') {
+      const name = project.images[0]!;
+      const href = shotHref(project.slug, name);
+      const img = <ProjectShot slug={project.slug} name={name} alt={t(lang, 'projects.diagramCaption')} sizes={sizes} eager={eager} />;
+      return (
+        <figure className="diagram">
+          {href ? <a href={href} target="_blank" rel="noopener" className="diagram-link" aria-label={t(lang, 'projects.openFull')} data-cursor="view">{img}</a> : img}
+          <figcaption>{t(lang, 'projects.diagramCaption')}</figcaption>
+        </figure>
       );
     }
     return (

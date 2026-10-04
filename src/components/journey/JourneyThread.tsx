@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Motif } from '@/components/ui/Motif';
 import { prefersReduced } from '@/lib/motion';
+import { whenIdleOrInteract } from '@/lib/defer';
 
 type Geo = { h: number; d: string; pts: { x: number; y: number }[] };
 
@@ -35,10 +36,11 @@ export function JourneyThread() {
       setGeo({ h: wrap.offsetHeight, d, pts });
       wrap.classList.add('thread-live');
     };
-    const t = setTimeout(build, 80);
-    const ro = new ResizeObserver(() => build());
+    let started = false; // le ResizeObserver déclenche un premier appel immédiat : on l'ignore tant que la construction différée n'a pas eu lieu
+    const cancel = whenIdleOrInteract(() => { started = true; build(); }, 1600);
+    const ro = new ResizeObserver(() => { if (started) build(); });
     ro.observe(wrap);
-    return () => { clearTimeout(t); ro.disconnect(); wrap.classList.remove('thread-live'); };
+    return () => { cancel(); ro.disconnect(); wrap.classList.remove('thread-live'); };
   }, [pathname]);
 
   useEffect(() => {

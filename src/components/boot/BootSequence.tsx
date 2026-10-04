@@ -62,7 +62,7 @@ function sampleText(el: HTMLElement, count: number): Float32Array | null {
 }
 
 /**
- * Boot sequence (≈ 1 s), première visite de l'accueil uniquement. Surcouche : le HTML du Hero est déjà dans la page.
+ * Boot sequence (≈ 0,65 s : le premier écran recruteur reste lisible en moins de 700 ms), première visite de l'accueil uniquement. Surcouche : le HTML du Hero est déjà dans la page.
  * La chronologie visuelle (logs, barre ASCII, ACCESS GRANTED + glitch 150 ms, fondu) est entièrement en CSS : elle part
  * du premier rendu et ne dépend pas de l'hydratation. Le JS ajoute l'implosion en particules, « Passer » et la mémorisation.
  */
@@ -91,8 +91,8 @@ export function BootSequence({ labels }: { labels: { welcome: string; skip: stri
     const end = () => { html.classList.remove('booting'); };
 
     if (prefersReduced()) { finish(false); end(); return; }
-    timers.push(setTimeout(() => finish(true), left(720)));   // implosion : texte → particules
-    timers.push(setTimeout(end, left(1000)));                   // fin du boot
+    timers.push(setTimeout(() => finish(true), left(480)));   // implosion : texte → particules
+    timers.push(setTimeout(end, left(660)));                    // fin du boot (premier écran lisible en < 0,7 s)
     const btn = el.querySelector<HTMLButtonElement>('.boot-skip');
     const skip = () => { finish(false); end(); };
     btn?.addEventListener('click', skip);

@@ -27,3 +27,10 @@ export function ProjectShot({ slug, name, alt, sizes, eager = false, className }
     </picture>
   );
 }
+
+/** URL (JPEG) de la plus grande déclinaison d'une capture : cible du lien « ouvrir en grand » des diagrammes. */
+export function shotHref(slug: string, name: string): string | null {
+  const m = getShot(slug, name);
+  if (!m) return null;
+  return withBase(`/images/projects/${slug}/${name}-${m.widths[m.widths.length - 1]}.jpg`);
+}

@@ -1464,6 +1464,16 @@
       },
       {
         "title": {
+          "fr": "Modélisation UML",
+          "en": "UML modelling"
+        },
+        "text": {
+          "fr": "Diagramme de classes d'environ 28 classes en 2 paquetages (GestServices, GestUser) avec classes d'association : géographie (continent → ville), services, produits et articles, stocks par lots, personnes, rôles, profils et permissions.",
+          "en": "Class diagram of about 28 classes in 2 packages (GestServices, GestUser) with association classes: geography (continent to city), services, products and articles, batch stock, people, roles, profiles and permissions."
+        }
+      },
+      {
+        "title": {
           "fr": "Persistance",
           "en": "Persistence"
         },
@@ -1584,8 +1594,10 @@
         }
       }
     ],
-    "images": [],
-    "imageKind": "web",
+    "images": [
+      "uml"
+    ],
+    "imageKind": "diagram",
     "repo": "https://github.com/HULL-bit/G-Services",
     "repoLabel": null,
     "demo": null,

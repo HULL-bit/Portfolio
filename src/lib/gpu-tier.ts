@@ -3,7 +3,7 @@ export type Tier = 'high' | 'mid' | 'low';
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-type GpuInfo = { webgl2: boolean; software: boolean };
+type GpuInfo = { webgl2: boolean; software: boolean; renderer: string };
 const SOFTWARE = /swiftshader|llvmpipe|software|basic render|softpipe/i;
 
 /**
@@ -13,7 +13,7 @@ const SOFTWARE = /swiftshader|llvmpipe|software|basic render|softpipe/i;
 function probeInWorker(): Promise<GpuInfo | null> {
   return new Promise((resolve) => {
     if (typeof OffscreenCanvas === 'undefined' || typeof Worker === 'undefined') return resolve(null);
-    const code = `self.onmessage=function(){try{var c=new OffscreenCanvas(1,1);var gl=c.getContext('webgl2');if(!gl){postMessage({webgl2:false,software:true});return}var e=gl.getExtension('WEBGL_debug_renderer_info');var r=e?String(gl.getParameter(e.UNMASKED_RENDERER_WEBGL)):'';postMessage({webgl2:true,software:/${SOFTWARE.source}/i.test(r)})}catch(x){postMessage({webgl2:false,software:true})}}`;
+    const code = `self.onmessage=function(){try{var c=new OffscreenCanvas(1,1);var gl=c.getContext('webgl2');if(!gl){postMessage({webgl2:false,software:true,renderer:''});return}var e=gl.getExtension('WEBGL_debug_renderer_info');var r=e?String(gl.getParameter(e.UNMASKED_RENDERER_WEBGL)):'';postMessage({webgl2:true,software:/${SOFTWARE.source}/i.test(r),renderer:r})}catch(x){postMessage({webgl2:false,software:true,renderer:''})}}`;
     let url = '';
     try {
       url = URL.createObjectURL(new Blob([code], { type: 'text/javascript' }));
@@ -30,23 +30,36 @@ function probeInWorker(): Promise<GpuInfo | null> {
 function probeOnMainThread(): GpuInfo {
   try {
     const gl = document.createElement('canvas').getContext('webgl2');
-    if (!gl) return { webgl2: false, software: true };
+    if (!gl) return { webgl2: false, software: true, renderer: '' };
     const ext = gl.getExtension('WEBGL_debug_renderer_info');
     const r = ext ? String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)) : '';
     gl.getExtension('WEBGL_lose_context')?.loseContext();
-    return { webgl2: true, software: SOFTWARE.test(r) };
-  } catch { return { webgl2: false, software: true }; }
+    return { webgl2: true, software: SOFTWARE.test(r), renderer: r };
+  } catch { return { webgl2: false, software: true, renderer: '' }; }
 }
 
 let info: Promise<GpuInfo> | null = null;
 const gpuInfo = (): Promise<GpuInfo> => (info ??= probeInWorker().then((r) => r ?? probeOnMainThread()));
 
-/** Forçage pour les tests/démos : `?gpu=force` ou localStorage `diaw:gpu=force`. */
-function forced(): boolean {
-  try { return new URLSearchParams(location.search).get('gpu') === 'force' || localStorage.getItem('diaw:gpu') === 'force'; } catch { return false; }
-}
+export type GpuOverride = 'force' | 'low' | null;
+const OVERRIDE_KEY = 'diaw:gpu';
 
-/** Verdict immédiat (sans mesure) : permet de ne même pas télécharger les chunks 3D sur un appareil « low ». */
+/**
+ * Choix manuel de la qualité 3D : `?gpu=force` / `?gpu=low` dans l'URL, ou la valeur mémorisée (commande `gpu on|off|auto`
+ * du terminal). `force` active la 3D même sur un rendu logiciel ; `low` coupe tout le WebGL (replis HTML/CSS).
+ */
+export function gpuOverride(): GpuOverride {
+  try {
+    const q = new URLSearchParams(location.search).get('gpu');
+    const v = q ?? localStorage.getItem(OVERRIDE_KEY);
+    return v === 'force' || v === 'low' ? v : null;
+  } catch { return null; }
+}
+export function setGpuOverride(v: GpuOverride) {
+  try { if (v) localStorage.setItem(OVERRIDE_KEY, v); else localStorage.removeItem(OVERRIDE_KEY); } catch { /* stockage indisponible */ }
+}
+const forced = () => gpuOverride() === 'force';
+
 let quick: Promise<Tier> | null = null;
 
 /** Verdict sans mesure de FPS : permet de ne même pas télécharger les chunks 3D sur un appareil « low ». */
@@ -54,7 +67,7 @@ export function quickTier(): Promise<Tier> {
   if (typeof window === 'undefined') return Promise.resolve('low');
   return (quick ??= (async () => {
     const g = await gpuInfo();
-    if (!g.webgl2) return 'low';
+    if (gpuOverride() === 'low' || !g.webgl2) return 'low';
     if (!forced() && g.software) return 'low';
     const nav = navigator as Navigator & { deviceMemory?: number };
     const memory = nav.deviceMemory ?? 4;
@@ -96,4 +109,10 @@ export function getGpuTier(): Promise<Tier> {
     return tier;
   })();
   return cached;
+}
+
+/** Diagnostic lisible (commande `gpu` du terminal) : moteur de rendu détecté, mode choisi, niveau retenu. */
+export async function gpuDiagnostics() {
+  const g = await gpuInfo();
+  return { webgl2: g.webgl2, software: g.software, renderer: g.renderer || '—', override: gpuOverride(), tier: await quickTier() };
 }

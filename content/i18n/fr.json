@@ -167,7 +167,9 @@
     "noSite": "Pas encore déployé",
     "repoPublic": "Dépôt public",
     "details": "Détails techniques",
-    "schematic": "Aperçu schématique"
+    "schematic": "Aperçu schématique",
+    "diagramCaption": "Diagramme de classes UML de G-SERVICES : environ 28 classes, 2 paquetages (GestServices, GestUser).",
+    "openFull": "Ouvrir le diagramme en grand"
   },
   "skills": {
     "primary": "PRINCIPAL",

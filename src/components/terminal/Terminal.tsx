@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 're
 import { usePathname, useRouter } from 'next/navigation';
 import { runtime, scrollToTarget } from '@/lib/runtime';
 import { toggleTheme } from '@/lib/theme';
+import { gpuDiagnostics, setGpuOverride } from '@/lib/gpu-tier';
 import { track } from '@/lib/track';
 
 export type TerminalData = {
@@ -19,7 +20,7 @@ export type TerminalData = {
   neofetchInfo: string[];
   cv: { href: string; lines: string[] };
   contact: { label: string; value: string; href?: string }[];
-  msg: { sudoPassword: string; sudoGranted: string; notFound: string; unknownProject: string; usageLang: string; opening: string; themeToggled: string; langTo: string; download: string };
+  msg: { sudoPassword: string; sudoGranted: string; notFound: string; unknownProject: string; usageLang: string; gpuStatus: string; gpuSoftware: string; gpuSet: string; usageGpu: string; opening: string; themeToggled: string; langTo: string; download: string };
   home: string;
   nextLang: { fr: string; en: string };
   labels: { title: string; close: string };
@@ -127,6 +128,20 @@ export function Terminal({ data, initialOpen = false }: { data: TerminalData; in
         print([{ text: data.msg.langTo.replace('{lang}', arg), kind: 'ok' }]);
         const rest = pathname.replace(/^\/(fr|en)/, '');
         setTimeout(() => { setOpen(false); router.push(`/${arg}${rest || '/'}`); }, 350);
+        break;
+      }
+      case 'gpu': {
+        const modes = { on: 'force', off: 'low', auto: null } as const;
+        if (arg && !(arg in modes)) { print([{ text: data.msg.usageGpu, kind: 'err' }]); break; }
+        if (arg) {
+          setGpuOverride(modes[arg as keyof typeof modes]);
+          print([{ text: data.msg.gpuSet.replace('{mode}', arg), kind: 'ok' }]);
+          setTimeout(() => window.location.reload(), 700);
+          break;
+        }
+        gpuDiagnostics().then((g) =>
+          print([{ text: data.msg.gpuStatus.replace('{tier}', g.tier).replace('{renderer}', g.renderer).replace('{software}', g.software && g.override !== 'force' ? data.msg.gpuSoftware : '').replace('{mode}', g.override ?? 'auto'), kind: 'ok' }]),
+        );
         break;
       }
       case 'theme': toggleTheme(); print([{ text: data.msg.themeToggled, kind: 'ok' }]); break;

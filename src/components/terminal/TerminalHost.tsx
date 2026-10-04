@@ -37,6 +37,7 @@ export function TerminalHost({ lang }: { lang: Lang }) {
       sudoPassword: r('sudoPassword', lang) as string, sudoGranted: r('sudoGranted', lang) as string, notFound: r('notFound', lang) as string,
       unknownProject: r('unknownProject', lang) as string, usageLang: r('usageLang', lang) as string, opening: r('opening', lang) as string,
       themeToggled: r('themeToggled', lang) as string, langTo: r('langTo', lang) as string, download: r('download', lang) as string,
+      gpuStatus: r('gpuStatus', lang) as string, gpuSoftware: r('gpuSoftware', lang) as string, gpuSet: r('gpuSet', lang) as string, usageGpu: r('usageGpu', lang) as string,
     },
     home: localePath(lang),
     nextLang: { fr: 'en', en: 'fr' },

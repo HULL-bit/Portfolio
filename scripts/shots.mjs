@@ -21,12 +21,15 @@ const args = process.argv.slice(2);
 // --at=#projects,.hscroll@1500 (décalage en px après l'ancre) : captures du viewport après défilement jusqu'à ces ancres
 const at = (args.find((a) => a.startsWith('--at=')) ?? '').slice(5).split(',').filter(Boolean);
 const only = (args.find((a) => a.startsWith('--only=')) ?? '').slice(7);
+// --width=1920 --height=1080 : taille de la fenêtre « desktop » (défaut 1440×900)
+const dw = Number((args.find((a) => a.startsWith('--width=')) ?? '').slice(8)) || 1440;
+const dh = Number((args.find((a) => a.startsWith('--height=')) ?? '').slice(9)) || 900;
 const argPaths = args.filter((a) => !a.startsWith('--'));
 const paths = argPaths.length ? argPaths : ['/fr/', '/en/'];
 await mkdir('.screenshots', { recursive: true });
 const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', '--enable-webgl'] });
 const errors = [];
-for (const [name, w, h, mobile] of [['desktop', 1440, 900, false], ['mobile', 390, 844, true]].filter(([n]) => !only || n === only)) {
+for (const [name, w, h, mobile] of [['desktop', dw, dh, false], ['mobile', 390, 844, true]].filter(([n]) => !only || n === only)) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: mobile, deviceScaleFactor: 1 });
   await ctx.addInitScript(({ boot, theme }) => { localStorage.setItem('diaw:gpu', 'force'); if (theme) localStorage.setItem('diaw:theme', theme); if (!boot) localStorage.setItem('diaw:booted', '1'); }, { boot: process.env.BOOT === '1', theme: process.env.THEME ?? '' });
   const page = await ctx.newPage();
