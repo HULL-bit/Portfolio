@@ -101,10 +101,21 @@
       ]
     }
   },
+  "w-hub": {
+    "home": {
+      "width": 1905,
+      "height": 956,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    }
+  },
   "wagadu-africa": {
     "home": {
-      "width": 1440,
-      "height": 2400,
+      "width": 1905,
+      "height": 956,
       "widths": [
         480,
         800,

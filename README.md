@@ -148,11 +148,11 @@ Générés par `npm run todos` (à relancer après chaque modification des conte
 ### Projet « Wagadu Hub — portail interne de l'ONG »
 - [ ] Chiffres de tests à actualiser (issus de docs/roadmap.md)
 - [ ] Le dépôt public contient le cahier des charges de l'ONG : vérifier qu'il peut rester public
-- [ ] Pas de capture : application interne à accès restreint
+- [ ] Capture limitée à la page d'accueil publique du Hub (les écrans internes, à accès restreint, ne sont pas montrés) : autorisation de l'ONG d'afficher cette capture à confirmer
 
 ### Projet « Site de l'ONG Wagadu Africa »
 - [ ] Confirmer l'année et le périmètre exact (réalisation vs administration)
-- [ ] Autorisation d'afficher la capture (photos de personnes sur l'accueil)
+- [ ] Autorisation de l'ONG d'afficher la capture de l'accueil (version anglaise, sans visage)
 
 ### Projet « Daara Barakatul Mahaahidi — plateforme de gestion »
 - [ ] CONFIDENTIALITÉ : le dépôt public DBM contient des photos de membres (backend/media/photos_membres) — données personnelles à retirer de l'historique ou dépôt à passer en privé avant de le lier
