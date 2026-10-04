@@ -395,7 +395,7 @@ html.menu-open { overflow: hidden; }
 .tech-item:hover .tech-name { color: var(--gold); -webkit-text-stroke-color: var(--gold); }
 
 /* Rail de circuit (marge gauche, écrans larges) */
-.rail { display: none; position: absolute; left: 0.8rem; top: 0; pointer-events: none; z-index: 0; overflow: visible; }
+.rail { display: none; position: absolute; left: max(0.8rem, calc((100% - 1360px) / 2 - 3.2rem)); top: 0; pointer-events: none; z-index: 0; overflow: visible; }
 .section { z-index: 1; }
 @media (min-width: 1180px) { .rail { display: block; } }
 .rail-ghost { fill: none; stroke: rgba(61, 90, 254, 0.18); stroke-width: 1.5; }
@@ -813,3 +813,7 @@ html { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--indigo) 
   ::-webkit-scrollbar-thumb { background: rgba(61, 90, 254, 0.55); border-radius: 8px; border: 2px solid var(--bg); }
 }
 input:-webkit-autofill, textarea:-webkit-autofill { -webkit-text-fill-color: var(--text); caret-color: var(--cyan); transition: background-color 9999s ease-out; }
+
+/* Titres géants : un mot ne se coupe jamais (il peut déborder du conteneur, par conception, jusqu'au bord de l'écran) */
+.split-word { white-space: nowrap; }
+.section-title, .curriculum-title, .project-title { overflow-wrap: normal; word-break: keep-all; }

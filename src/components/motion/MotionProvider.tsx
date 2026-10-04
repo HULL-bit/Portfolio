@@ -95,7 +95,7 @@ export function MotionProvider() {
                 if (disposed || !ST) return show(el);
                 if (el.hasAttribute('data-title')) {
                   ST.create(el, {
-                    type: 'chars,words', mask: 'chars', maskClass: 'split-mask', autoSplit: true,
+                    type: 'chars,words', mask: 'chars', maskClass: 'split-mask', wordsClass: 'split-word', autoSplit: true,
                     onSplit: (self) => {
                       show(el);
                       return gsap.from(self.chars, { yPercent: 115, duration: DUR.reveal * 1.15, ease: EASE.out, stagger: STAGGER.chars });
