@@ -472,6 +472,7 @@
     "demo": "https://ocrystale.com/",
     "accent": "#4DA3FF",
     "todo": [
+      "CONFIDENTIALITÉ : le dépôt public contient docs/brand-source/Cahier_des_charges_OCrystal.docx — vérifier que ce document client peut être public",
       "Confirmer le rôle exact et l'année",
       "Autorisation d'afficher la marque et la capture d'O'Crystal"
     ]
@@ -1123,6 +1124,7 @@
     "demo": "https://darabarakatulmahahidi.online/",
     "accent": "#3DDC84",
     "todo": [
+      "CONFIDENTIALITÉ : le dépôt public DBM contient des photos de membres (backend/media/photos_membres) — données personnelles à retirer de l'historique ou dépôt à passer en privé avant de le lier",
       "Nombre d'utilisateurs (100+ ou 500+)",
       "Autorisation d'afficher la capture de la daara"
     ]
@@ -1369,7 +1371,7 @@
     "demo": null,
     "accent": "#FF2E88",
     "todo": [
-      "Le dépôt GitHub HULL-bit/DGAP est public (projet d'État) : décider s'il doit être lié ou rendu privé",
+      "CONFIDENTIALITÉ : le dépôt public DGAP contient files/Cahier des charges DGAP.docx et docs/imgs (photos institutionnelles de personnels de l'administration pénitentiaire) — à passer en privé ; ces photos ne sont PAS utilisées dans le portfolio",
       "Le brief initial citait Spring et Oracle : à confirmer (le dépôt montre Django, React, PostgreSQL)",
       "Volumes (candidats, inscriptions) à renseigner après déploiement"
     ]
@@ -1795,6 +1797,7 @@
     "demo": "https://baaxil-xadiim-1.onrender.com/#/admin",
     "accent": "#D4AF37",
     "todo": [
+      "CONFIDENTIALITÉ : le dépôt public BAAXIL-XADIIM contient des photos de membres (backend/media/photos_membres) et des images WhatsApp — à retirer de l'historique ou dépôt à passer en privé",
       "Le service Render répond actuellement « Service Suspended » : le réactiver (ou retirer le lien)"
     ]
   },
@@ -2196,6 +2199,7 @@
     "demo": null,
     "accent": "#00C2A8",
     "todo": [
+      "CONFIDENTIALITÉ : le dépôt public Ocass-Digital contient MOTS_DE_PASSE.md (comptes de test) et backend/db.sqlite3 — à retirer de l'historique ou passer le dépôt en privé avant de le lier depuis le portfolio",
       "Confirmer que ce dépôt correspond au mémoire (le brief initial citait Spring, Flutter et MySQL)",
       "Valider « 5 points de vente » et « −60 % de ruptures »"
     ]

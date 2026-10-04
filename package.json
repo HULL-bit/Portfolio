@@ -8,11 +8,14 @@
     "prebuild": "node scripts/fetch-github.mjs && node scripts/optimize-images.mjs && node scripts/sample-portrait.mjs && node scripts/generate-og.mjs",
     "build": "next build",
     "postbuild": "node scripts/check-static.mjs",
-    "preview": "npx serve out",
+    "preview": "node scripts/serve.mjs",
     "lint": "eslint src",
     "shots": "node scripts/shots.mjs",
     "a11y": "node scripts/audit-a11y.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "todos": "node scripts/list-todos.mjs",
+    "lhci:desktop": "lhci autorun --config=lighthouserc.desktop.json --collect.url=http://localhost:4010${NEXT_PUBLIC_BASE_PATH}/fr/ --collect.url=http://localhost:4010${NEXT_PUBLIC_BASE_PATH}/fr/cv/",
+    "lhci:mobile": "lhci autorun --config=lighthouserc.mobile.json --collect.url=http://localhost:4011${NEXT_PUBLIC_BASE_PATH}/fr/"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",

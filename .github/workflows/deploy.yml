@@ -1,0 +1,59 @@
+name: Build & deploy (GitHub Pages)
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *' # chaque nuit à 02:00 UTC : rafraîchit les données GitHub du site
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # GitHub Pages « projet » : /nom-du-dépôt. Avec un domaine personnalisé, créer la variable USE_CUSTOM_DOMAIN=true.
+      NEXT_PUBLIC_BASE_PATH: ${{ vars.USE_CUSTOM_DOMAIN == 'true' && '' || format('/{0}', github.event.repository.name) }}
+      NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
+      NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
+      NEXT_PUBLIC_GOATCOUNTER: ${{ vars.GOATCOUNTER_CODE }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium # génération des images Open Graph + tests
+      - run: npm run lint
+      - run: npm run build # prebuild (GitHub, images, portrait, OG) → next build → check-static
+      - name: Tests de fumée et accessibilité (sous le basePath)
+        run: |
+          BASE_PATH="$NEXT_PUBLIC_BASE_PATH" npm run smoke
+          npm run a11y
+      - name: Lighthouse CI — desktop (échec sous 85)
+        run: npm run lhci:desktop
+      - name: Lighthouse CI — mobile
+        run: npm run lhci:mobile
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

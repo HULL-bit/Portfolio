@@ -13,7 +13,7 @@ Ce fichier est relu à chaque étape. Le prompt complet fait foi pour les détai
 
 ## Stack
 Next.js 15 (App Router) · React 19 · TypeScript `strict` · Tailwind v4 + variables CSS · three / @react-three/fiber / drei / postprocessing · GSAP 3.13+ (ScrollTrigger, SplitText, ScrambleText, DrawSVG, MorphSVG) · Lenis · Framer Motion (transitions de page, layout) · GLSL maison · Zod (contenus validés au build) · sharp (images, portrait) · ESLint, Prettier, Playwright, Lighthouse CI.
-Polices auto-hébergées `woff2` dans `public/fonts` : Clash Display (titres), Satoshi (texte), JetBrains Mono (code). `font-display: swap`, préchargement des 2 graisses critiques.
+Polices auto-hébergées `woff2` dans `public/fonts` : Clash Display Bold (titres, 600→700), Satoshi Regular/Medium (texte), JetBrains Mono 400 (code, 400→500). `font-display: swap`, préchargement des 3 fichiers critiques, **polices de secours à métriques ajustées** (`scripts/font-metrics.mjs`, `FontFaces.tsx`) pour un CLS nul.
 
 ## Design tokens (`src/styles/globals.css`)
 ```
@@ -50,23 +50,28 @@ Mode jour : fond #F3F1EA, texte #0A0D18, mêmes accents.
 - Pas de son. Pas de backend « pour plus tard ». Pas de bibliothèque de composants à look de template.
 - Mots-clés SEO/ATS intégrés naturellement : Administrateur Linux, DBA Oracle, PL/SQL, Django, React, Spring Boot, Full-Stack, Dakar, Sénégal…
 
+## Architecture (décisions à respecter)
+- **Tout est rendu côté serveur** ; le JS n'ajoute que des couches. Pour les gros blocs (section Projets, boot, bandeaux), préférer du HTML serveur + un **îlot client minuscule** qui rend `null` (ex. `ProjectsFilter`, `LiquidBehavior`) plutôt qu'un gros arbre client à hydrater. Jamais de `<a>` dans un `<a>` (erreur d'hydratation #418).
+- Révélations = CSS + IntersectionObserver (classe `.in`) ; GSAP seulement pour SplitText (chargé à l'approche), Lenis, DrawSVG. Titres masqués par `opacity` (jamais `visibility`). Moteur d'animation différé (`src/lib/defer.ts`).
+- Nom du héros dimensionné en `cqw` (colonne), pas en `vw`. Mots des titres géants insécables (`.split-word`). Tester 390→2560 px (`npm run smoke` vérifie les débordements).
+- Aucun effet de mise en page dans les animations (scramble du nom sur une couche superposée).
+- GPU : rendu logiciel = tier `low` (pas de WebGL). Forçage : `?gpu=force` ou commande terminal `gpu on`.
+- Projets : `content/projects.json` (statut, `technical[]`, liens, `images`/`imageKind`) ; captures dans `content-images/<slug>/`. Les projets sans capture utilisent un visuel schématique SVG, étiqueté comme tel.
+- Contenu sensible : ne jamais utiliser les photos de personnes des dépôts clients (ex. `docs/imgs` du dépôt DGAP) ; signaler les dépôts publics exposant des données (voir TODO « CONFIDENTIALITÉ »).
+
 ## Arborescence
-`content/` (JSON + i18n) · `public/{cv,images,fonts,data,og}` · `scripts/` (fetch-github, optimize-images, sample-portrait, generate-og, check-static) · `src/app/[lang]/…` · `src/components/{boot,hero,about,marquee,experience,projects,skills,journey,github,contact,three,terminal,cursor,transitions,nav,ui}` · `src/lib` · `src/shaders` · `deploy/nginx.conf` · `.github/workflows/deploy.yml`.
+`content/` (JSON + i18n) · `content-images/` (captures sources) · `public/{cv,images,fonts,data,og}` · `scripts/` (fetch-github, optimize-images, sample-portrait, generate-og, check-static, smoke, audit-a11y, shots, serve, font-metrics, capture-project-shots, list-todos) · `src/app/[lang]/…` · `src/components/…` · `src/lib` · `src/shaders` · `deploy/nginx.conf` · `.github/workflows/deploy.yml` · `lighthouserc.*.json`.
 
-## Commandes (à créer dans `package.json`)
+## Commandes
 ```
-npm run dev        # next dev
-npm run build      # prebuild (github, images, portrait, og) → next build → postbuild (check-static)
-npm run preview    # npx serve out
-npm run lint
-npm run shots      # Playwright : .screenshots/ desktop 1440 + mobile 390
+npm run dev | build | preview | lint
+npm run smoke      # tests de fumée Playwright (BASE_PATH=/x sous un basePath)
+npm run a11y       # axe-core, thèmes sombre et clair
+npm run shots      # captures dans .screenshots/ (--width, --only, --at)
+npm run todos      # liste des TODO: confirmer
+npm run lhci:desktop | lhci:mobile
 ```
-Test sous basePath : `NEXT_PUBLIC_BASE_PATH=/portfolio npm run build`.
+Test sous basePath : `NEXT_PUBLIC_BASE_PATH=/portfolio npm run build && BASE_PATH=/portfolio npm run smoke`.
 
-## Méthode (10 étapes, 1 commit chacune `feat(zone): …`)
-1 init/static/tokens/polices · 2 contenus + Zod + i18n + prebuild · 3 layout + sections HTML/CSS sans animation · 4 motif brodé, logo, grain, fond shader · 5 motion (Lenis, GSAP, compteurs, bandeaux, curseur) · 6 Hero particules + replis + boot · 7 projets horizontaux + pages projet + transitions · 8 baie 3D, fil du parcours, GitHub, contact · 9 vue express CV + print, barre mobile, terminal, easter egg, mode clair, mesure · 10 audit final.
-À chaque étape : `npm run build` sans erreur/avertissement TS, `preview`, captures Playwright regardées, correction si pas au niveau. **On ne passe pas à l'étape suivante si le build casse ou si les captures déçoivent.**
-
-## État du dépôt au démarrage
-- Ancien projet Replit supprimé dans l'arbre de travail (`artifacts/`, `.replit`…), non committé : repartir d'une base propre.
-- Sources fournies : `profil/profil.jpeg`, `cv/*.pdf` (7 versions, à trancher), à déplacer/copier vers `public/` par script.
+## Statut
+Les 10 étapes sont réalisées. Avant tout commit : `npm run lint`, `npm run build`, `npm run smoke`. Reste : TODO de contenu (README) et décisions de confidentialité sur les dépôts publics.
