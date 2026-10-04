@@ -12,14 +12,16 @@ import { CircuitRail } from '@/components/motion/CircuitRail';
 import { profile, t } from '@/lib/content';
 import { withBase } from '@/lib/base';
 import { MobileBar } from '@/components/ui/MobileBar';
-import { BackgroundLoader } from '@/components/three/BackgroundLoader';
+import { Nebula } from '@/components/ui/Nebula';
+import { NebulaTint } from '@/components/ui/NebulaTint';
 
 export default async function SiteLayout({ children, params }: { children: ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
   return (
     <div id="top">
-      <BackgroundLoader />
+      <Nebula />
+      <NebulaTint />
       <Grain />
       <FaviconState />
       <MotionProvider />

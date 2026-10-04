@@ -25,6 +25,7 @@ export function Cursor({ labels }: { labels: Labels }) {
 
     const onMove = (e: PointerEvent) => {
       pos.x = e.clientX; pos.y = e.clientY;
+      if (!raf) raf = requestAnimationFrame(loop);
       if (!visible) { visible = true; ringPos.x = pos.x; ringPos.y = pos.y; root.classList.add('cursor-on'); }
       const el = (e.target as HTMLElement | null)?.closest<HTMLElement>('a, button, summary, [data-cursor], input, textarea, [role="button"]') ?? null;
       if (el !== target) {
@@ -37,6 +38,7 @@ export function Cursor({ labels }: { labels: Labels }) {
       }
     };
     const onLeave = () => { visible = false; root.classList.remove('cursor-on'); };
+    let still = 0;
     const loop = () => {
       raf = requestAnimationFrame(loop);
       let tx = pos.x, ty = pos.y;
@@ -52,13 +54,17 @@ export function Cursor({ labels }: { labels: Labels }) {
       if (dot.current) dot.current.style.transform = `translate3d(${pos.x}px,${pos.y}px,0)`;
       if (ring.current) ring.current.style.transform = `translate3d(${ringPos.x}px,${ringPos.y}px,0)`;
       let px = pos.x, py = pos.y;
+      let delta = Math.abs(ringPos.x - tx) + Math.abs(ringPos.y - ty);
       trailPos.forEach((p, i) => {
         p.x += (px - p.x) * (0.34 - i * 0.04);
         p.y += (py - p.y) * (0.34 - i * 0.04);
         const el = trailEls[i];
         if (el) el.style.transform = `translate3d(${p.x}px,${p.y}px,0)`;
+        delta += Math.abs(p.x - pos.x) + Math.abs(p.y - pos.y);
         px = p.x; py = p.y;
       });
+      // au repos (souris immobile) la boucle s'arrête : plus aucune image forcée à 60 fps
+      if (delta < 0.6) { if (++still > 20) { cancelAnimationFrame(raf); raf = 0; still = 0; } } else still = 0;
     };
     raf = requestAnimationFrame(loop);
     window.addEventListener('pointermove', onMove, { passive: true });

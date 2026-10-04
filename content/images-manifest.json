@@ -1,4 +1,15 @@
 {
+  "baaxil-xadiim": {
+    "home": {
+      "width": 1909,
+      "height": 880,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    }
+  },
   "blue-track": {
     "home": {
       "width": 1440,
@@ -44,6 +55,26 @@
       "widths": [
         480,
         528
+      ]
+    }
+  },
+  "dgap-senegal": {
+    "home": {
+      "width": 1848,
+      "height": 800,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    },
+    "intranet": {
+      "width": 1848,
+      "height": 938,
+      "widths": [
+        480,
+        800,
+        1200
       ]
     }
   },

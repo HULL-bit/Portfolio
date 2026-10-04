@@ -185,7 +185,7 @@ export default function SkillsRack({ domains, labels, tier, visible }: { domains
   return (
     <div ref={wrap} className="rack-stage" data-cursor="view">
       <div className="rack-canvas" role="img" aria-label={labels.list}>
-        <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0.5, 8.6], fov: 32 }} gl={{ alpha: true, antialias: tier === 'high', powerPreference: 'high-performance' }} frameloop={visible ? 'always' : 'never'}>
+        <Canvas dpr={[1, 1.4]} camera={{ position: [0, 0.5, 8.6], fov: 32 }} gl={{ alpha: true, antialias: tier === 'high', powerPreference: 'high-performance' }} frameloop={visible ? 'always' : 'never'}>
           <Rig domains={domains} ctl={ctl} tier={tier} wrap={wrap} />
           {tier === 'high' ? <EffectComposer multisampling={0}><Bloom intensity={1.0} luminanceThreshold={0.35} luminanceSmoothing={0.3} mipmapBlur /></EffectComposer> : null}
         </Canvas>

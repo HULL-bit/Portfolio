@@ -8,13 +8,14 @@ type Geo = { h: number; d: string; pads: { x: number; y: number; section: string
 const X = [12, 30];
 
 /**
- * Piste de circuit dans la marge gauche : relie les sections, se dessine au scroll (DrawSVG, scrub)
+ * Piste de circuit dans la marge gauche : relie les sections, se révèle au scroll (scrub, transforms seulement)
  * et allume une pastille de soudure à chaque section atteinte. Décoratif, desktop large uniquement.
  */
 export function CircuitRail() {
   const [geo, setGeo] = useState<Geo | null>(null);
-  const pathRef = useRef<SVGPathElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const maskRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<SVGSVGElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -51,16 +52,27 @@ export function CircuitRail() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!geo || !pathRef.current || !svgRef.current) return;
+    const wrap = wrapRef.current, mask = maskRef.current, line = lineRef.current;
+    if (!geo || !wrap || !mask || !line) return;
     let kill = () => {};
     let off = false;
     (async () => {
-      const [{ gsap }, { ScrollTrigger }, { DrawSVGPlugin }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger'), import('gsap/DrawSVGPlugin')]);
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')]);
       if (off) return;
-      gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+      gsap.registerPlugin(ScrollTrigger);
+      // Le tracé n'est pas redessiné : une fenêtre (masque) descend en `transform` pendant que son contenu remonte d'autant.
+      // Deux calques composités, zéro rastérisation à chaque image.
+      const H = geo.h;
+      const place = (p: number) => {
+        const y = Math.round(p * H);
+        mask.style.transform = `translate3d(0, ${y - H}px, 0)`;
+        line.style.transform = `translate3d(0, ${H - y}px, 0)`;
+      };
+      place(0);
       const ctx = gsap.context(() => {
-        gsap.fromTo(pathRef.current, { drawSVG: '0%' }, { drawSVG: '100%', ease: 'none', scrollTrigger: { trigger: '#main', start: 'top 70%', end: 'bottom bottom', scrub: 0.7 } });
-        svgRef.current!.querySelectorAll<SVGCircleElement>('.rail-pad').forEach((pad) => {
+        const prog = { p: 0 };
+        gsap.to(prog, { p: 1, ease: 'none', onUpdate: () => place(prog.p), scrollTrigger: { trigger: '#main', start: 'top 70%', end: 'bottom bottom', scrub: 0.7 } });
+        wrap.querySelectorAll<SVGCircleElement>('.rail-pad').forEach((pad) => {
           ScrollTrigger.create({ trigger: `#${pad.dataset.section}`, start: 'top 62%', onEnter: () => pad.classList.add('lit'), onLeaveBack: () => pad.classList.remove('lit') });
         });
       });
@@ -70,11 +82,16 @@ export function CircuitRail() {
   }, [geo]);
 
   if (!geo) return null;
+  const box = { width: 44, height: geo.h, viewBox: `0 0 44 ${geo.h}`, focusable: 'false' as const };
   return (
-    <svg ref={svgRef} className="rail" width={44} height={geo.h} viewBox={`0 0 44 ${geo.h}`} aria-hidden="true" focusable="false">
-      <path className="rail-ghost" d={geo.d} />
-      <path ref={pathRef} className="rail-line" d={geo.d} />
-      {geo.pads.map((p) => <circle key={p.section} className="rail-pad" data-section={p.section} cx={p.x} cy={p.y} r={4.5} />)}
-    </svg>
+    <div ref={wrapRef} className="rail" style={{ width: 44, height: geo.h }} aria-hidden="true">
+      <svg className="rail-svg" {...box}><path className="rail-ghost" d={geo.d} /></svg>
+      <div ref={maskRef} className="rail-mask">
+        <svg ref={lineRef} className="rail-svg rail-line-svg" {...box}><path className="rail-line" d={geo.d} /></svg>
+      </div>
+      <svg className="rail-svg" {...box}>
+        {geo.pads.map((p) => <circle key={p.section} className="rail-pad" data-section={p.section} cx={p.x} cy={p.y} r={4.5} />)}
+      </svg>
+    </div>
   );
 }

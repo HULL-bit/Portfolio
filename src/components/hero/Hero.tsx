@@ -6,7 +6,6 @@ import { pick, profile, t } from '@/lib/content';
 import type { Lang } from '@/lib/i18n';
 import { Picture } from '@/components/ui/Picture';
 import { Motif } from '@/components/ui/Motif';
-import { HeroLoader } from './HeroLoader';
 import { HeroFx } from './HeroFx';
 import { RoleCycler } from './RoleCycler';
 import { HeroStatus } from './HeroStatus';
@@ -17,7 +16,6 @@ export function Hero({ lang }: { lang: Lang }) {
   return (
     <section id="hero" className="hero" aria-labelledby="hero-name">
       <Motif name="rosace" variant="circuit" className="hero-rosace" />
-      <HeroLoader label={t(lang, 'a11y.canvasHero')} />
       <HeroFx />
       <div className="wrap hero-grid">
         <div>
@@ -51,8 +49,8 @@ export function Hero({ lang }: { lang: Lang }) {
         </div>
         <div className="duo-wrap">
           <Motif name="rosace" variant="embroidery" className="duo-ring" />
-          <figure className="duotone">
-            <Picture name="profil" alt={t(lang, 'a11y.portrait')} sizes="(min-width: 960px) 30rem, 90vw" width={800} height={1067} eager />
+          <figure className="toon">
+            <Picture name="hero-cartoon" alt={t(lang, 'a11y.portrait')} sizes="(min-width: 960px) 30rem, 90vw" width={800} height={1067} eager />
           </figure>
         </div>
       </div>

@@ -3,9 +3,9 @@
 Site **100 % statique** (Next.js 15 en `output: 'export'`), bilingue FR/EN, servable par n'importe quel serveur de fichiers (GitHub Pages, Nginx, `npx serve out`). Aucun serveur Node en production.
 
 - Premier écran en HTML pur (nom, titre, disponibilité, 3 preuves chiffrées, CV, contact), avant toute 3D.
-- Trois grands moments : le **Hero** (portrait en particules, boot), les **Projets**, les **Compétences** (baie de serveurs 3D). Le reste est sobre.
+- Trois grands moments : le **Hero** (portrait illustré façon bande dessinée, boot), les **Projets**, les **Compétences** (baie de serveurs 3D). Le reste est sobre.
 - Vue express recruteur `/fr/cv/` : CV d'une page en HTML pur, imprimable (A4).
-- Thèmes sombre (par défaut) et clair, terminal intégré (touche `` ` ``), repli HTML/CSS sans WebGL.
+- Thèmes sombre (par défaut) et clair, terminal intégré (touche `` ` ``), aucun WebGL hors baie 3D des compétences (fond en images WebP, rapide partout).
 
 ## Installation
 
@@ -30,7 +30,7 @@ cp .env.example .env.local        # puis renseigner les variables (toutes facult
 | Commande | Effet |
 |---|---|
 | `npm run dev` | Serveur de développement. |
-| `npm run build` | `prebuild` (données GitHub, images AVIF/WebP/JPEG, portrait en particules, images OG) → `next build` → `postbuild` (`check-static`). |
+| `npm run build` | `prebuild` (données GitHub, portrait illustré, images AVIF/WebP/JPEG, fonds nébuleuse, images OG) → `next build` → `postbuild` (`check-static`). |
 | `npm run preview` | Sert `out/` sur http://localhost:4010 (`--base /sous-dossier` pour simuler GitHub Pages). |
 | `npm run lint` | ESLint. |
 | `npm run smoke` | Tests de fumée Playwright (pages, filtres, terminal, thème, formulaire, 404, mobile, débordements 390→2560 px). `BASE_PATH=/portfolio npm run smoke` sous un basePath. |
@@ -57,7 +57,7 @@ Tout le contenu est dans `content/` (JSON validé par Zod à chaque build : une 
 | Un **texte** d'interface | `content/i18n/fr.json` et `en.json` (mêmes clés des deux côtés) |
 | Les commandes et réponses du terminal | `content/terminal.json` |
 | Le **CV** | remplacer `public/cv/CV-Souleymane-DIAW-FR.pdf` / `-EN.pdf` ; la vue express `/fr/cv/` se génère depuis les JSON |
-| La photo | `profil/profil.jpeg` (+ `profil/profil-detoure.png` facultatif, utilisé automatiquement pour le portrait en particules) |
+| La photo | `profil/profil.jpeg` ; le portrait illustré du Hero (`profil/hero-cartoon.png`) en est généré par `scripts/cartoonize-portrait.mjs` (aplats, traits d'encre, fond aux couleurs du site ; `--k=8` règle le nombre d'aplats) |
 
 Les captures des sites en production se rafraîchissent avec `node scripts/capture-project-shots.mjs [slug…]` (réseau requis).
 
@@ -67,7 +67,7 @@ Les captures des sites en production se rafraîchissent avec `node scripts/captu
 
 ### Qualité graphique (3D)
 
-`src/lib/gpu-tier.ts` classe l'appareil (`high`, `mid`, `low`). Un **rendu logiciel** (SwiftShader, llvmpipe — fréquent sous Linux sans accélération matérielle) coupe volontairement le WebGL : le site retombe sur ses replis HTML/CSS. Pour forcer la 3D : ouvrir `?gpu=force`, ou taper `gpu on` dans le terminal (`gpu` affiche le moteur détecté ; `gpu auto` revient au mode automatique).
+`src/lib/gpu-tier.ts` classe l'appareil (`high`, `mid`, `low`). Seule la baie de serveurs 3D (Compétences) utilise WebGL ; un **rendu logiciel** (SwiftShader, llvmpipe — fréquent sous Linux sans accélération matérielle) la coupe volontairement et le site retombe sur son repli HTML/CSS. Le fond (nébuleuse teintée selon la section) et le portrait sont des images : identiques sur mobile et desktop, sans coût GPU. `scripts/generate-bg.mjs` régénère les fonds ; `node scripts/perf-scroll.mjs [--gpu=force|low]` mesure la fluidité du défilement. Pour forcer la 3D : ouvrir `?gpu=force`, ou taper `gpu on` dans le terminal (`gpu` affiche le moteur détecté ; `gpu auto` revient au mode automatique).
 
 ## Déploiement
 
@@ -96,7 +96,7 @@ sudo nginx -t && sudo systemctl reload nginx
 - `src/app/[lang]/(site)/…` : accueil et pages projet ; `src/app/[lang]/cv/` : vue express ; `src/app/(root)/` : redirection `/` → `/fr/` ou `/en/`.
 - **Tout est rendu côté serveur (HTML statique)** ; le JavaScript n'ajoute que des couches (animations, 3D, terminal). Les parties lourdes (section Projets, boot, bandeaux) sont du HTML pur avec de minuscules « îlots » client (filtres, survol liquide) : rien de volumineux à hydrater.
 - Moteur d'animation (Lenis, GSAP) différé jusqu'à la première interaction ou ~1,2 s après le chargement ; 3D en import dynamique, jamais chargée sur un appareil `low`.
-- `prefers-reduced-motion` : ni boot, ni particules, ni transitions animées.
+- `prefers-reduced-motion` : ni boot, ni dérive du fond, ni transitions animées.
 - Polices de secours à métriques ajustées (`scripts/font-metrics.mjs`) : aucun décalage de mise en page au chargement des polices.
 
 ## Mesures (Lighthouse, build de production servi en local)
@@ -163,6 +163,7 @@ Générés par `npm run todos` (à relancer après chaque modification des conte
 - [ ] CONFIDENTIALITÉ : le dépôt public DGAP contient files/Cahier des charges DGAP.docx et docs/imgs (photos institutionnelles de personnels de l'administration pénitentiaire) — à passer en privé ; ces photos ne sont PAS utilisées dans le portfolio
 - [ ] Le brief initial citait Spring et Oracle : à confirmer (le dépôt montre Django, React, PostgreSQL)
 - [ ] Volumes (candidats, inscriptions) à renseigner après déploiement
+- [ ] Autorisation de la DGAP / du Ministère de la Justice d'afficher les captures de l'accueil et de l'intranet (application non déployée ; la capture d'intranet montre un compte de démonstration)
 
 ### Projet « G-SERVICES — services et produits géolocalisés »
 - [ ] Préciser le cadre (projet personnel, académique ?) et le client éventuel
@@ -170,6 +171,7 @@ Générés par `npm run todos` (à relancer après chaque modification des conte
 ### Projet « BAAXIL-XADIIM — plateforme Ahibahil Khadim »
 - [ ] CONFIDENTIALITÉ : le dépôt public BAAXIL-XADIIM contient des photos de membres (backend/media/photos_membres) et des images WhatsApp — à retirer de l'historique ou dépôt à passer en privé
 - [ ] Le service Render répond actuellement « Service Suspended » : le réactiver (ou retirer le lien)
+- [ ] Autorisation d'afficher la capture de la plateforme Ahibahil Khadim (tableau de bord d'administration)
 
 ### Projet « DeliverEat — livraison de repas à Dakar »
 - [ ] Préciser le cadre (projet académique ? client ?)

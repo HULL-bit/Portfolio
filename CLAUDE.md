@@ -34,7 +34,7 @@ Mode jour : fond #F3F1EA, texte #0A0D18, mêmes accents.
 - Micro 200–350 ms · révélations 700–1100 ms · transitions de page 900–1200 ms.
 - Un seul grand moment par écran. Ce qui bouge au scroll est lié au scroll (`scrub`), sauf révélations de texte.
 - Les « grands moments » sont **Hero, Projets, Compétences**. Le reste est sobre.
-- `prefers-reduced-motion` : pas de boot, pas de particules, pas de pin horizontal, fondu simple.
+- `prefers-reduced-motion` : pas de boot, pas de dérive du fond, pas de pin horizontal, fondu simple.
 
 ## Performance et accessibilité
 - Lighthouse ≥ 90 × 4 (desktop + mobile), LCP < 2,5 s, CLS < 0,05, INP < 200 ms. JS initial < 200 Ko gzip hors chunks 3D.
@@ -55,12 +55,15 @@ Mode jour : fond #F3F1EA, texte #0A0D18, mêmes accents.
 - Révélations = CSS + IntersectionObserver (classe `.in`) ; GSAP seulement pour SplitText (chargé à l'approche), Lenis, DrawSVG. Titres masqués par `opacity` (jamais `visibility`). Moteur d'animation différé (`src/lib/defer.ts`).
 - Nom du héros dimensionné en `cqw` (colonne), pas en `vw`. Mots des titres géants insécables (`.split-word`). Tester 390→2560 px (`npm run smoke` vérifie les débordements).
 - Aucun effet de mise en page dans les animations (scramble du nom sur une couche superposée).
-- GPU : rendu logiciel = tier `low` (pas de WebGL). Forçage : `?gpu=force` ou commande terminal `gpu on`.
+- GPU : seule la baie 3D (Compétences) utilise WebGL ; rendu logiciel = tier `low` (repli HTML). Forçage : `?gpu=force` ou commande terminal `gpu on`.
+- Fond = 4 images WebP « nébuleuse » (`scripts/generate-bg.mjs`, `src/components/ui/Nebula.tsx`, teinte par section via `NebulaTint`) : même rendu mobile et desktop, aucun shader. Pas de `backdrop-filter`, pas de `filter: drop-shadow` sur des éléments plein écran ou très hauts : ils coûtent à chaque image. Les éléments qui bougent au scroll doivent n'utiliser que `transform`/`opacity` (voir `CircuitRail`).
+- Portrait du Hero : illustration générée (`scripts/cartoonize-portrait.mjs` → `profil/hero-cartoon.png`), servie en `<picture>` ; plus de particules ni de boot en implosion.
+- Mesurer la fluidité : `node scripts/perf-scroll.mjs --gpu=low|force [--css="…"]` (rendu logiciel : valeurs relatives, comparer des variantes).
 - Projets : `content/projects.json` (statut, `technical[]`, liens, `images`/`imageKind`) ; captures dans `content-images/<slug>/`. Les projets sans capture utilisent un visuel schématique SVG, étiqueté comme tel.
 - Contenu sensible : ne jamais utiliser les photos de personnes des dépôts clients (ex. `docs/imgs` du dépôt DGAP) ; signaler les dépôts publics exposant des données (voir TODO « CONFIDENTIALITÉ »).
 
 ## Arborescence
-`content/` (JSON + i18n) · `content-images/` (captures sources) · `public/{cv,images,fonts,data,og}` · `scripts/` (fetch-github, optimize-images, sample-portrait, generate-og, check-static, smoke, audit-a11y, shots, serve, font-metrics, capture-project-shots, list-todos) · `src/app/[lang]/…` · `src/components/…` · `src/lib` · `src/shaders` · `deploy/nginx.conf` · `.github/workflows/deploy.yml` · `lighthouserc.*.json`.
+`content/` (JSON + i18n) · `content-images/` (captures sources) · `public/{cv,images,fonts,og}` · `scripts/` (fetch-github, cartoonize-portrait, optimize-images, generate-bg, generate-og, perf-scroll, check-static, smoke, audit-a11y, shots, serve, font-metrics, capture-project-shots, list-todos) · `src/app/[lang]/…` · `src/components/…` · `src/lib` · `deploy/nginx.conf` · `.github/workflows/deploy.yml` · `lighthouserc.*.json`.
 
 ## Commandes
 ```

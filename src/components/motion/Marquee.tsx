@@ -16,7 +16,6 @@ export function Marquee({ rows, label }: Props) {
     const el = root.current;
     if (!el || prefersReduced()) return;
     el.classList.add('is-live');
-    const rowsEl = Array.from(el.querySelectorAll<HTMLElement>('.marquee-row'));
     const tracks = Array.from(el.querySelectorAll<HTMLElement>('.marquee-track'));
     const state = tracks.map((t, i) => ({ t, x: 0, dir: i % 2 === 0 ? -1 : 1, base: i % 2 === 0 ? 55 : 42, w: 0 }));
     const measure = () => state.forEach((s) => { s.w = (s.t.firstElementChild as HTMLElement | null)?.offsetWidth ?? 0; if (s.dir > 0) s.x = -s.w; });
@@ -28,7 +27,6 @@ export function Marquee({ rows, label }: Props) {
     const io = new IntersectionObserver(([e]) => { visible = !!e?.isIntersecting; }, { rootMargin: '100px' });
     io.observe(el);
     let skew = 0;
-    let lastSkew = 0;
     let last = performance.now();
     let raf = 0;
     const loop = (now: number) => {
@@ -45,12 +43,8 @@ export function Marquee({ rows, label }: Props) {
         s.x += s.dir * s.base * boost * dt;
         if (s.dir < 0 && s.x <= -s.w) s.x += s.w;
         if (s.dir > 0 && s.x >= 0) s.x -= s.w;
-        s.t.style.transform = `translate3d(${s.x}px,0,0)`;
+        s.t.style.transform = `translate3d(${s.x}px,0,0) skewX(${skew.toFixed(2)}deg)`;
       });
-      if (Math.abs(skew) > 0.02 || lastSkew !== 0) {
-        rowsEl.forEach((r) => { r.style.transform = `skewX(${skew.toFixed(2)}deg)`; });
-        lastSkew = Math.abs(skew) > 0.02 ? skew : 0;
-      }
     };
     raf = requestAnimationFrame(loop);
     return () => { cancelAnimationFrame(raf); io.disconnect(); window.removeEventListener('resize', measure); el.classList.remove('is-live'); };

@@ -1137,7 +1137,7 @@
       "fr": "DGAP Sénégal — portail et socle SI",
       "en": "DGAP Senegal — portal and IS foundation"
     },
-    "client": "DGAP Sénégal",
+    "client": "DGAP — Ministère de la Justice",
     "location": "Sénégal",
     "year": 2026,
     "categories": [
@@ -1151,16 +1151,16 @@
     },
     "status": "in-progress",
     "statusNote": {
-      "fr": "Pas encore déployé",
-      "en": "Not deployed yet"
+      "fr": "En développement — pas encore déployé",
+      "en": "In development — not deployed yet"
     },
     "summary": {
-      "fr": "Refonte du portail de la Direction Générale de l'Administration Pénitentiaire et socle de son système d'information : portail, démarches en ligne, intranet et back-office.",
-      "en": "Overhaul of the portal of the Senegalese Prison Administration (DGAP) and the foundation of its information system: portal, online services, intranet and back-office."
+      "fr": "Refonte du portail de la Direction Générale de l'Administration Pénitentiaire (Ministère de la Justice) et socle de son système d'information : portail, démarches en ligne, intranet et back-office.",
+      "en": "Overhaul of the portal of the Directorate General of the Prison Administration (Ministry of Justice) and the foundation of its information system: portal, online services, intranet and back-office."
     },
     "context": {
-      "fr": "La DGAP veut remplacer son site actuel par un portail institutionnel moderne et poser un socle commun pour ses téléservices citoyens et ses outils internes, avec de fortes exigences de sécurité et d'accessibilité.",
-      "en": "The DGAP wants to replace its current website with a modern institutional portal and lay a common foundation for its citizen e-services and internal tools, with strong security and accessibility requirements."
+      "fr": "La Direction Générale de l'Administration Pénitentiaire (DGAP), rattachée au Ministère de la Justice du Sénégal, veut remplacer son site actuel par un portail institutionnel moderne et poser un socle commun pour ses téléservices citoyens et ses outils internes, avec de fortes exigences de sécurité et d'accessibilité.",
+      "en": "The Directorate General of the Prison Administration (DGAP), under the Senegalese Ministry of Justice, wants to replace its current website with a modern institutional portal and lay a common foundation for its citizen e-services and internal tools, with strong security and accessibility requirements."
     },
     "mission": {
       "fr": "Livrer, bloc par bloc, un socle sécurisé et réversible : quatre applications partageant une même API, un design system et une même chaîne de qualité.",
@@ -1364,7 +1364,10 @@
         }
       }
     ],
-    "images": [],
+    "images": [
+      "home",
+      "intranet"
+    ],
     "imageKind": "web",
     "repo": null,
     "repoLabel": null,
@@ -1373,7 +1376,8 @@
     "todo": [
       "CONFIDENTIALITÉ : le dépôt public DGAP contient files/Cahier des charges DGAP.docx et docs/imgs (photos institutionnelles de personnels de l'administration pénitentiaire) — à passer en privé ; ces photos ne sont PAS utilisées dans le portfolio",
       "Le brief initial citait Spring et Oracle : à confirmer (le dépôt montre Django, React, PostgreSQL)",
-      "Volumes (candidats, inscriptions) à renseigner après déploiement"
+      "Volumes (candidats, inscriptions) à renseigner après déploiement",
+      "Autorisation de la DGAP / du Ministère de la Justice d'afficher les captures de l'accueil et de l'intranet (application non déployée ; la capture d'intranet montre un compte de démonstration)"
     ]
   },
   {
@@ -1790,7 +1794,9 @@
         }
       }
     ],
-    "images": [],
+    "images": [
+      "home"
+    ],
     "imageKind": "web",
     "repo": "https://github.com/HULL-bit/BAAXIL-XADIIM",
     "repoLabel": null,
@@ -1798,7 +1804,8 @@
     "accent": "#D4AF37",
     "todo": [
       "CONFIDENTIALITÉ : le dépôt public BAAXIL-XADIIM contient des photos de membres (backend/media/photos_membres) et des images WhatsApp — à retirer de l'historique ou dépôt à passer en privé",
-      "Le service Render répond actuellement « Service Suspended » : le réactiver (ou retirer le lien)"
+      "Le service Render répond actuellement « Service Suspended » : le réactiver (ou retirer le lien)",
+      "Autorisation d'afficher la capture de la plateforme Ahibahil Khadim (tableau de bord d'administration)"
     ]
   },
   {

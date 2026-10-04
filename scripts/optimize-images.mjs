@@ -27,6 +27,7 @@ async function derive(src, outDir, name) {
 
 let total = 0;
 if (existsSync('profil/profil.jpeg')) total += await derive('profil/profil.jpeg', 'public/images/profil', 'profil');
+if (existsSync('profil/hero-cartoon.png')) total += await derive('profil/hero-cartoon.png', 'public/images/profil', 'hero-cartoon'); // portrait illustré du Hero (scripts/cartoonize-portrait.mjs)
 // Détourage : PNG transparent → WebP/AVIF transparents (pas de JPEG).
 if (existsSync('profil/profil-detoure.png')) {
   const src = 'profil/profil-detoure.png';
@@ -44,7 +45,7 @@ const manifest = {};
 if (existsSync('content-images')) {
   for (const slug of readdirSync('content-images')) {
     const dir = join('content-images', slug);
-    if (!statSync(dir).isDirectory()) continue;
+    if (slug.startsWith('_') || !statSync(dir).isDirectory()) continue; // « _source » : originaux non publiés
     for (const f of readdirSync(dir).filter((f) => /\.(jpe?g|png|webp)$/i.test(f)).sort()) {
       const src = join(dir, f);
       const name = basename(f, extname(f));
