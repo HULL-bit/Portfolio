@@ -29,7 +29,9 @@ export function FontFaces() {
       <link rel="preload" as="font" type="font/woff2" crossOrigin="" href={withBase('/fonts/ClashDisplay-Bold.woff2')} />
       <link rel="preload" as="font" type="font/woff2" crossOrigin="" href={withBase('/fonts/Satoshi-Regular.woff2')} />
       <link rel="preload" as="font" type="font/woff2" crossOrigin="" href={withBase('/fonts/jetbrains-mono-latin-400-normal.woff2')} />
+      <link rel="icon" href={withBase('/favicon.ico')} sizes="32x32" />
       <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+      <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
       <meta name="theme-color" content="#05060A" />
       <style dangerouslySetInnerHTML={{ __html: css }} />
     </>

@@ -20,9 +20,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # GitHub Pages « projet » : /nom-du-dépôt. Avec un domaine personnalisé, créer la variable USE_CUSTOM_DOMAIN=true.
-      NEXT_PUBLIC_BASE_PATH: ${{ vars.USE_CUSTOM_DOMAIN == 'true' && '' || format('/{0}', github.event.repository.name) }}
-      NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
+      # Domaine personnalisé www.souleymane-diaw.online : site à la racine. Pour tester sur l'URL « projet » de GitHub Pages
+      # (hull-bit.github.io/<dépôt>), créer la variable USE_CUSTOM_DOMAIN=false.
+      NEXT_PUBLIC_BASE_PATH: ${{ vars.USE_CUSTOM_DOMAIN == 'false' && format('/{0}', github.event.repository.name) || '' }}
+      NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://www.souleymane-diaw.online' }}
       NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
       NEXT_PUBLIC_GOATCOUNTER: ${{ vars.GOATCOUNTER_CODE }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

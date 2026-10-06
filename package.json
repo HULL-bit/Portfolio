@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-github.mjs && node scripts/cartoonize-portrait.mjs && node scripts/optimize-images.mjs && node scripts/generate-bg.mjs && node scripts/generate-og.mjs",
+    "prebuild": "node scripts/fetch-github.mjs && node scripts/generate-icons.mjs && node scripts/cartoonize-portrait.mjs && node scripts/optimize-images.mjs && node scripts/generate-bg.mjs && node scripts/generate-og.mjs",
     "build": "next build",
     "postbuild": "node scripts/check-static.mjs",
     "preview": "node scripts/serve.mjs",

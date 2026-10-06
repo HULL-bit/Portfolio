@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { BASE_PATH } from './base';
 import { LOCALES, type Lang } from './i18n';
 
-/** Origine publique du site (TODO: confirmer le domaine ; GitHub Pages par défaut). */
-export const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hull-bit.github.io';
+/** Origine publique du site : domaine officiel par défaut, `NEXT_PUBLIC_SITE_URL` pour le surcharger (sans slash final). */
+export const SITE_ORIGIN = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.souleymane-diaw.online').replace(/\/+$/, '');
 
 /** URL absolue d'un chemin du site (basePath inclus). */
 export const abs = (path: string) => `${SITE_ORIGIN}${BASE_PATH}${path}`;

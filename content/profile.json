@@ -181,7 +181,6 @@
   "todo": [
     "Chiffres clés : « 600+ utilisateurs », « 3 ans » et « 25+ technologies » à confirmer (« 4+ projets en production » est appuyé par 4 sites en ligne : Blue Track, O'Crystal, site Wagadu, Daara)",
     "CV EN : copie du CV FR en attendant une version anglaise",
-    "Adresse publique du site (NEXT_PUBLIC_SITE_URL) pour canonical, sitemap et Open Graph",
     "Autorisation d'utiliser les noms des organisations du bandeau « Ils m'ont fait confiance » (dont O'Crystal)"
   ]
 }

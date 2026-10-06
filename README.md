@@ -21,7 +21,7 @@ cp .env.example .env.local        # puis renseigner les variables (toutes facult
 |---|---|
 | `NEXT_PUBLIC_WEB3FORMS_KEY` | Clé publique [Web3Forms](https://web3forms.com) du formulaire de contact. Absente : repli `mailto:`. |
 | `NEXT_PUBLIC_BASE_PATH` | Sous-dossier de déploiement (GitHub Pages : `/nom-du-depot`). Vide à la racine d'un domaine. |
-| `NEXT_PUBLIC_SITE_URL` | URL publique (canonical, sitemap, Open Graph). |
+| `NEXT_PUBLIC_SITE_URL` | URL publique (canonical, sitemap, Open Graph). Par défaut : `https://www.souleymane-diaw.online`. |
 | `NEXT_PUBLIC_GOATCOUNTER` | Code [GoatCounter](https://www.goatcounter.com) (statistiques sans cookie). Absent : désactivé. |
 | `GITHUB_TOKEN` | Facultatif au build : évite la limite de l'API GitHub (en local, la session `gh auth login` est utilisée). |
 
@@ -74,7 +74,8 @@ Les captures des sites en production se rafraîchissent avec `node scripts/captu
 ### GitHub Pages
 
 1. Dépôt GitHub → **Settings → Pages → Source : GitHub Actions**.
-2. Facultatif — *Settings → Secrets and variables → Actions* : secret `WEB3FORMS_KEY` ; variables `SITE_URL`, `GOATCOUNTER_CODE`, et `USE_CUSTOM_DOMAIN=true` si le site est servi à la racine d'un domaine personnalisé (sinon le `basePath` vaut `/<nom-du-dépôt>`).
+2. Facultatif — *Settings → Secrets and variables → Actions* : secret `WEB3FORMS_KEY` ; variables `SITE_URL` (par défaut `https://www.souleymane-diaw.online`), `GOATCOUNTER_CODE`, et `USE_CUSTOM_DOMAIN=false` pour tester sur l'URL « projet » `hull-bit.github.io/<dépôt>` (le `basePath` vaut alors `/<nom-du-dépôt>` ; par défaut le site est à la racine du domaine).
+3. **Domaine** : *Settings → Pages → Custom domain* = `www.souleymane-diaw.online`, puis chez le registrar : `CNAME www → hull-bit.github.io` et, pour l'apex, quatre enregistrements `A` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` ; cocher « Enforce HTTPS » une fois le certificat émis. Tant que le DNS n'existe pas, le domaine ne répond pas (au 6 octobre 2026, le registre `.online` renvoie NXDOMAIN).
 3. Pousser sur `main` : `.github/workflows/deploy.yml` fait `npm ci`, lint, build, tests de fumée, audit axe, Lighthouse CI (desktop : échec sous 85), puis déploie avec `actions/deploy-pages`. Il se relance chaque nuit à 02:00 UTC.
 
 ### VPS Ubuntu (Nginx)
@@ -83,9 +84,9 @@ Les captures des sites en production se rafraîchissent avec `node scripts/captu
 npm ci && npm run build                      # build sans NEXT_PUBLIC_BASE_PATH (site à la racine du domaine)
 sudo apt install nginx libnginx-mod-http-brotli-filter libnginx-mod-http-brotli-static certbot python3-certbot-nginx
 sudo mkdir -p /var/www/diaw && sudo rsync -a --delete out/ /var/www/diaw/
-sudo cp deploy/nginx.conf /etc/nginx/sites-available/diaw     # remplacer « exemple.com » par le domaine
+sudo cp deploy/nginx.conf /etc/nginx/sites-available/diaw     # remplacer « exemple.com » par le domaine (déjà fait : `souleymane-diaw.online`)
 sudo ln -s /etc/nginx/sites-available/diaw /etc/nginx/sites-enabled/
-sudo certbot --nginx -d exemple.com -d www.exemple.com        # HTTPS Let's Encrypt + renouvellement automatique
+sudo certbot --nginx -d souleymane-diaw.online -d www.souleymane-diaw.online        # HTTPS Let's Encrypt + renouvellement automatique
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
@@ -120,7 +121,6 @@ Générés par `npm run todos` (à relancer après chaque modification des conte
 ### Profil
 - [ ] Chiffres clés : « 600+ utilisateurs », « 3 ans » et « 25+ technologies » à confirmer (« 4+ projets en production » est appuyé par 4 sites en ligne : Blue Track, O'Crystal, site Wagadu, Daara)
 - [ ] CV EN : copie du CV FR en attendant une version anglaise
-- [ ] Adresse publique du site (NEXT_PUBLIC_SITE_URL) pour canonical, sitemap et Open Graph
 - [ ] Autorisation d'utiliser les noms des organisations du bandeau « Ils m'ont fait confiance » (dont O'Crystal)
 
 ### Cursus
