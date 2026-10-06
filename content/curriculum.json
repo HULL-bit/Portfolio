@@ -1,11 +1,12 @@
 {
   "todo": [
     "Cursus : intitulés exacts des unités d'enseignement et répartition par année (Licence, Master 1, Master 2) à confirmer",
-    "Cursus : la mention « et d'autres » (langages, frameworks) attend la liste complète"
+    "Cursus : la mention « et d'autres » (langages, frameworks) attend la liste complète",
+    "Cursus : Big Data, MongoDB / NoSQL, machine learning et science des données — cours, outils (Spark, scikit-learn…) et projets à citer (aucun projet du portfolio ne les illustre encore)"
   ],
   "cvLine": {
-    "fr": "algorithmique, architecture des ordinateurs, mathématiques et algèbre, optique, réseaux et services IP, Oracle 19c, SQL Server, C# et .NET, sécurité et protocoles.",
-    "en": "algorithms, computer architecture, mathematics and algebra, optics, networks and IP services, Oracle 19c, SQL Server, C# and .NET, security and protocols."
+    "fr": "algorithmique, architecture des ordinateurs, mathématiques et algèbre, optique, réseaux et services IP, Oracle 19c, SQL Server, MongoDB et bases NoSQL, C# et .NET, Big Data, science des données et machine learning, sécurité et protocoles.",
+    "en": "algorithms, computer architecture, mathematics and algebra, optics, networks and IP services, Oracle 19c, SQL Server, MongoDB and NoSQL databases, C# and .NET, big data, data science and machine learning, security and protocols."
   },
   "domains": [
     {
@@ -154,7 +155,7 @@
     },
     {
       "id": "networks",
-      "span": 4,
+      "span": 3,
       "name": {
         "fr": "Réseaux",
         "en": "Networks"
@@ -186,14 +187,14 @@
     },
     {
       "id": "databases",
-      "span": 4,
+      "span": 3,
       "name": {
         "fr": "Bases de données",
         "en": "Databases"
       },
       "blurb": {
-        "fr": "Administration et programmation des bases relationnelles.",
-        "en": "Administration and programming of relational databases."
+        "fr": "Administration et programmation des bases relationnelles, et bases NoSQL.",
+        "en": "Administration and programming of relational databases, plus NoSQL databases."
       },
       "groups": [
         {
@@ -210,6 +211,14 @@
             {
               "fr": "SQL avancé et PL/SQL",
               "en": "Advanced SQL and PL/SQL"
+            },
+            {
+              "fr": "MongoDB",
+              "en": "MongoDB"
+            },
+            {
+              "fr": "Bases NoSQL",
+              "en": "NoSQL databases"
             }
           ],
           "more": true
@@ -218,7 +227,7 @@
     },
     {
       "id": "security",
-      "span": 4,
+      "span": 3,
       "name": {
         "fr": "Sécurité",
         "en": "Security"
@@ -238,6 +247,38 @@
             {
               "fr": "Protocoles",
               "en": "Protocols"
+            }
+          ],
+          "more": false
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "span": 3,
+      "name": {
+        "fr": "Données & IA",
+        "en": "Data & AI"
+      },
+      "blurb": {
+        "fr": "De la donnée massive à l'apprentissage automatique.",
+        "en": "From big data to machine learning."
+      },
+      "groups": [
+        {
+          "label": null,
+          "items": [
+            {
+              "fr": "Big Data",
+              "en": "Big data"
+            },
+            {
+              "fr": "Science des données",
+              "en": "Data science"
+            },
+            {
+              "fr": "Machine learning",
+              "en": "Machine learning"
             }
           ],
           "more": false

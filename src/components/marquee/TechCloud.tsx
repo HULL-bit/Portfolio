@@ -1,5 +1,5 @@
 import {
-  siDart, siDebian, siDjango, siDotnet, siDocker, siFlutter, siGit, siLinux, siMysql, siNextdotjs, siNginx, siOpenjdk,
+  siDart, siDebian, siDjango, siDotnet, siDocker, siFlutter, siGit, siLinux, siMongodb, siMysql, siNextdotjs, siNginx, siOpenjdk,
   siPostgresql, siPython, siReact, siSpring, siTypescript, siUbuntu, type SimpleIcon,
 } from 'simple-icons';
 import { skills, t } from '@/lib/content';
@@ -7,9 +7,9 @@ import type { Lang } from '@/lib/i18n';
 import { SectionHead } from '@/components/ui/SectionHead';
 import { Marquee } from '@/components/motion/Marquee';
 
-/** Logos monochromes (simple-icons, CC0). Oracle, SQL Server, UML… : texte seul. */
+/** Logos monochromes (simple-icons, CC0). Oracle, SQL Server, Big Data, UML… : texte seul. */
 const ICONS: Record<string, SimpleIcon> = {
-  Linux: siLinux, Debian: siDebian, Ubuntu: siUbuntu, PostgreSQL: siPostgresql, MySQL: siMysql, Django: siDjango, React: siReact,
+  Linux: siLinux, Debian: siDebian, Ubuntu: siUbuntu, MongoDB: siMongodb, PostgreSQL: siPostgresql, MySQL: siMysql, Django: siDjango, React: siReact,
   Spring: siSpring, 'Next.js': siNextdotjs, Flutter: siFlutter, Docker: siDocker, Nginx: siNginx, Git: siGit, Python: siPython,
   Java: siOpenjdk, TypeScript: siTypescript, Dart: siDart, '.NET': siDotnet,
 };

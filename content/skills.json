@@ -51,12 +51,12 @@
       "id": "databases",
       "primary": true,
       "name": {
-        "fr": "Bases de données",
-        "en": "Databases"
+        "fr": "Bases de données & Data",
+        "en": "Databases & Data"
       },
       "blurb": {
-        "fr": "Oracle Database 19c, SQL avancé, PL/SQL.",
-        "en": "Oracle Database 19c, advanced SQL, PL/SQL."
+        "fr": "Oracle Database 19c, SQL avancé, PL/SQL ; NoSQL (MongoDB), Big Data et machine learning.",
+        "en": "Oracle Database 19c, advanced SQL, PL/SQL; NoSQL (MongoDB), big data and machine learning."
       },
       "items": [
         {
@@ -81,6 +81,26 @@
         },
         {
           "name": "SQL Server",
+          "level": 3
+        },
+        {
+          "name": "MongoDB",
+          "level": 3
+        },
+        {
+          "name": "NoSQL",
+          "level": 3
+        },
+        {
+          "name": "Big Data",
+          "level": 2
+        },
+        {
+          "name": "Machine learning",
+          "level": 3
+        },
+        {
+          "name": "Science des données",
           "level": 3
         }
       ]
@@ -209,6 +229,9 @@
     "PostgreSQL",
     "MySQL",
     "SQL Server",
+    "Machine learning",
+    "Big Data",
+    "MongoDB",
     "Django",
     "React",
     "Spring",

@@ -35,7 +35,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     url: abs(`/${lang}/`),
     email: `mailto:${profile.contact.email}`,
     address: { '@type': 'PostalAddress', addressLocality: profile.location.city, addressCountry: 'SN' },
-    knowsAbout: ['Linux', 'Oracle Database 19c', 'PL/SQL', 'SQL Server', 'C#', '.NET', 'Django', 'React', 'Spring Boot', 'Full-Stack', 'DevOps', 'Systèmes distribués', 'Réseaux IP', 'Sécurité informatique'],
+    knowsAbout: ['Linux', 'Oracle Database 19c', 'PL/SQL', 'SQL Server', 'MongoDB', 'NoSQL', 'Big Data', 'Machine learning', 'Science des données', 'C#', '.NET', 'Django', 'React', 'Spring Boot', 'Full-Stack', 'DevOps', 'Systèmes distribués', 'Réseaux IP', 'Sécurité informatique'],
     alumniOf: [
       { '@type': 'CollegeOrUniversity', name: 'Université Cheikh Anta Diop de Dakar (UCAD)' },
       { '@type': 'School', name: 'Lycée de Mbacké' },

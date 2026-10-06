@@ -21,11 +21,17 @@ function makeLabel(index: number, name: string, tag: string | null, accent: stri
   g.textBaseline = 'middle';
   g.fillText(String(index + 1).padStart(2, '0'), 24, 66);
   g.fillStyle = '#F5F7FF';
-  g.font = '700 54px "Clash Display", sans-serif';
+  // largeur disponible : jusqu'à la pastille (tag) ou au bord ; la police rétrécit pour les noms longs
+  g.font = '500 24px "JetBrains Mono", monospace';
+  const tagW = tag ? g.measureText(tag).width + 36 : 0;
+  const room = c.width - 100 - 24 - (tag ? tagW + 48 : 0);
+  let px = 54;
+  g.font = `700 ${px}px "Clash Display", sans-serif`;
+  while (px > 30 && g.measureText(name.toUpperCase()).width > room) { px -= 2; g.font = `700 ${px}px "Clash Display", sans-serif`; }
   g.fillText(name.toUpperCase(), 100, 66);
   if (tag) {
     g.font = '500 24px "JetBrains Mono", monospace';
-    const w = g.measureText(tag).width + 36;
+    const w = tagW;
     g.strokeStyle = accent; g.lineWidth = 2;
     g.beginPath(); g.roundRect(c.width - w - 24, 40, w, 52, 26); g.stroke();
     g.fillStyle = accent; g.fillText(tag, c.width - w - 6, 67);

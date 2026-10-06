@@ -126,6 +126,7 @@ Générés par `npm run todos` (à relancer après chaque modification des conte
 ### Cursus
 - [ ] Cursus : intitulés exacts des unités d'enseignement et répartition par année (Licence, Master 1, Master 2) à confirmer
 - [ ] Cursus : la mention « et d'autres » (langages, frameworks) attend la liste complète
+- [ ] Cursus : Big Data, MongoDB / NoSQL, machine learning et science des données — cours, outils (Spark, scikit-learn…) et projets à citer (aucun projet du portfolio ne les illustre encore)
 
 ### Compétences
 - [ ] Niveaux (1 à 5) des barres de LED : indicatifs, à confirmer

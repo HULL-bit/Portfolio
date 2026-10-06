@@ -85,13 +85,14 @@ await check('Héros et navigation : aucun débordement de 390 à 2560 px', async
 });
 
 // ── Cursus ──
-await check('Cursus : 5 domaines, Oracle 19c, SQL Server, C#, .NET', async () => {
+await check('Cursus : 6 domaines, Oracle 19c, SQL Server, C#, .NET, NoSQL, Big Data, machine learning', async () => {
   await page.goto(`${origin}/fr/`, { waitUntil: 'networkidle' });
-  ok((await page.locator('#cursus .cur-card').count()) === 5, 'les 5 domaines du cursus sont attendus');
+  ok((await page.locator('#cursus .cur-card').count()) === 6, 'les 6 domaines du cursus sont attendus');
   const txt = await page.locator('#cursus').innerText();
-  for (const k of ['Algorithmique', 'Architecture des ordinateurs', 'Optique', 'Algèbre', 'Oracle 19c', 'SQL Server', 'C#', '.NET', 'Services IP', 'Réseaux avancés', 'Protocoles']) ok(txt.includes(k), `« ${k} » absent du cursus`);
+  for (const k of ['Algorithmique', 'Architecture des ordinateurs', 'Optique', 'Algèbre', 'Oracle 19c', 'SQL Server', 'C#', '.NET', 'Services IP', 'Réseaux avancés', 'Protocoles', 'MongoDB', 'NoSQL', 'Big Data', 'Science des données', 'Machine learning']) ok(txt.includes(k), `« ${k} » absent du cursus`);
   await page.goto(`${origin}/en/`, { waitUntil: 'networkidle' });
-  ok((await page.locator('#cursus').innerText()).includes('Computer architecture'), 'cursus non traduit en anglais');
+  const en = await page.locator('#cursus').innerText();
+  ok(en.includes('Computer architecture') && en.includes('Data science') && en.includes('NoSQL databases'), 'cursus non traduit en anglais');
 });
 
 // ── Section Projets : filtres ──
