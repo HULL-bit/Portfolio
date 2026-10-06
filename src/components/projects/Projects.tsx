@@ -15,7 +15,7 @@ export function Projects({ lang }: { lang: Lang }) {
     results: p.results.map((r) => ({ value: r.value, label: pick(r.label, lang) })),
     stack: p.stack, categories: p.categories, accent: p.accent, href: localePath(lang, `projets/${p.slug}/`),
     demo: p.demo, repo: p.repo, repoLabel: p.repoLabel ? pick(p.repoLabel, lang) : null,
-    media: <ProjectMedia project={p} lang={lang} sizes="(min-width: 960px) 52vw, 92vw" />,
+    media: <ProjectMedia project={p} lang={lang} sizes="(min-width: 960px) 52vw, 92vw" stack />,
     mediaHasLink: p.imageKind === 'diagram' && p.images.length > 0,
   }));
   const filters = Object.fromEntries(['all', ...CATEGORIES].map((c) => [c, t(lang, `projects.filters.${c}`)])) as Record<'all' | (typeof CATEGORIES)[number], string>;

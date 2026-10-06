@@ -5,11 +5,13 @@ import { BrowserFrame } from './BrowserFrame';
 import { LiquidVisual } from './LiquidVisual';
 import { ProjectShot, shotHref } from './ProjectShot';
 
+const isDiagram = (name: string) => /^(uml|diagram)/i.test(name); // même convention que scripts/optimize-images.mjs
+
 /**
  * Visuel d'un projet : vraie capture dans une maquette navigateur (sites en ligne), captures d'application (mobile),
  * ou, à défaut, interface filaire générée (SVG procédural) avec distorsion liquide au survol.
  */
-export function ProjectMedia({ project, lang, sizes, eager = false }: { project: Project; lang: Lang; sizes: string; eager?: boolean }) {
+export function ProjectMedia({ project, lang, sizes, eager = false, stack = false }: { project: Project; lang: Lang; sizes: string; eager?: boolean; stack?: boolean }) {
   const title = pick(project.title, lang);
   const alt = t(lang, 'projects.shotAlt').replace('{title}', title);
   if (project.images.length) {
@@ -25,14 +27,23 @@ export function ProjectMedia({ project, lang, sizes, eager = false }: { project:
     if (project.imageKind === 'diagram') {
       return <Diagram slug={project.slug} name={project.images[0]!} lang={lang} sizes={sizes} eager={eager} />;
     }
-    return <WebShot project={project} name={project.images[0]!} alt={alt} sizes={sizes} eager={eager} hint={t(lang, 'projects.hint')} />;
+    const shot = <WebShot project={project} name={project.images[0]!} alt={alt} sizes={sizes} eager={eager} hint={t(lang, 'projects.hint')} />;
+    // Carte de la liste : le rendu du site ET ses diagrammes (sans lien : la carte entière mène déjà à la page projet)
+    const diagrams = stack ? project.images.slice(1).filter(isDiagram) : [];
+    if (!diagrams.length) return shot;
+    return (
+      <div className="media-stack">
+        {shot}
+        {diagrams.map((name) => <Diagram key={name} slug={project.slug} name={name} lang={lang} sizes={sizes} link={false} />)}
+      </div>
+    );
   }
   return <LiquidVisual project={project} title={title} tag={t(lang, 'projects.schematic')} />;
 }
 
 /** Diagramme (UML…) : image zoomable sur fond clair, ouverte en grand dans un nouvel onglet. */
-function Diagram({ slug, name, lang, sizes, eager = false }: { slug: string; name: string; lang: Lang; sizes: string; eager?: boolean }) {
-  const href = shotHref(slug, name);
+function Diagram({ slug, name, lang, sizes, eager = false, link = true }: { slug: string; name: string; lang: Lang; sizes: string; eager?: boolean; link?: boolean }) {
+  const href = link ? shotHref(slug, name) : null;
   const img = <ProjectShot slug={slug} name={name} alt={t(lang, 'projects.diagramCaption')} sizes={sizes} eager={eager} />;
   return (
     <figure className="diagram">
@@ -52,8 +63,6 @@ export function WebShot({ project, name, alt, sizes, eager = false, hint }: { pr
     </BrowserFrame>
   );
 }
-
-const isDiagram = (name: string) => /^(uml|diagram)/i.test(name); // même convention que scripts/optimize-images.mjs
 
 /** Captures supplémentaires d'un projet (page projet) : cadres navigateur, et diagrammes (uml*, diagram*) pleine largeur. */
 export function ProjectGallery({ project, lang }: { project: Project; lang: Lang }) {
