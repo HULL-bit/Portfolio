@@ -809,6 +809,7 @@ input:-webkit-autofill, textarea:-webkit-autofill { -webkit-text-fill-color: var
 
 /* Captures d'un seul écran : le cadre garde le format de la capture (pas de défilement au survol) */
 .browser-view.is-fit img { height: 100%; object-fit: cover; object-position: 50% 0%; transition: none; will-change: auto; }
+.gallery .is-diagram { grid-column: 1 / -1; }
 .gallery { display: grid; gap: clamp(1rem, 2vw, 1.6rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); margin-top: clamp(1rem, 2vw, 1.6rem); max-width: 58rem; }
 
 /* ───────── Fond « nébuleuse » (images pré-calculées, dérive CSS) ───────── */

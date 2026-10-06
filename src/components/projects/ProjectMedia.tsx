@@ -23,19 +23,23 @@ export function ProjectMedia({ project, lang, sizes, eager = false }: { project:
       );
     }
     if (project.imageKind === 'diagram') {
-      const name = project.images[0]!;
-      const href = shotHref(project.slug, name);
-      const img = <ProjectShot slug={project.slug} name={name} alt={t(lang, 'projects.diagramCaption')} sizes={sizes} eager={eager} />;
-      return (
-        <figure className="diagram">
-          {href ? <a href={href} target="_blank" rel="noopener" className="diagram-link" aria-label={t(lang, 'projects.openFull')} data-cursor="view">{img}</a> : img}
-          <figcaption>{t(lang, 'projects.diagramCaption')}</figcaption>
-        </figure>
-      );
+      return <Diagram slug={project.slug} name={project.images[0]!} lang={lang} sizes={sizes} eager={eager} />;
     }
     return <WebShot project={project} name={project.images[0]!} alt={alt} sizes={sizes} eager={eager} hint={t(lang, 'projects.hint')} />;
   }
   return <LiquidVisual project={project} title={title} tag={t(lang, 'projects.schematic')} />;
+}
+
+/** Diagramme (UML…) : image zoomable sur fond clair, ouverte en grand dans un nouvel onglet. */
+function Diagram({ slug, name, lang, sizes, eager = false }: { slug: string; name: string; lang: Lang; sizes: string; eager?: boolean }) {
+  const href = shotHref(slug, name);
+  const img = <ProjectShot slug={slug} name={name} alt={t(lang, 'projects.diagramCaption')} sizes={sizes} eager={eager} />;
+  return (
+    <figure className="diagram">
+      {href ? <a href={href} target="_blank" rel="noopener" className="diagram-link" aria-label={t(lang, 'projects.openFull')} data-cursor="view">{img}</a> : img}
+      <figcaption>{t(lang, 'projects.diagramCaption')}</figcaption>
+    </figure>
+  );
 }
 
 /** Capture web dans un cadre navigateur : une capture d'un seul écran garde son format ; une page longue défile au survol. */
@@ -49,14 +53,18 @@ export function WebShot({ project, name, alt, sizes, eager = false, hint }: { pr
   );
 }
 
-/** Captures supplémentaires d'un projet (page projet) : une grille de cadres navigateur. */
+const isDiagram = (name: string) => /^(uml|diagram)/i.test(name); // même convention que scripts/optimize-images.mjs
+
+/** Captures supplémentaires d'un projet (page projet) : cadres navigateur, et diagrammes (uml*, diagram*) pleine largeur. */
 export function ProjectGallery({ project, lang }: { project: Project; lang: Lang }) {
   const rest = project.images.slice(1);
   if (project.imageKind !== 'web' || !rest.length) return null;
   const title = pick(project.title, lang);
   return (
     <ul className="gallery">
-      {rest.map((name) => (
+      {rest.map((name) => isDiagram(name) ? (
+        <li key={name} className="is-diagram"><Diagram slug={project.slug} name={name} lang={lang} sizes="(min-width: 960px) 58rem, 92vw" /></li>
+      ) : (
         <li key={name}><WebShot project={project} name={name} alt={t(lang, 'projects.shotAlt').replace('{title}', title)} sizes="(min-width: 960px) 46vw, 92vw" /></li>
       ))}
     </ul>

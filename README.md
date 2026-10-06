@@ -168,6 +168,8 @@ Générés par `npm run todos` (à relancer après chaque modification des conte
 
 ### Projet « G-SERVICES — services et produits géolocalisés »
 - [ ] Préciser le cadre (projet personnel, académique ?) et le client éventuel
+- [ ] Autorisation d'afficher la capture de l'accueil de G-SERVICES (application non déployée)
+- [ ] La vidéo de fond de l'accueil porte une note « filigrane iStock » : vérifier les droits de cette séquence avant de montrer la capture (la note a été rognée de l'image)
 
 ### Projet « BAAXIL-XADIIM — plateforme Ahibahil Khadim »
 - [ ] CONFIDENTIALITÉ : le dépôt public BAAXIL-XADIIM contient des photos de membres (backend/media/photos_membres) et des images WhatsApp — à retirer de l'historique ou dépôt à passer en privé

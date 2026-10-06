@@ -1603,15 +1603,18 @@
       }
     ],
     "images": [
+      "home",
       "uml"
     ],
-    "imageKind": "diagram",
+    "imageKind": "web",
     "repo": "https://github.com/HULL-bit/G-Services",
     "repoLabel": null,
     "demo": null,
     "accent": "#3D5AFE",
     "todo": [
-      "Préciser le cadre (projet personnel, académique ?) et le client éventuel"
+      "Préciser le cadre (projet personnel, académique ?) et le client éventuel",
+      "Autorisation d'afficher la capture de l'accueil de G-SERVICES (application non déployée)",
+      "La vidéo de fond de l'accueil porte une note « filigrane iStock » : vérifier les droits de cette séquence avant de montrer la capture (la note a été rognée de l'image)"
     ]
   },
   {

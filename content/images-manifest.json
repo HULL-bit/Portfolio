@@ -79,6 +79,15 @@
     }
   },
   "g-services": {
+    "home": {
+      "width": 1890,
+      "height": 913,
+      "widths": [
+        480,
+        800,
+        1200
+      ]
+    },
     "uml": {
       "width": 3061,
       "height": 1584,
